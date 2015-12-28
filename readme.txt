@@ -20,6 +20,11 @@ Japanese viral media often uses this kind of display.
 * English: KUCKLU
 * Japanese: KUCKLU
 
+= Requires =
+* WordPress 4.4. or higher
+* PHP 5.6
+PHP 7 is not tested.
+
 = Contribute! =
 You can fork the plugin from [GitHub](https://github.com/visualive/va-social-buzz)
 

@@ -9,6 +9,11 @@ It displays buttons at the end of every article for readers to "Like" your recom
 
 Japanese viral media often uses this kind of display.
 
+## Requires
+* WordPress 4.4. or higher
+* PHP 5.6  
+PHP 7 is not tested.
+
 ## Installation
 
 To install VA Social Buzz:
