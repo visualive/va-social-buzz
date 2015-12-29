@@ -92,12 +92,12 @@ abstract class VASOCIALBUZZ_Singleton {
 			'tw_account' => 'wordpress',
 			'text'       => array(
 				'like'   => array(
-					'If you liked this article,',
-					'please click this \'like!\'.',
+					__('If you liked this article,', 'va-social-buzz' ),
+					__('please click this \'like!\'.', 'va-social-buzz' ),
 				),
-				'share'  => 'Share',
-				'tweet'  => 'Tweet',
-				'follow' => 'Follow on Twetter !',
+				'share'  => __('Share', 'va-social-buzz' ),
+				'tweet'  => __('Tweet', 'va-social-buzz' ),
+				'follow' => __('Follow on Twetter !', 'va-social-buzz' ),
 			),
 		);
 	}
