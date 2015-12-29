@@ -36,6 +36,7 @@ To install "VA Social Buzz":
 
 1. Upload the "va-social-buzz" directory and all its contents to your `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
+3. Optimize your setting through the `Option`>`Reading` menu in WordPress.
 
 == Screenshots ==
 
@@ -46,7 +47,7 @@ To install "VA Social Buzz":
 
 = 1.0.3
 * Choose the post type to display.
-* Add ii8n.
+* Add i18n.
 
 = 1.0.2
 * Add image size.
