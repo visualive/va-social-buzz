@@ -31,6 +31,9 @@ To install VA Social Buzz:
 
 ## Changelog
 
+### 1.0.2
+* Add image size.
+
 ### 1.0.1
 * Update the readme.txt.
 
