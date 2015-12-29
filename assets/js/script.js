@@ -157,9 +157,11 @@
                 window.onload = function () {
                     if (typeof (FB) != 'undefined') {
                         FB.Event.subscribe('edge.create', function (url) {
+                            ga('send', 'event', 'VA Social Buzz', 'Fb Like', url);
                             ga('send', 'social', 'facebook', 'like', url);
                         });
                         FB.Event.subscribe('edge.remove', function (url) {
+                            ga('send', 'event', 'VA Social Buzz', 'Fb Unlike', url);
                             ga('send', 'social', 'facebook', 'unlike', url);
                         });
                     }
@@ -167,7 +169,8 @@
                     if (typeof (twttr) != 'undefined') {
                         twttr.ready(function (twttr) {
                             twttr.events.bind('follow', function (e) {
-                                ga('send', 'social', 'twitter', 'follow', self.cache.window.location.href);
+                                ga('send', 'event', 'VA Social Buzz', 'Twi Follow', self.cache.window.location.href);
+                                ga('send', 'social', 'Twitter', 'Follow', self.cache.window.location.href);
                             });
                         } );
                     }
@@ -182,18 +185,21 @@
                                 redirect_uri: self.cache.window.location.href
                             }, function (response) {
                                 if ( response !== null && typeof response.post_id !== 'undefined' ) {
-                                    ga('send', 'social', 'facebook', 'share', self.cache.window.location.href);
+                                    ga('send', 'event', 'VA Social Buzz', 'Fb Share', self.cache.window.location.href);
+                                    ga('send', 'social', 'Facebook', 'Share', self.cache.window.location.href);
                                 }
                             });
                         } else {
-                            ga('send', 'social', 'facebook', 'share', self.cache.window.location.href);
+                            ga('send', 'event', 'VA Social Buzz', 'Fb Share', self.cache.window.location.href);
+                            ga('send', 'social', 'Facebook', 'Share', self.cache.window.location.href);
                             self._shareNewWindow( this );
                         }
                     });
 
                     $twitter.on('click', function ( e ) {
                         e.preventDefault();
-                        ga('send', 'social', 'twitter', 'tweet', self.cache.window.location.href);
+                        ga('send', 'event', 'VA Social Buzz', 'Twi Tweet', self.cache.window.location.href);
+                        ga('send', 'social', 'Twitter', 'Tweet', self.cache.window.location.href);
                         self._shareNewWindow( this );
                     });
                 }
