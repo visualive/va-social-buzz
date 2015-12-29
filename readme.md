@@ -30,6 +30,12 @@ To install VA Social Buzz:
 ![Admin.](./screenshot-2.png)  
 **2. Admin.**
 
+![Google Analytics - Event.](./screenshot-3.png)  
+**3. Google Analytics - Event.**
+
+![Google Analytics - Social Plugin.](./screenshot-4.png)  
+**4. Google Analytics - Social Plugin.**
+
 ## Changelog
 
 ### 1.0.3
