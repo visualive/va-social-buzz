@@ -175,7 +175,7 @@
                         } );
                     }
 
-                    $facebook.on('click touchstart', function ( e ) {
+                    $facebook.on('click', function ( e ) {
                         e.preventDefault();
 
                         if (typeof (FB) != 'undefined' && typeof self.cache.wordpress.appid != 'undefined') {
@@ -194,7 +194,7 @@
                         }
                     });
 
-                    $twitter.on('click touchstart', function ( e ) {
+                    $twitter.on('click', function ( e ) {
                         e.preventDefault();
                         ga('send', 'social', 'twitter', 'tweetClick', self.cache.window.location.href);
                         self._shareNewWindow( this );
