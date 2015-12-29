@@ -191,7 +191,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 	/**
 	 * Show in post types.
 	 *
-	 * @since 0.0.1 (Alpha)
+	 * @since 1.0.3
 	 */
 	public function render_post_types() {
 		$options    = self::get_option();
