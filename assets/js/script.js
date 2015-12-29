@@ -8,7 +8,8 @@
  * @link      http://visualive.jp/
  * @license   GNU General Public License version 2.0 later.
  */
-;( function( $, window, document, undefined ) {
+;
+(function ($, window, document, undefined) {
     'use strict';
 
     var vaSocialBuzz = {
@@ -24,7 +25,7 @@
          *
          * @since 1.0.0
          */
-        init: function() {
+        init: function () {
             this.cacheElements();
             this.bindEvents();
         },
@@ -34,11 +35,11 @@
          *
          * @since 1.0.0
          */
-        cacheElements: function() {
+        cacheElements: function () {
             this.cache = {
-                $window  : $( window ),
+                $window  : $(window),
                 window   : window,
-                $document: $( document ),
+                $document: $(document),
                 document : document,
                 wordpress: vaSocialBuzzSettings
             };
@@ -49,22 +50,22 @@
          *
          * @since 1.0.0
          */
-        bindEvents: function() {
+        bindEvents: function () {
             // Store object in new var
             var self = this;
 
             // Ajax Cache
-            $.ajaxSetup( {
-                cache : true,
-                async : true
-            } );
+            $.ajaxSetup({
+                cache: true,
+                async: true
+            });
 
             // Run on document ready
-            self.cache.$document.on( 'ready', function() {
+            self.cache.$document.on('ready', function () {
                 self.getJavaScriptSDK();
                 self.createElements();
-                self.shareNewWindow();
-            } );
+                self.gaEventTracking()
+            });
         },
 
         /**
@@ -75,8 +76,8 @@
          * @returns {*}
          * @private
          */
-        _escapeHTML: function( str ) {
-            return str.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').replace(/&/g,'&amp;').replace(/"/g, '&quot;').replace(/\'/g, '&apos;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        _escapeHTML: function (str) {
+            return str.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/\'/g, '&apos;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         },
 
         /**
@@ -87,7 +88,7 @@
          * @returns {*}
          * @private
          */
-        _deletionOtherAlphanumeric: function( str ) {
+        _deletionOtherAlphanumeric: function (str) {
             return str.replace(/[^\w\-]/g, '');
         },
 
@@ -99,7 +100,7 @@
          * @returns {*}
          * @private
          */
-        _deletionOtherNumeric: function( str ) {
+        _deletionOtherNumeric: function (str) {
             return str.replace(/[^0-9]/g, '');
         },
 
@@ -108,36 +109,20 @@
          *
          * @since 1.0.0
          */
-        getJavaScriptSDK: function() {
+        getJavaScriptSDK: function () {
             var self = this;
 
-            if ( !self.cache.window.FB ) {
-                $.getScript( '//connect.facebook.net/' + self._deletionOtherAlphanumeric( self.cache.wordpress.locale ) + '/sdk.js', function() {
-                    if ( typeof self.cache.wordpress.appid != 'undefined' ) {
-                        FB.init( {
-                            appId : self._deletionOtherNumeric( self.cache.wordpress.appid ),
-                            version : 'v2.5',
-                            status  : true,
-                            cookie  : true,
-                            xfbml   : true
-                        } );
-                    } else {
-                        FB.init( {
-                            version : 'v2.5',
-                            status  : true,
-                            cookie  : true,
-                            xfbml   : true
-                        } );
-                    }
-                } );
-            }
-            if ( !self.cache.window.twttr ) {
-                $.getScript( '//platform.twitter.com/widgets.js', function() {
-                    if ( twttr.widgets ) {
-                        twttr.widgets.load();
-                    }
-                } );
-            }
+            $.getScript('//connect.facebook.net/' + self._deletionOtherAlphanumeric(self.cache.wordpress.locale) + '/sdk.js', function () {
+                if (typeof self.cache.wordpress.appid != 'undefined') {
+                    FB.init({appId : self._deletionOtherNumeric(self.cache.wordpress.appid), version : 'v2.5', status : true, cookie : true, xfbml : true});
+                } else {
+                    FB.init({version: 'v2.5', status: true, cookie: true, xfbml: true});
+                }
+            });
+
+            $.getScript('//platform.twitter.com/widgets.js', function () {
+                twttr.widgets.load();
+            });
         },
 
         /**
@@ -145,32 +130,94 @@
          *
          * @since 1.0.0
          */
-        createElements: function() {
-            var self   = this,
-                fbRoot = self.cache.document.getElementById( 'fb-root' ),
+        createElements: function () {
+            var self = this,
+                fbRoot = self.cache.document.getElementById('fb-root'),
                 body;
 
-            if ( null == fbRoot ) {
-                body      = self.cache.document.body;
-                fbRoot    = self.cache.document.createElement( 'div' );
+            if (null == fbRoot) {
+                body = self.cache.document.body;
+                fbRoot = self.cache.document.createElement('div');
 
-                fbRoot.setAttribute( 'id', 'fb-root' );
-                body.insertBefore( fbRoot, body.firstChild );
+                fbRoot.setAttribute('id', 'fb-root');
+                body.insertBefore(fbRoot, body.firstChild);
             }
         },
 
-        shareNewWindow: function() {
-            var target = $( '.vasb_share_button a' );
+        /**
+         * Google Analytics Events Tracking.
+         */
+        gaEventTracking: function () {
+            var self      = this,
+                $vasb     = $('#va-social-buzz'),
+                $facebook = $vasb.find('.vasb_share_button-fb').children('a'),
+                $twitter  = $vasb.find('.vasb_share_button-tw').children('a');
 
-            target.on( 'click', function( event ) {
-                var href = $( this ).attr( 'href' );
+            if (typeof self.cache.window.GoogleAnalyticsObject != 'undefined' && self.cache.window.GoogleAnalyticsObject == 'ga') {
+                window.onload = function () {
+                    if (typeof (FB) != 'undefined') {
+                        FB.Event.subscribe('edge.create', function (url) {
+                            ga('send', 'social', 'facebook', 'like', url);
+                        });
+                        FB.Event.subscribe('edge.remove', function (url) {
+                            ga('send', 'social', 'facebook', 'unlike', url);
+                        });
+                    }
 
-                event.preventDefault();
-                window.open( href, '', 'width=550,height=500' );
-            } );
+                    if (typeof (twttr) != 'undefined') {
+                        twttr.ready(function (twttr) {
+                            twttr.events.bind('follow', function (e) {
+                                ga('send', 'social', 'twitter', 'follow', self.cache.window.location.href);
+                            });
+                            twttr.events.bind('tweet', function () {
+                                ga('send', 'social', 'twitter', 'tweet', self.cache.window.location.href);
+                            });
+                        } );
+                    }
+
+                    $facebook.on('click touchstart', function ( e ) {
+                        e.preventDefault();
+
+                        if (typeof (FB) != 'undefined' && typeof self.cache.wordpress.appid != 'undefined') {
+                            FB.ui({
+                                method      : 'share',
+                                href        :  self.cache.window.location.href,
+                                redirect_uri:  self.cache.window.location.href
+                            }, function (response) {
+                                if ( response !== null && typeof response.post_id !== 'undefined' ) {
+                                    ga('send', 'social', 'facebook', 'share', self.cache.window.location.href);
+                                }
+                            });
+                        } else {
+                            ga('send', 'social', 'facebook', 'shareClick', self.cache.window.location.href);
+                            self._shareNewWindow( this );
+                        }
+                    });
+
+                    $twitter.on('click touchstart', function ( e ) {
+                        e.preventDefault();
+                        ga('send', 'social', 'twitter', 'tweetClick', self.cache.window.location.href);
+                        self._shareNewWindow( this );
+                    });
+                }
+            }
+        },
+
+        /**
+         * Open new window.
+         *
+         * @since 1.0.3
+         *
+         * @param t this
+         * @private
+         */
+        _shareNewWindow: function ( t ) {
+            var href = $( t ).attr('href');
+
+            window.open(href, '', 'width=550,height=500');
         }
     };
 
     // Get things going
     vaSocialBuzz.init();
-} )( window.jQuery, window, document, undefined );
+})(window.jQuery, window, document, undefined);

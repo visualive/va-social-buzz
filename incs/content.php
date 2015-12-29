@@ -132,7 +132,7 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 		$template[] = '<div class="vasb_share">';
 		$template[] = '<div class="vasb_share_button vasb_share_button-fb">';
 		$template[] = sprintf(
-			'<a href="http://www.facebook.com/sharer.php?u=%s"><i class="vasb_icon"></i><span>%s</span></a>',
+			'<a href="http://www.facebook.com/sharer/sharer.php?u=%s&display=popup&ref=plugin&src=share_button&sdk=joey"><i class="vasb_icon"></i><span>%s</span></a>',
 			get_the_permalink(),
 			esc_html( $options['text']['share'] )
 		);
