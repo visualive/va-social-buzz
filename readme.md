@@ -1,7 +1,7 @@
 VA Social Buzz
 ==============================
 
-It displays buttons at the end of every article for readers to "Like" your recommended Facebook page, to share the article on Facebook, to tweet about it on Twitter, and to follow you on Twitter.
+It displays buttons at the end of every article for readers to "Like" your recommended Facebook page, to share the article on social, and to follow you on social.
 
 ## Description
 
@@ -30,6 +30,9 @@ To install VA Social Buzz:
 **2. Admin.**
 
 ## Changelog
+
+### 1.0.1
+* Update the readme.txt.
 
 ### 1.0.0
 * First public release to WordPress.org.

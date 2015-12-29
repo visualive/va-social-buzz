@@ -1,14 +1,14 @@
 === VA Social Buzz ===
 Contributors: kuck1u
 Donate link: http://www.amazon.co.jp/registry/wishlist/AN9BLYUQMVZ5/
-Tags: anchor, automatic, social, socialmedia, social media, viral, viralmedia, viral media, share, facebook, twitter
+Tags: automatic, social, socialmedia, social media, viral, viralmedia, viral media, share, facebook, twitter
 Requires at least: 4.4
 Tested up to: 4.4
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-It displays buttons at the end of every article for readers to "Like" your recommended Facebook page, to share the article on Facebook, to tweet about it on Twitter, and to follow you on Twitter.
+It displays buttons at the end of every article for readers to "Like" your recommended Facebook page, to share the article on social, and to follow you on social.
 
 == Description ==
 
@@ -23,6 +23,8 @@ Japanese viral media often uses this kind of display.
 = Requires =
 * WordPress 4.4. or higher
 * PHP 5.6
+
+= Note =
 PHP 7 is not tested.
 
 = Contribute! =
@@ -41,6 +43,9 @@ To install "VA Social Buzz":
 2. Admin.
 
 == Changelog ==
+
+= 1.0.1 =
+* Update the readme.txt.
 
 = 1.0.0 =
 * First public release to WordPress.org.
