@@ -37,7 +37,6 @@ abstract class VASOCIALBUZZ_Singleton {
 	 * Holds the singleton instance of this class
 	 *
 	 * @since 0.0.1 (Alpha)
-	 *
 	 * @var array
 	 */
 	private static $instances = array();
@@ -46,7 +45,6 @@ abstract class VASOCIALBUZZ_Singleton {
 	 * Plugin prefix.
 	 *
 	 * @since 0.0.1 (Alpha)
-	 *
 	 * @var string
 	 */
 	protected static $prefix = 'vasocialbuzz';
@@ -92,13 +90,14 @@ abstract class VASOCIALBUZZ_Singleton {
 			'tw_account' => 'wordpress',
 			'text'       => array(
 				'like'   => array(
-					__('If you liked this article,', 'va-social-buzz' ),
-					__('please click this \'like!\'.', 'va-social-buzz' ),
+					__( 'If you liked this article,', 'va-social-buzz' ),
+					__( 'please click this "like!".', 'va-social-buzz' ),
 				),
-				'share'  => __('Share', 'va-social-buzz' ),
-				'tweet'  => __('Tweet', 'va-social-buzz' ),
-				'follow' => __('Follow on Twetter !', 'va-social-buzz' ),
+				'share'  => __( 'Share', 'va-social-buzz' ),
+				'tweet'  => __( 'Tweet', 'va-social-buzz' ),
+				'follow' => __( 'Follow on Twetter !', 'va-social-buzz' ),
 			),
+			'post_type' => array( 'post' ),
 		);
 	}
 

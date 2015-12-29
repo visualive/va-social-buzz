@@ -31,6 +31,10 @@ To install VA Social Buzz:
 
 ## Changelog
 
+### 1.0.3
+* Choose the post type to display.
+* Add ii8n.
+
 ### 1.0.2
 * Add image size.
 

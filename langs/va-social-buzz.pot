@@ -2,14 +2,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: VA Social Buzz\n"
-"POT-Creation-Date: 2015-12-29 07:20+0900\n"
+"POT-Creation-Date: 2015-12-29 19:12+0900\n"
 "PO-Revision-Date: 2015-12-29 07:09+0900\n"
 "Last-Translator: \n"
 "Language-Team: VisuAlive <kuck1u@visualive.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.6\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: en_001\n"
@@ -37,30 +37,62 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
-#: incs/admin.php:99
+#: incs/admin.php:86
+msgid "Show in"
+msgstr ""
+
+#: incs/admin.php:105
 msgid "Facebook Page Web Address can only contain A-Z, a-z, 0-9, and periods (.)"
 msgstr ""
 
-#: incs/admin.php:116
+#: incs/admin.php:121
 msgid "Facebook App ID can only contain 0-9."
 msgstr ""
 
-#: incs/admin.php:133
+#: incs/admin.php:137
 msgid "Twitter Account can only contain A-Z, a-z, 0-9, and underscore (_)"
 msgstr ""
 
-#: incs/admin.php:153
+#: incs/admin.php:162
 msgid "Appear on top of the like button."
 msgstr ""
 
-#: incs/admin.php:161
+#: incs/admin.php:170
 msgid "Share button to Facebook."
 msgstr ""
 
-#: incs/admin.php:169
+#: incs/admin.php:178
 msgid "Tweet button to Twitter."
 msgstr ""
 
-#: incs/admin.php:177
+#: incs/admin.php:186
 msgid "Follow button left of the text."
+msgstr ""
+
+#: incs/admin.php:215
+msgid "Choose the post type to display."
+msgstr ""
+
+#: incs/admin.php:216
+msgid "Please select the one or more."
+msgstr ""
+
+#: incs/singleton.php:93
+msgid "If you liked this article,"
+msgstr ""
+
+#: incs/singleton.php:94
+msgid "please click this \"like!\"."
+msgstr ""
+
+#: incs/singleton.php:96
+msgid "Share"
+msgstr ""
+
+#: incs/singleton.php:97
+msgid "Tweet"
+msgstr ""
+
+#: incs/singleton.php:98
+msgid "Follow on Twetter !"
 msgstr ""

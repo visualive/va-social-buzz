@@ -93,11 +93,11 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 	 * @return string
 	 */
 	protected function _content_template() {
-		if ( ! is_singular() ) {
+		$options   = self::get_option();
+
+		if ( ! is_singular() || ! in_array( get_post_type(), $options['post_type'] ) ) {
 			return null;
 		}
-
-		$options = self::get_option();
 
 		if ( has_post_thumbnail() && ! post_password_required() ) {
 			$options['thumb'] = get_the_post_thumbnail_url( null, self::$prefix . '-thumbnail' );

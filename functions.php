@@ -4,7 +4,7 @@
  * Plugin URI: https://github.com/visualive/va-social-buzz
  * Description: It displays buttons at the end of every article for readers to "Like" your recommended Facebook page, to share the article on Facebook, to tweet about it on Twitter, and to follow you on Twitter.
  * Author: KUCKLU
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author URI: http://visualive.jp/
  * Text Domain: va-social-buzz
  * Domain Path: /langs

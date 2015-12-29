@@ -1,5 +1,5 @@
 === VA Social Buzz ===
-Contributors: kuck1u
+Contributors: kuck1u, mayukojpn
 Donate link: http://www.amazon.co.jp/registry/wishlist/AN9BLYUQMVZ5/
 Tags: automatic, social, socialmedia, social media, viral, viralmedia, viral media, share, facebook, twitter
 Requires at least: 4.4
@@ -43,6 +43,10 @@ To install "VA Social Buzz":
 2. Admin.
 
 == Changelog ==
+
+= 1.0.3
+* Choose the post type to display.
+* Add ii8n.
 
 = 1.0.2
 * Add image size.

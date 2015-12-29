@@ -81,13 +81,19 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 			'reading',
 			'vasocialbuzz_section'
 		);
+		add_settings_field(
+			'vasocialbuzz_post_types',
+			__( 'Show in', 'va-social-buzz' ),
+			array( &$this, 'render_post_types' ),
+			'reading',
+			'vasocialbuzz_section'
+		);
 	}
 
 	/**
 	 * Facebook page url.
 	 *
 	 * @since 0.0.1 (Alpha)
-	 * @return string
 	 */
 	public function render_fb_page() {
 		$options  = self::get_option();
@@ -105,7 +111,6 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 	 * Facebook app id.
 	 *
 	 * @since 0.0.1 (Alpha)
-	 * @return string
 	 */
 	public function render_fb_appid() {
 		$options  = self::get_option();
@@ -122,7 +127,6 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 	 * Twitter account.
 	 *
 	 * @since 0.0.1 (Alpha)
-	 * @return string
 	 */
 	public function render_tw_account() {
 		$options  = self::get_option();
@@ -135,8 +139,13 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 		echo implode( PHP_EOL, $output );
 	}
 
+	/**
+	 * Chenge text.
+	 *
+	 * @since 0.0.1 (Alpha)
+	 */
 	public function render_text() {
-		$options  = self::get_option();
+		$options = self::get_option();
 
 		$output[] = '<p><label for="vasocialbuzz_text_like_0">';
 		$output[] = sprintf(
@@ -180,6 +189,36 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 	}
 
 	/**
+	 * Show in post types.
+	 *
+	 * @since 0.0.1 (Alpha)
+	 */
+	public function render_post_types() {
+		$options    = self::get_option();
+		$post_types = array_values( get_post_types( array(
+			'public' => true,
+		) ) );
+		$output[]   = '<ul>';
+
+		foreach ( $post_types as $post_type ) {
+			$checked          = in_array( $post_type, $options['post_type'] ) ? ' checked' : '';
+			$post_type_object = get_post_type_object( $post_type );
+			$output[]         = sprintf(
+				'<li><label><input class="vasocialbuzz_post_types" type="checkbox" name="va_social_buzz[post_type][]" value="%s"%s> %s</label></li>',
+				$post_type,
+				$checked,
+				$post_type_object->labels->name
+			);
+		}
+
+		$output[] = '</ul>';
+		$output[] = '<p class="description">' . __( 'Choose the post type to display.', 'va-social-buzz' ) . '</p>';
+		$output[] = '<p class="description">' . __( 'Please select the one or more.', 'va-social-buzz' ) . '</p>';
+
+		echo implode( PHP_EOL, $output );
+	}
+
+	/**
 	 * Sanitize.
 	 *
 	 * @since 0.0.1 (Alpha)
@@ -198,6 +237,10 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 		$options['text']['share']   = sanitize_text_field( $options['text']['share'] );
 		$options['text']['tweet']   = sanitize_text_field( $options['text']['tweet'] );
 		$options['text']['follow']  = sanitize_text_field( $options['text']['follow'] );
+
+		foreach ( $options['post_type'] as $key => $post_type ) {
+			$options['post_type'][ $key ] = sanitize_key( $post_type );
+		}
 
 		return $options;
 	}

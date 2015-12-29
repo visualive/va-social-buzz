@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: VA Social Buzz\n"
-"POT-Creation-Date: 2015-12-29 07:20+0900\n"
-"PO-Revision-Date: 2015-12-29 07:20+0900\n"
+"POT-Creation-Date: 2015-12-29 19:12+0900\n"
+"PO-Revision-Date: 2015-12-29 19:14+0900\n"
 "Last-Translator: \n"
 "Language-Team: VisuAlive <kuck1u@visualive.jp>\n"
 "Language: en_001\n"
@@ -36,35 +36,67 @@ msgstr "Twitter アカウント"
 msgid "Text"
 msgstr "テキスト"
 
-#: incs/admin.php:99
+#: incs/admin.php:86
+msgid "Show in"
+msgstr "自動表示"
+
+#: incs/admin.php:105
 msgid ""
 "Facebook Page Web Address can only contain A-Z, a-z, 0-9, and periods (.)"
 msgstr ""
 "Facebook ページ Web アドレスには、A-Z,、a-z,、0-9 と ピリオド (.) のみ入"
 "力できます。"
 
-#: incs/admin.php:116
+#: incs/admin.php:121
 msgid "Facebook App ID can only contain 0-9."
 msgstr "Facebook アプリケーション ID には 0-9 のみ入力できます。"
 
-#: incs/admin.php:133
+#: incs/admin.php:137
 msgid "Twitter Account can only contain A-Z, a-z, 0-9, and underscore (_)"
 msgstr ""
 "Twitter アカウントには、A-Z、a-z、0-9 と アンダースコア (_) のみ入力でき"
 "ます。"
 
-#: incs/admin.php:153
+#: incs/admin.php:162
 msgid "Appear on top of the like button."
 msgstr "いいね！ボタンの上のテキスト。"
 
-#: incs/admin.php:161
+#: incs/admin.php:170
 msgid "Share button to Facebook."
 msgstr "Facebook へのシェアボタンのテキスト。"
 
-#: incs/admin.php:169
+#: incs/admin.php:178
 msgid "Tweet button to Twitter."
 msgstr "Twitter へのツイートボタンのテキスト。"
 
-#: incs/admin.php:177
+#: incs/admin.php:186
 msgid "Follow button left of the text."
 msgstr "フォローボタンの左横のテキスト。"
+
+#: incs/admin.php:215
+msgid "Choose the post type to display."
+msgstr "表示するポストタイプを選択してください。"
+
+#: incs/admin.php:216
+msgid "Please select the one or more."
+msgstr "1 つ以上選択してください。"
+
+#: incs/singleton.php:93
+msgid "If you liked this article,"
+msgstr "この記事が気に入ったら"
+
+#: incs/singleton.php:94
+msgid "please click this \"like!\"."
+msgstr "いいね！しよう"
+
+#: incs/singleton.php:96
+msgid "Share"
+msgstr "シェアする"
+
+#: incs/singleton.php:97
+msgid "Tweet"
+msgstr "ツイートする"
+
+#: incs/singleton.php:98
+msgid "Follow on Twetter !"
+msgstr "Twitter で"
