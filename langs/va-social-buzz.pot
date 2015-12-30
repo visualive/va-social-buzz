@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: VA Social Buzz\n"
-"POT-Creation-Date: 2015-12-29 19:12+0900\n"
+"POT-Creation-Date: 2015-12-30 20:16+0900\n"
 "PO-Revision-Date: 2015-12-29 07:09+0900\n"
 "Last-Translator: \n"
 "Language-Team: VisuAlive <kuck1u@visualive.jp>\n"
@@ -17,63 +17,79 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_x\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: incs/admin.php:55
+#: incs/admin.php:56
 msgid "VA Social Buzz"
 msgstr ""
 
-#: incs/admin.php:58
+#: incs/admin.php:59
 msgid "Facebook Page Web Address"
 msgstr ""
 
-#: incs/admin.php:65
+#: incs/admin.php:66
 msgid "Facebook App ID"
 msgstr ""
 
-#: incs/admin.php:72
+#: incs/admin.php:73
 msgid "Twitter Account"
 msgstr ""
 
-#: incs/admin.php:79
+#: incs/admin.php:80
 msgid "Text"
 msgstr ""
 
-#: incs/admin.php:86
-msgid "Show in"
+#: incs/admin.php:87
+msgid "Like Button Aria"
 msgstr ""
 
-#: incs/admin.php:105
+#: incs/admin.php:94
+msgid "Show In"
+msgstr ""
+
+#: incs/admin.php:113
 msgid "Facebook Page Web Address can only contain A-Z, a-z, 0-9, and periods (.)"
 msgstr ""
 
-#: incs/admin.php:121
+#: incs/admin.php:129
 msgid "Facebook App ID can only contain 0-9."
 msgstr ""
 
-#: incs/admin.php:137
+#: incs/admin.php:145
 msgid "Twitter Account can only contain A-Z, a-z, 0-9, and underscore (_)"
 msgstr ""
 
-#: incs/admin.php:162
+#: incs/admin.php:170
 msgid "Appear on top of the like button."
 msgstr ""
 
-#: incs/admin.php:170
+#: incs/admin.php:178
 msgid "Share button to Facebook."
 msgstr ""
 
-#: incs/admin.php:178
+#: incs/admin.php:186
 msgid "Tweet button to Twitter."
 msgstr ""
 
-#: incs/admin.php:186
+#: incs/admin.php:194
 msgid "Follow button left of the text."
 msgstr ""
 
-#: incs/admin.php:215
+#: incs/admin.php:209
+msgid "Background color:"
+msgstr ""
+
+#: incs/admin.php:213
+msgid "Background color opacity:"
+msgstr ""
+
+#: incs/admin.php:231
+msgid "Font color:"
+msgstr ""
+
+#: incs/admin.php:263
 msgid "Choose the post type to display."
 msgstr ""
 
-#: incs/admin.php:216
+#: incs/admin.php:264
 msgid "Please select the one or more."
 msgstr ""
 
