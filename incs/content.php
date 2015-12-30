@@ -87,13 +87,14 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 	/**
 	 * Content template.
 	 *
-	 * @todo 後で分割する
-	 *
+	 * @todo  後で分割する
 	 * @since 0.0.1 (Alpha)
 	 * @return string
 	 */
 	protected function _content_template() {
-		$options   = self::get_option();
+		$dummy_option                = self::dummy_option();
+		$options                     = self::get_option();
+		$options['like_button_area'] = array_merge( $dummy_option['like_button_area'], $options['like_button_area'] );
 
 		if ( ! is_singular() || ! in_array( get_post_type(), $options['post_type'] ) ) {
 			return null;
@@ -110,12 +111,17 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 		$template[] = '<div id="va-social-buzz" class="va-social-buzz">';
 
 		if ( ! empty( $options['fb_page'] ) ) {
-			$template[] = '<div class="vasb_fb">';
 			$template[] = sprintf(
-				'<div class="vasb_fb_thumbnail" style="background-image: url(%s);"></div>',
+				'<div class="vasb_fb" style="background-image: url(%s);">',
 				$options['thumb']
 			);
-			$template[] = '<div class="vasb_fb_like">';
+			$template[] = '<div class="vasb_fb_thumbnail"></div>';
+			$template[] = sprintf(
+				'<div class="vasb_fb_like" style="background-color: rgba(%s,%s); color: %s;">',
+				implode( ',', self::_hex_to_rgb( $options['like_button_area']['bg'] ) ),
+				$options['like_button_area']['bg_opacity'],
+				$options['like_button_area']['color']
+			);
 			$template[] = sprintf(
 				'<p>%s<br>%s</p>',
 				esc_html( $options['text']['like'][0] ),
@@ -295,5 +301,33 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 		}
 
 		return $locale;
+	}
+
+	/**
+	 * Convert a hexa decimal color code to its RGB equivalent
+	 *
+	 * @link   http://php.net/manual/ja/function.hexdec.php
+	 * @param  string $hexStr (hexadecimal color value)
+	 * @param  boolean $returnAsString (if set true, returns the value separated by the separator character. Otherwise returns associative array)
+	 * @param  string $seperator (to separate RGB values. Applicable only if second parameter is true.)
+	 * @return array or string (depending on second parameter. Returns False if invalid hex color value)
+	 */
+	function _hex_to_rgb( $hexStr, $returnAsString = false, $seperator = ',' ) {
+		$hexStr   = preg_replace( '/[^0-9A-Fa-f]/', '', $hexStr );
+		$rgbArray = array();
+		if ( strlen( $hexStr ) == 6 ) {
+			$colorVal          = hexdec( $hexStr );
+			$rgbArray['red']   = 0xFF & ( $colorVal >> 0x10 );
+			$rgbArray['green'] = 0xFF & ( $colorVal >> 0x8 );
+			$rgbArray['blue']  = 0xFF & $colorVal;
+		} elseif ( strlen( $hexStr ) == 3 ) {
+			$rgbArray['red']   = hexdec( str_repeat( substr( $hexStr, 0, 1 ), 2 ) );
+			$rgbArray['green'] = hexdec( str_repeat( substr( $hexStr, 1, 1 ), 2 ) );
+			$rgbArray['blue']  = hexdec( str_repeat( substr( $hexStr, 2, 1 ), 2 ) );
+		} else {
+			return false;
+		}
+
+		return $returnAsString ? implode( $seperator, $rgbArray ) : $rgbArray;
 	}
 }

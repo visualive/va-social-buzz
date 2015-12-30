@@ -8,7 +8,7 @@
  * @link      http://visualive.jp/
  * @license   GNU General Public License version 2.0 later.
  */
-;
+
 (function ($, window, document, undefined) {
     'use strict';
 
@@ -203,6 +203,15 @@
                         self._shareNewWindow( this );
                     });
                 }
+            } else {
+                $facebook.on('click', function ( e ) {
+                    e.preventDefault();
+                    self._shareNewWindow( this );
+                });
+                $twitter.on('click', function ( e ) {
+                    e.preventDefault();
+                    self._shareNewWindow( this );
+                });
             }
         },
 

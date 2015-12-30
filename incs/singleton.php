@@ -85,10 +85,10 @@ abstract class VASOCIALBUZZ_Singleton {
 	 */
 	protected function dummy_option() {
 		return array(
-			'fb_page'    => 'wordpress',
-			'fb_appid'   => '',
-			'tw_account' => 'wordpress',
-			'text'       => array(
+			'fb_page'          => 'wordpress',
+			'fb_appid'         => '',
+			'tw_account'       => 'wordpress',
+			'text'             => array(
 				'like'   => array(
 					__( 'If you liked this article,', 'va-social-buzz' ),
 					__( 'please click this "like!".', 'va-social-buzz' ),
@@ -97,7 +97,12 @@ abstract class VASOCIALBUZZ_Singleton {
 				'tweet'  => __( 'Tweet', 'va-social-buzz' ),
 				'follow' => __( 'Follow on Twetter !', 'va-social-buzz' ),
 			),
-			'post_type' => array( 'post' ),
+			'like_button_area' => array(
+				'bg'         => '#000000',
+				'color'      => '#ffffff',
+				'bg_opacity' => '0.7',
+			),
+			'post_type'        => array( 'post' ),
 		);
 	}
 

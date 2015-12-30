@@ -44,6 +44,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 	 */
 	public function __construct( $settings = array() ) {
 		add_action( 'admin_init', array( &$this, 'admin_init' ) );
+		add_action( 'admin_enqueue_scripts', array( &$this, 'admin_enqueue_scripts' ) );
 	}
 
 	/**
@@ -82,8 +83,15 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 			'vasocialbuzz_section'
 		);
 		add_settings_field(
+			'vasocialbuzz_like_button_area',
+			__( 'Like Button Aria', 'va-social-buzz' ),
+			array( &$this, 'render_like_button_area' ),
+			'reading',
+			'vasocialbuzz_section'
+		);
+		add_settings_field(
 			'vasocialbuzz_post_types',
-			__( 'Show in', 'va-social-buzz' ),
+			__( 'Show In', 'va-social-buzz' ),
 			array( &$this, 'render_post_types' ),
 			'reading',
 			'vasocialbuzz_section'
@@ -99,7 +107,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 		$options  = self::get_option();
 		$output[] = '<label for="vasocialbuzz_fb_page">https://facebook.com/</label>';
 		$output[] = sprintf(
-			'<input id="vasocialbuzz_fb_page" class="regular-text code" name="va_social_buzz[fb_page]" value="%s">',
+			'<input id="vasocialbuzz_fb_page" class="regular-text code" type="text" name="va_social_buzz[fb_page]" value="%s">',
 			esc_attr( $options['fb_page'] )
 		);
 		$output[] = '<p class="description">' . __( 'Facebook Page Web Address can only contain A-Z, a-z, 0-9, and periods (.)', 'va-social-buzz' ) . '</p>';
@@ -115,7 +123,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 	public function render_fb_appid() {
 		$options  = self::get_option();
 		$output[] = sprintf(
-			'<input id="vasocialbuzz_fb_appid" class="regular-text" name="va_social_buzz[fb_appid]" value="%s">',
+			'<input id="vasocialbuzz_fb_appid" class="regular-text" type="text" name="va_social_buzz[fb_appid]" value="%s">',
 			esc_attr( $options['fb_appid'] )
 		);
 		$output[] = '<p class="description">' . __( 'Facebook App ID can only contain 0-9.', 'va-social-buzz' ) . '</p>';
@@ -131,7 +139,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 	public function render_tw_account() {
 		$options  = self::get_option();
 		$output[] = sprintf(
-			'<input id="vasocialbuzz_tw_account" class="regular-text code" name="va_social_buzz[tw_account]" value="%s">',
+			'<input id="vasocialbuzz_tw_account" class="regular-text code" type="text" name="va_social_buzz[tw_account]" value="%s">',
 			esc_attr( $options['tw_account'] )
 		);
 		$output[] = '<p class="description">' . __( 'Twitter Account can only contain A-Z, a-z, 0-9, and underscore (_)', 'va-social-buzz' ) . '</p>';
@@ -149,13 +157,13 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 
 		$output[] = '<p><label for="vasocialbuzz_text_like_0">';
 		$output[] = sprintf(
-			'<input id="vasocialbuzz_text_like_0" class="regular-text" name="va_social_buzz[text][like][0]" value="%s">',
+			'<input id="vasocialbuzz_text_like_0" class="regular-text" type="text" name="va_social_buzz[text][like][0]" value="%s">',
 			esc_attr( $options['text']['like'][0] )
 		);
 		$output[] = '</label></p>';
 		$output[] = '<p><label for="vasocialbuzz_text_like_1">';
 		$output[] = sprintf(
-			'<input id="vasocialbuzz_text_like_1" class="regular-text" name="va_social_buzz[text][like][1]" value="%s">',
+			'<input id="vasocialbuzz_text_like_1" class="regular-text" type="text" name="va_social_buzz[text][like][1]" value="%s">',
 			esc_attr( $options['text']['like'][1] )
 		);
 		$output[] = '</label></p>';
@@ -163,7 +171,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 
 		$output[] = '<p><label for="vasocialbuzz_text_share">';
 		$output[] = sprintf(
-			'<input id="vasocialbuzz_text_share" class="regular-text" name="va_social_buzz[text][share]" value="%s">',
+			'<input id="vasocialbuzz_text_share" class="regular-text" type="text" name="va_social_buzz[text][share]" value="%s">',
 			esc_attr( $options['text']['share'] )
 		);
 		$output[] = '</label></p>';
@@ -171,7 +179,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 
 		$output[] = '<p><label for="vasocialbuzz_text_tweet">';
 		$output[] = sprintf(
-			'<input id="vasocialbuzz_text_tweet" class="regular-text" name="va_social_buzz[text][tweet]" value="%s">',
+			'<input id="vasocialbuzz_text_tweet" class="regular-text" type="text" name="va_social_buzz[text][tweet]" value="%s">',
 			esc_attr( $options['text']['tweet'] )
 		);
 		$output[] = '</label></p>';
@@ -179,11 +187,50 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 
 		$output[] = '<p><label for="vasocialbuzz_text_follow">';
 		$output[] = sprintf(
-			'<input id="vasocialbuzz_text_follow" class="regular-text" name="va_social_buzz[text][follow]" value="%s">',
+			'<input id="vasocialbuzz_text_follow" class="regular-text" type="text" name="va_social_buzz[text][follow]" value="%s">',
 			esc_attr( $options['text']['follow'] )
 		);
 		$output[] = '</label></p>';
 		$output[] = '<p class="description">' . __( 'Follow button left of the text.', 'va-social-buzz' ) . '</p>';
+
+		echo implode( PHP_EOL, $output );
+	}
+
+	/**
+	 * Backgrund of the like button box.
+	 */
+	public function render_like_button_area() {
+		$dummy_option                = self::dummy_option();
+		$options                     = self::get_option();
+		$options['like_button_area'] = array_merge( $dummy_option['like_button_area'], $options['like_button_area'] );
+		$selected                    = '0' === $options['like_button_area']['bg_opacity'] ? ' selected' : '';
+
+		$output[] = sprintf(
+			'<p><label>' . __( 'Background color:', 'va-social-buzz' ) . ' <input class="vasb-color-picker" type="text" name="va_social_buzz[like_button_area][bg]" value="%s"></label></p>',
+			$options['like_button_area']['bg']
+		);
+
+		$output[] = '<p><label>' . __( 'Background color opacity:', 'va-social-buzz' ) . ' <select name="va_social_buzz[like_button_area][bg_opacity]">';
+		$fields[] = '<option value="0"' . $selected . '>0</option>';
+		for ( $i = 0; $i < 1; ) {
+			$i = (string) bcadd( $i, 0.05, 2 );
+			$i = preg_replace( '/\.?0+$/', '', $i );
+
+			if ( '1' === (string) floor( $i ) ) {
+				$i = (string) floor( $i );
+			}
+
+			$selected = $i === $options['like_button_area']['bg_opacity'] ? ' selected' : '';
+			$fields[] = '<option value="' . $i . '"' . $selected . '>' . $i . '</option>';
+		}
+		$output   =  array_merge( $output, array_reverse( $fields ) );
+		$output[] =  '</select></label></p>';
+		unset( $fields );
+
+		$output[] = sprintf(
+			'<p><label>' . __( 'Font color:', 'va-social-buzz' ) . ' <input class="vasb-color-picker" type="text" name="va_social_buzz[like_button_area][color]" value="%s"></label></p>',
+			$options['like_button_area']['color']
+		);
 
 		echo implode( PHP_EOL, $output );
 	}
@@ -194,7 +241,8 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 	 * @since 1.0.3
 	 */
 	public function render_post_types() {
-		$options    = self::get_option();
+		$options = self::get_option();
+
 		$post_types = array_values( get_post_types( array(
 			'public' => true,
 		) ) );
@@ -219,6 +267,22 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 	}
 
 	/**
+	 * Admin enqueue scripts.
+	 *
+	 * @param string $hook
+	 */
+	public function admin_enqueue_scripts( $hook ) {
+		if ( 'options-reading.php' === $hook ) {
+			wp_enqueue_style( 'va-social-buzz-admin', VASOCIALBUZZ_URL . 'assets/css/admin.css' );
+			wp_enqueue_style( 'wp-color-picker' );
+			wp_enqueue_script( 'va-social-buzz-admin', VASOCIALBUZZ_URL . 'assets/js/admin.js', array(
+				'jquery',
+				'wp-color-picker'
+			), false, true );
+		}
+	}
+
+	/**
 	 * Sanitize.
 	 *
 	 * @since 0.0.1 (Alpha)
@@ -228,15 +292,26 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 	 * @return array
 	 */
 	public function _sanitize_option( $options ) {
-		$options                    = wp_parse_args( $options, self::dummy_option() );
-		$options['fb_page']         = preg_replace( '/[^a-zA-Z0-9.]/', '', $options['fb_page'] );
-		$options['fb_appid']        = preg_replace( '/[\D]/', '', $options['fb_appid'] );
-		$options['tw_account']      = preg_replace( '/[\W]/', '', $options['tw_account'] );
-		$options['text']['like'][0] = sanitize_text_field( $options['text']['like'][0] );
-		$options['text']['like'][1] = sanitize_text_field( $options['text']['like'][1] );
-		$options['text']['share']   = sanitize_text_field( $options['text']['share'] );
-		$options['text']['tweet']   = sanitize_text_field( $options['text']['tweet'] );
-		$options['text']['follow']  = sanitize_text_field( $options['text']['follow'] );
+		$dummy_option                              = self::dummy_option();
+		$options                                   = wp_parse_args( $options, $dummy_option );
+		$options['fb_page']                        = preg_replace( '/[^a-zA-Z0-9.]/', '', $options['fb_page'] );
+		$options['fb_appid']                       = preg_replace( '/[\D]/', '', $options['fb_appid'] );
+		$options['tw_account']                     = preg_replace( '/[\W]/', '', $options['tw_account'] );
+		$options['text']['like'][0]                = sanitize_text_field( $options['text']['like'][0] );
+		$options['text']['like'][1]                = sanitize_text_field( $options['text']['like'][1] );
+		$options['text']['share']                  = sanitize_text_field( $options['text']['share'] );
+		$options['text']['tweet']                  = sanitize_text_field( $options['text']['tweet'] );
+		$options['text']['follow']                 = sanitize_text_field( $options['text']['follow'] );
+		$options['like_button_area']               = array_merge( $dummy_option['like_button_area'], $options['like_button_area'] );
+		$options['like_button_area']['bg_opacity'] = preg_replace( '/[^0-9.]/', '', $options['like_button_area']['bg_opacity'] );
+
+		foreach ( $options['like_button_area'] as $key => $hash ) {
+			if ( preg_match( '/\A#([A-Fa-f0-9]{3}){1,2}\z/i', $hash ) ) {
+				$options['like_button_area'][ $key ] = $hash;
+			} elseif ( 'bg_opacity' !== $key ) {
+				$options['like_button_area'][ $key ] = $dummy_option['like_button_area'][ $key ];
+			}
+		}
 
 		foreach ( $options['post_type'] as $key => $post_type ) {
 			$options['post_type'][ $key ] = sanitize_key( $post_type );

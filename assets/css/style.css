@@ -10,19 +10,18 @@
 }
 
 #va-social-buzz .vasb_fb {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     display: table;
     margin-bottom: .75em;
     width: 100%;
 }
 #va-social-buzz .vasb_fb .vasb_fb_thumbnail {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
     display: table-cell;
     padding: 46px 27px;
 }
 #va-social-buzz .vasb_fb .vasb_fb_like {
-    background-color: #333333;
     display: table-cell;
     vertical-align: middle;
     text-align: center;
@@ -31,7 +30,6 @@
     margin-bottom: 0;
 }
 #va-social-buzz .vasb_fb .vasb_fb_like p {
-    color: #ffffff;
     font-size: 12px;
     line-height: 1.3;
     margin: 0 0 .5em;
