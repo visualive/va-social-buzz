@@ -113,14 +113,14 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 		if ( ! empty( $options['fb_page'] ) ) {
 			$template[] = sprintf(
 				'<div class="vasb_fb" style="background-image: url(%s);">',
-				$options['thumb']
+				esc_url( $options['thumb'] )
 			);
 			$template[] = '<div class="vasb_fb_thumbnail"></div>';
 			$template[] = sprintf(
 				'<div class="vasb_fb_like" style="background-color: rgba(%s,%s); color: %s;">',
-				implode( ',', self::_hex_to_rgb( $options['like_button_area']['bg'] ) ),
-				$options['like_button_area']['bg_opacity'],
-				$options['like_button_area']['color']
+				esc_attr( implode( ',', self::_hex_to_rgb( $options['like_button_area']['bg'] ) ) ),
+				esc_attr( $options['like_button_area']['bg_opacity'] ),
+				esc_attr( $options['like_button_area']['color'] )
 			);
 			$template[] = sprintf(
 				'<p>%s<br>%s</p>',
