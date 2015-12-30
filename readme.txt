@@ -47,6 +47,9 @@ To install "VA Social Buzz":
 
 == Changelog ==
 
+= 1.0.5 =
+* Was to be able to change the color of the the like button area.
+
 = 1.0.4 =
 * Update readme.
 
