@@ -11,7 +11,7 @@ If Google Universal Analytics is introduced to the website, it will become possi
 
 ## Requires
 * WordPress 4.4. or higher
-* PHP 5.6  
+* PHP 5.6+  
 PHP 7 is not tested.
 
 ## Installation
@@ -37,6 +37,9 @@ To install VA Social Buzz:
 **4. Google Analytics - Social Plugin.**
 
 ## Changelog
+
+### 1.0.6
+* CSS fixes.
 
 ### 1.0.5
 * Was to be able to change the color of the the like button area.
