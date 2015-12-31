@@ -116,7 +116,13 @@
 }
 
 @media only screen and (min-width : 415px) {
+    #va-social-buzz .vasb_fb {
+        background-image: none;
+    }
     #va-social-buzz .vasb_fb .vasb_fb_thumbnail {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
         display: table-cell;
         padding: 100px 25px;
         visibility: visible;

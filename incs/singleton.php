@@ -98,7 +98,7 @@ abstract class VASOCIALBUZZ_Singleton {
 				'follow' => __( 'Follow on Twetter !', 'va-social-buzz' ),
 			),
 			'like_button_area' => array(
-				'bg'         => '#000000',
+				'bg'         => '#2b2b2b',
 				'color'      => '#ffffff',
 				'bg_opacity' => '0.7',
 			),

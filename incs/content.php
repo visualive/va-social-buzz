@@ -73,13 +73,46 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 	 * Echo scripts.
 	 */
 	public function wp_enqueue_script() {
-		$localize['locale'] = esc_attr( self::_get_locale() );
+		$localize['locale']          = esc_attr( self::_get_locale() );
+		$dummy_option                = self::dummy_option();
+		$options                     = self::get_option();
+		$options['like_button_area'] = array_merge( $dummy_option['like_button_area'], $options['like_button_area'] );
+		$bg                          = esc_attr( implode( ',', self::_hex_to_rgb( $options['like_button_area']['bg'] ) ) );
+		$opacity                     = esc_attr( $options['like_button_area']['bg_opacity'] );
+		$color                       = esc_attr( $options['like_button_area']['color'] );
+
+		if ( has_post_thumbnail() && ! post_password_required() ) {
+			$thumb = get_the_post_thumbnail_url( null, self::$prefix . '-thumbnail' );
+		} elseif ( has_site_icon() ) {
+			$thumb = get_site_icon_url();
+		} else {
+			$thumb = '';
+		}
+
+		$css = <<<EOI
+.vasb_fb {
+	background-image: url({$thumb});
+}
+.vasb_fb_like {
+	background-color: rgba({$bg}, {$opacity});
+	color: {$color};
+}
+@media only screen and (min-width : 415px) {
+	.vasb_fb_thumbnail {
+		background-image: url({$thumb});
+	}
+	.vasb_fb_like {
+		background-color: rgba({$bg}, 1);
+	}
+}
+EOI;
 
 		if ( isset( get_option( 'va_social_buzz' )['fb_appid'] ) && ! empty( get_option( 'va_social_buzz' )['fb_appid'] ) ) {
 			$localize['appid'] = esc_attr( self::get_option()['fb_appid'] );
 		}
 
 		wp_enqueue_style( 'va-social-buzz', VASOCIALBUZZ_URL . 'assets/css/style.css' );
+		wp_add_inline_style( 'va-social-buzz', $css );
 		wp_enqueue_script( 'va-social-buzz', VASOCIALBUZZ_URL . 'assets/js/script.js', array( 'jquery' ), '1.0.0', true );
 		wp_localize_script( 'va-social-buzz', 'vaSocialBuzzSettings', $localize );
 	}
@@ -92,36 +125,18 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 	 * @return string
 	 */
 	protected function _content_template() {
-		$dummy_option                = self::dummy_option();
-		$options                     = self::get_option();
-		$options['like_button_area'] = array_merge( $dummy_option['like_button_area'], $options['like_button_area'] );
+		$options = self::get_option();
 
 		if ( ! is_singular() || ! in_array( get_post_type(), $options['post_type'] ) ) {
 			return null;
 		}
 
-		if ( has_post_thumbnail() && ! post_password_required() ) {
-			$options['thumb'] = get_the_post_thumbnail_url( null, self::$prefix . '-thumbnail' );
-		} elseif ( has_site_icon() ) {
-			$options['thumb'] = get_site_icon_url();
-		} else {
-			$options['thumb'] = '';
-		}
-
 		$template[] = '<div id="va-social-buzz" class="va-social-buzz">';
 
 		if ( ! empty( $options['fb_page'] ) ) {
-			$template[] = sprintf(
-				'<div class="vasb_fb" style="background-image: url(%s);">',
-				esc_url( $options['thumb'] )
-			);
+			$template[] = '<div class="vasb_fb">';
 			$template[] = '<div class="vasb_fb_thumbnail"></div>';
-			$template[] = sprintf(
-				'<div class="vasb_fb_like" style="background-color: rgba(%s,%s); color: %s;">',
-				esc_attr( implode( ',', self::_hex_to_rgb( $options['like_button_area']['bg'] ) ) ),
-				esc_attr( $options['like_button_area']['bg_opacity'] ),
-				esc_attr( $options['like_button_area']['color'] )
-			);
+			$template[] = '<div class="vasb_fb_like">';
 			$template[] = sprintf(
 				'<p>%s<br>%s</p>',
 				esc_html( $options['text']['like'][0] ),
@@ -307,14 +322,17 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 	 * Convert a hexa decimal color code to its RGB equivalent
 	 *
 	 * @link   http://php.net/manual/ja/function.hexdec.php
-	 * @param  string $hexStr (hexadecimal color value)
+	 *
+	 * @param  string  $hexStr         (hexadecimal color value)
 	 * @param  boolean $returnAsString (if set true, returns the value separated by the separator character. Otherwise returns associative array)
-	 * @param  string $seperator (to separate RGB values. Applicable only if second parameter is true.)
+	 * @param  string  $seperator      (to separate RGB values. Applicable only if second parameter is true.)
+	 *
 	 * @return array or string (depending on second parameter. Returns False if invalid hex color value)
 	 */
 	function _hex_to_rgb( $hexStr, $returnAsString = false, $seperator = ',' ) {
-		$hexStr   = preg_replace( '/[^0-9A-Fa-f]/', '', $hexStr );
-		$rgbArray = array();
+		$dummy_options = self::dummy_option();
+		$hexStr        = preg_replace( '/[^0-9A-Fa-f]/', '', $hexStr );
+		$rgbArray      = array();
 		if ( strlen( $hexStr ) == 6 ) {
 			$colorVal          = hexdec( $hexStr );
 			$rgbArray['red']   = 0xFF & ( $colorVal >> 0x10 );
@@ -325,7 +343,7 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 			$rgbArray['green'] = hexdec( str_repeat( substr( $hexStr, 1, 1 ), 2 ) );
 			$rgbArray['blue']  = hexdec( str_repeat( substr( $hexStr, 2, 1 ), 2 ) );
 		} else {
-			return false;
+			self::_hex_to_rgb( $dummy_options['like_button_area']['bg'] );
 		}
 
 		return $returnAsString ? implode( $seperator, $rgbArray ) : $rgbArray;
