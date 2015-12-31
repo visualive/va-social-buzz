@@ -18,14 +18,14 @@
     width: 100%;
 }
 #va-social-buzz .vasb_fb .vasb_fb_thumbnail {
-    display: table-cell;
-    padding: 50px 0;
-    width: 0;
+    display: none;
+    visibility: hidden;
 }
 #va-social-buzz .vasb_fb .vasb_fb_like {
     display: table-cell;
-    vertical-align: middle;
+    padding: 16.5px 0;
     text-align: center;
+    vertical-align: middle;
 }
 #va-social-buzz .vasb_fb .vasb_fb_like .fb_iframe_widget {
     margin-bottom: 0;
@@ -117,7 +117,9 @@
 
 @media only screen and (min-width : 415px) {
     #va-social-buzz .vasb_fb .vasb_fb_thumbnail {
+        display: table-cell;
         padding: 100px 25px;
+        visibility: visible;
     }
     #va-social-buzz .vasb_fb .vasb_fb_like {
         width: 208px;
