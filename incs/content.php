@@ -77,7 +77,8 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 		$dummy_option                = self::dummy_option();
 		$options                     = self::get_option();
 		$options['like_button_area'] = array_merge( $dummy_option['like_button_area'], $options['like_button_area'] );
-		$bg                          = esc_attr( $options['like_button_area']['bg'] );
+		$bg                          = esc_attr( implode( ',', self::_hex_to_rgb( $options['like_button_area']['bg'] ) ) );
+		$opacity                     = esc_attr( $options['like_button_area']['bg_opacity'] );
 		$color                       = esc_attr( $options['like_button_area']['color'] );
 
 		if ( has_post_thumbnail() && ! post_password_required() ) {
@@ -89,12 +90,20 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 		}
 
 		$css = <<<EOI
-.vasb_fb_thumbnail {
+.vasb_fb {
 	background-image: url({$thumb});
 }
 .vasb_fb_like {
-	background-color: {$bg};
+	background-color: rgba({$bg}, {$opacity});
 	color: {$color};
+}
+@media only screen and (min-width : 415px) {
+	.vasb_fb_thumbnail {
+		background-image: url({$thumb});
+	}
+	.vasb_fb_like {
+		background-color: rgba({$bg}, 1);
+	}
 }
 EOI;
 
