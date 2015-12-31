@@ -77,8 +77,7 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 		$dummy_option                = self::dummy_option();
 		$options                     = self::get_option();
 		$options['like_button_area'] = array_merge( $dummy_option['like_button_area'], $options['like_button_area'] );
-		$bg                          = esc_attr( implode( ',', self::_hex_to_rgb( $options['like_button_area']['bg'] ) ) );
-		$opacity                     = esc_attr( $options['like_button_area']['bg_opacity'] );
+		$bg                          = esc_attr( $options['like_button_area']['bg'] );
 		$color                       = esc_attr( $options['like_button_area']['color'] );
 
 		if ( has_post_thumbnail() && ! post_password_required() ) {
@@ -90,20 +89,12 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 		}
 
 		$css = <<<EOI
-.vasb_fb {
+.vasb_fb_thumbnail {
 	background-image: url({$thumb});
 }
 .vasb_fb_like {
-	background-color: rgba({$bg}, {$opacity});
+	background-color: {$bg};
 	color: {$color};
-}
-@media only screen and (min-width : 415px) {
-	.vasb_fb_thumbnail {
-		background-image: url({$thumb});
-	}
-	.vasb_fb_like {
-		background-color: rgba({$bg}, 1);
-	}
 }
 EOI;
 
@@ -333,6 +324,7 @@ EOI;
 		$dummy_options = self::dummy_option();
 		$hexStr        = preg_replace( '/[^0-9A-Fa-f]/', '', $hexStr );
 		$rgbArray      = array();
+
 		if ( strlen( $hexStr ) == 6 ) {
 			$colorVal          = hexdec( $hexStr );
 			$rgbArray['red']   = 0xFF & ( $colorVal >> 0x10 );
@@ -343,7 +335,8 @@ EOI;
 			$rgbArray['green'] = hexdec( str_repeat( substr( $hexStr, 1, 1 ), 2 ) );
 			$rgbArray['blue']  = hexdec( str_repeat( substr( $hexStr, 2, 1 ), 2 ) );
 		} else {
-			self::_hex_to_rgb( $dummy_options['like_button_area']['bg'] );
+			var_dump($dummy_options['like_button_area']['bg']);
+			return self::_hex_to_rgb( $dummy_options['like_button_area']['bg'] );
 		}
 
 		return $returnAsString ? implode( $seperator, $rgbArray ) : $rgbArray;
