@@ -100,7 +100,7 @@ abstract class VASOCIALBUZZ_Singleton {
 			'like_button_area' => array(
 				'bg'         => '#2b2b2b',
 				'color'      => '#ffffff',
-				'bg_opacity' => '0.75',
+				'bg_opacity' => '0.7',
 			),
 			'post_type'        => array( 'post' ),
 		);

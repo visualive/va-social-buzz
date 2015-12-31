@@ -9,6 +9,10 @@
     font-style: normal;
 }
 
+#va-social-buzz {
+    font-family: Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "ヒラギノ丸ゴ ProN W4", "Hiragino Maru Gothic ProN", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, fantasy, sans-serif;
+}
+
 #va-social-buzz .vasb_fb {
     background-position: center;
     background-repeat: no-repeat;
