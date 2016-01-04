@@ -47,6 +47,9 @@ To install "VA Social Buzz":
 
 == Changelog ==
 
+= 1.0.8 =
+* Bug fix.
+
 = 1.0.7 =
 * Remove the style attributes from HTML elements.
 

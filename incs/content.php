@@ -153,16 +153,16 @@ EOI;
 		$template[] = '<div class="vasb_share">';
 		$template[] = '<div class="vasb_share_button vasb_share_button-fb">';
 		$template[] = sprintf(
-			'<a href="http://www.facebook.com/sharer/sharer.php?u=%s&display=popup&ref=plugin&src=share_button&sdk=joey"><i class="vasb_icon"></i><span>%s</span></a>',
-			get_the_permalink(),
+			'<a href="https://www.facebook.com/sharer/sharer.php?u=%s&display=popup&ref=plugin&sdk=joey&src=share_button"><i class="vasb_icon"></i><span>%s</span></a>',
+			rawurlencode( get_the_permalink() ),
 			esc_html( $options['text']['share'] )
 		);
 		$template[] = '</div>';
 		$template[] = '<div class="vasb_share_button vasb_share_button-tw">';
 		$template[] = sprintf(
-			'<a href="http://twitter.com/share?url=%s&text=%s"><i class="vasb_icon"></i><span>%s</span></a>',
-			get_the_permalink(),
-			get_the_title(),
+			'<a href="https://twitter.com/share?url=%s&text=%s"><i class="vasb_icon"></i><span>%s</span></a>',
+			rawurlencode( get_the_permalink() ),
+			rawurlencode( get_the_title() ),
 			esc_html( $options['text']['tweet'] )
 		);
 		$template[] = '</div>';
