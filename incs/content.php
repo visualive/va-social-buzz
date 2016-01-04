@@ -111,9 +111,9 @@ EOI;
 			$localize['appid'] = esc_attr( self::get_option()['fb_appid'] );
 		}
 
-		wp_enqueue_style( 'va-social-buzz', VASOCIALBUZZ_URL . 'assets/css/style.css' );
+		wp_enqueue_style( 'va-social-buzz', VASOCIALBUZZ_URL . 'assets/css/style.css', array(), self::$version );
 		wp_add_inline_style( 'va-social-buzz', $css );
-		wp_enqueue_script( 'va-social-buzz', VASOCIALBUZZ_URL . 'assets/js/script.js', array( 'jquery' ), '1.0.0', true );
+		wp_enqueue_script( 'va-social-buzz', VASOCIALBUZZ_URL . 'assets/js/script.js', array( 'jquery' ), self::$version, true );
 		wp_localize_script( 'va-social-buzz', 'vaSocialBuzzSettings', $localize );
 	}
 

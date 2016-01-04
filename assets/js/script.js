@@ -2,7 +2,7 @@
  * VA Social Buzz.
  *
  * @package   VisuAlive.
- * @version   1.0.0
+ * @version   1.0.8
  * @author    KUCKLU.
  * @copyright Copyright (c) KUCKLU and VisuAlive.
  * @link      http://visualive.jp/
@@ -62,9 +62,88 @@
 
             // Run on document ready
             self.cache.$document.on('ready', function () {
-                self.getJavaScriptSDK();
+                self.run();
                 self.createElements();
-                self.gaEventTracking()
+                self.getJavaScriptSDK();
+            });
+        },
+
+        /**
+         * Run plugin.
+         *
+         * @since 1.0.0
+         */
+        run: function () {
+            var self = this,
+                $vasb = $('#va-social-buzz'),
+                $facebook = $vasb.find('.vasb_share_button-fb').children('a'),
+                $twitter = $vasb.find('.vasb_share_button-tw').children('a');
+
+            if (typeof self.cache.window.GoogleAnalyticsObject != 'undefined' && self.cache.window.GoogleAnalyticsObject == 'ga') {
+                self._gaEventTracking(self);
+            } else {
+                $facebook.on('click', function (e) {
+                    e.preventDefault();
+                    if (typeof (FB) != 'undefined' && typeof self.cache.wordpress.appid != 'undefined') {
+                        FB.ui({
+                            method      : 'share',
+                            href        : self.cache.window.location.href,
+                            redirect_uri: self.cache.window.location.href
+                        });
+                    } else {
+                        self._shareNewWindow(this);
+                    }
+                });
+                $twitter.on('click', function (e) {
+                    e.preventDefault();
+                    self._shareNewWindow(this);
+                });
+            }
+        },
+
+        /**
+         * Create Fb elements.
+         *
+         * @since 1.0.0
+         */
+        createElements: function () {
+            var self = this,
+                fbRoot = self.cache.document.getElementById('fb-root'),
+                body;
+
+            if (null == fbRoot) {
+                body = self.cache.document.body;
+                fbRoot = self.cache.document.createElement('div');
+
+                fbRoot.setAttribute('id', 'fb-root');
+                body.insertBefore(fbRoot, body.firstChild);
+            }
+        },
+
+        /**
+         * Load js sdk.
+         *
+         * @since 1.0.0
+         */
+        getJavaScriptSDK: function () {
+            var self = this;
+
+            $.getScript('//connect.facebook.net/' + self._deletionOtherAlphanumeric(self.cache.wordpress.locale) + '/sdk.js', function () {
+                if (typeof self.cache.wordpress.appid != 'undefined') {
+                    FB.init({
+                        appId  : self._deletionOtherNumeric(self.cache.wordpress.appid),
+                        version: 'v2.5',
+                        status : true,
+                        cookie : true,
+                        xfbml  : true
+                    });
+                } else {
+                    FB.init({version: 'v2.5', status: true, cookie: true, xfbml: true});
+                }
+            });
+
+            $.getScript('//platform.twitter.com/widgets.js', function () {
+                twttr.widgets.load();
             });
         },
 
@@ -105,120 +184,63 @@
         },
 
         /**
-         * Load js sdk.
-         *
-         * @since 1.0.0
+         * Google Analytics Events Send.
          */
-        getJavaScriptSDK: function () {
-            var self = this;
-
-            $.getScript('//connect.facebook.net/' + self._deletionOtherAlphanumeric(self.cache.wordpress.locale) + '/sdk.js', function () {
-                if (typeof self.cache.wordpress.appid != 'undefined') {
-                    FB.init({
-                        appId  : self._deletionOtherNumeric(self.cache.wordpress.appid),
-                        version: 'v2.5',
-                        status : true,
-                        cookie : true,
-                        xfbml  : true
-                    });
-                } else {
-                    FB.init({version: 'v2.5', status: true, cookie: true, xfbml: true});
-                }
-            });
-
-            $.getScript('//platform.twitter.com/widgets.js', function () {
-                twttr.widgets.load();
-            });
-        },
-
-        /**
-         * Create Fb elements.
-         *
-         * @since 1.0.0
-         */
-        createElements: function () {
-            var self = this,
-                fbRoot = self.cache.document.getElementById('fb-root'),
-                body;
-
-            if (null == fbRoot) {
-                body = self.cache.document.body;
-                fbRoot = self.cache.document.createElement('div');
-
-                fbRoot.setAttribute('id', 'fb-root');
-                body.insertBefore(fbRoot, body.firstChild);
-            }
-        },
-
-        /**
-         * Google Analytics Events Tracking.
-         */
-        gaEventTracking: function () {
-            var self = this,
+        _gaEventTracking: function (t) {
+            var self = t,
                 $vasb = $('#va-social-buzz'),
                 $facebook = $vasb.find('.vasb_share_button-fb').children('a'),
                 $twitter = $vasb.find('.vasb_share_button-tw').children('a');
 
-            if (typeof self.cache.window.GoogleAnalyticsObject != 'undefined' && self.cache.window.GoogleAnalyticsObject == 'ga') {
-                window.onload = function () {
-                    if (typeof (FB) != 'undefined') {
-                        FB.Event.subscribe('edge.create', function (url) {
-                            ga('send', 'event', 'VA Social Buzz', 'Fb Like', url);
-                            ga('send', 'social', 'facebook', 'like', url);
-                        });
-                        FB.Event.subscribe('edge.remove', function (url) {
-                            ga('send', 'event', 'VA Social Buzz', 'Fb Unlike', url);
-                            ga('send', 'social', 'facebook', 'unlike', url);
-                        });
-                    }
-
-                    if (typeof (twttr) != 'undefined') {
-                        twttr.ready(function (twttr) {
-                            twttr.events.bind('follow', function () {
-                                ga('send', 'event', 'VA Social Buzz', 'Twi Follow', self.cache.window.location.href);
-                                ga('send', 'social', 'Twitter', 'Follow', self.cache.window.location.href);
-                            });
-                        });
-                    }
-
-                    $facebook.on('click', function (e) {
-                        e.preventDefault();
-
-                        if (typeof (FB) != 'undefined' && typeof self.cache.wordpress.appid != 'undefined') {
-                            FB.ui({
-                                method      : 'share',
-                                href        : self.cache.window.location.href,
-                                redirect_uri: self.cache.window.location.href
-                            }, function (response) {
-                                if (response !== null && typeof response.post_id !== 'undefined') {
-                                    ga('send', 'event', 'VA Social Buzz', 'Fb Share', self.cache.window.location.href);
-                                    ga('send', 'social', 'Facebook', 'Share', self.cache.window.location.href);
-                                }
-                            });
-                        } else {
-                            ga('send', 'event', 'VA Social Buzz', 'Fb Share', self.cache.window.location.href);
-                            ga('send', 'social', 'Facebook', 'Share', self.cache.window.location.href);
-                            self._shareNewWindow(this);
-                        }
+            window.onload = function () {
+                if (typeof (FB) != 'undefined') {
+                    FB.Event.subscribe('edge.create', function (url) {
+                        ga('send', 'event', 'VA Social Buzz', 'Fb Like', url);
+                        ga('send', 'social', 'facebook', 'like', url);
                     });
-
-                    $twitter.on('click', function (e) {
-                        e.preventDefault();
-                        ga('send', 'event', 'VA Social Buzz', 'Twi Tweet', self.cache.window.location.href);
-                        ga('send', 'social', 'Twitter', 'Tweet', self.cache.window.location.href);
-                        self._shareNewWindow(this);
+                    FB.Event.subscribe('edge.remove', function (url) {
+                        ga('send', 'event', 'VA Social Buzz', 'Fb Unlike', url);
+                        ga('send', 'social', 'facebook', 'unlike', url);
                     });
                 }
-            } else {
-                $facebook.on('click', function (e) {
-                    e.preventDefault();
+
+                if (typeof (twttr) != 'undefined') {
+                    twttr.ready(function (twttr) {
+                        twttr.events.bind('follow', function () {
+                            ga('send', 'event', 'VA Social Buzz', 'Twi Follow', self.cache.window.location.href);
+                            ga('send', 'social', 'Twitter', 'Follow', self.cache.window.location.href);
+                        });
+                    });
+                }
+            };
+
+            $facebook.on('click', function (e) {
+                e.preventDefault();
+
+                if (typeof (FB) != 'undefined' && typeof self.cache.wordpress.appid != 'undefined') {
+                    FB.ui({
+                        method      : 'share',
+                        href        : self.cache.window.location.href,
+                        redirect_uri: self.cache.window.location.href
+                    }, function (response) {
+                        if (response && !response.error_message) {
+                            ga('send', 'event', 'VA Social Buzz', 'Fb Share', self.cache.window.location.href);
+                            ga('send', 'social', 'Facebook', 'Share', self.cache.window.location.href);
+                        }
+                    });
+                } else {
+                    ga('send', 'event', 'VA Social Buzz', 'Fb Share', self.cache.window.location.href);
+                    ga('send', 'social', 'Facebook', 'Share', self.cache.window.location.href);
                     self._shareNewWindow(this);
-                });
-                $twitter.on('click', function (e) {
-                    e.preventDefault();
-                    self._shareNewWindow(this);
-                });
-            }
+                }
+            });
+
+            $twitter.on('click', function (e) {
+                e.preventDefault();
+                ga('send', 'event', 'VA Social Buzz', 'Twi Tweet', self.cache.window.location.href);
+                ga('send', 'social', 'Twitter', 'Tweet', self.cache.window.location.href);
+                self._shareNewWindow(this);
+            });
         },
 
         /**

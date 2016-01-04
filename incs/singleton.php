@@ -50,6 +50,14 @@ abstract class VASOCIALBUZZ_Singleton {
 	protected static $prefix = 'vasocialbuzz';
 
 	/**
+	 * Plugin version.
+	 *
+	 * @since 1.0.8
+	 * @var string
+	 */
+	protected static $version = '1.0.8';
+
+	/**
 	 * Instance.
 	 *
 	 * @since 0.0.1 (Alpha)
