@@ -55,7 +55,7 @@ abstract class VASOCIALBUZZ_Singleton {
 	 * @since 1.0.8
 	 * @var string
 	 */
-	protected static $version = '1.0.8';
+	protected static $version = '1.0.9';
 
 	/**
 	 * Instance.

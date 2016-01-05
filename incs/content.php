@@ -344,7 +344,6 @@ EOI;
 			$rgbArray['green'] = hexdec( str_repeat( substr( $hexStr, 1, 1 ), 2 ) );
 			$rgbArray['blue']  = hexdec( str_repeat( substr( $hexStr, 2, 1 ), 2 ) );
 		} else {
-			var_dump($dummy_options['like_button_area']['bg']);
 			return self::_hex_to_rgb( $dummy_options['like_button_area']['bg'] );
 		}
 
