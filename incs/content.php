@@ -71,6 +71,8 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 
 	/**
 	 * Echo scripts.
+	 *
+	 * @since 0.0.1 (Alpha)
 	 */
 	public function wp_enqueue_script() {
 		$localize['locale']          = esc_attr( self::_get_locale() );
@@ -82,9 +84,9 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 		$color                       = esc_attr( $options['like_button_area']['color'] );
 
 		if ( has_post_thumbnail() && ! post_password_required() ) {
-			$thumb = get_the_post_thumbnail_url( null, self::$prefix . '-thumbnail' );
+			$thumb = esc_url( get_the_post_thumbnail_url( null, self::$prefix . '-thumbnail' ) );
 		} elseif ( has_site_icon() ) {
-			$thumb = get_site_icon_url();
+			$thumb = esc_url( get_site_icon_url() );
 		} else {
 			$thumb = '';
 		}
@@ -153,7 +155,7 @@ EOI;
 		$template[] = '<div class="vasb_share">';
 		$template[] = '<div class="vasb_share_button vasb_share_button-fb">';
 		$template[] = sprintf(
-			'<a href="https://www.facebook.com/sharer/sharer.php?u=%s&display=popup&ref=plugin&sdk=joey&src=share_button"><i class="vasb_icon"></i><span>%s</span></a>',
+			'<a href="https://www.facebook.com/sharer/sharer.php?u=%s"><i class="vasb_icon"></i><span>%s</span></a>',
 			rawurlencode( get_the_permalink() ),
 			esc_html( $options['text']['share'] )
 		);
@@ -322,6 +324,7 @@ EOI;
 	 * Convert a hexa decimal color code to its RGB equivalent
 	 *
 	 * @link   http://php.net/manual/ja/function.hexdec.php
+	 * @since  0.0.1 (Alpha)
 	 *
 	 * @param  string  $hexStr         (hexadecimal color value)
 	 * @param  boolean $returnAsString (if set true, returns the value separated by the separator character. Otherwise returns associative array)

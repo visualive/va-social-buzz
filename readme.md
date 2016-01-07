@@ -38,6 +38,9 @@ To install VA Social Buzz:
 
 ## Changelog
 
+### 1.0.10
+* Fixed a bug that occurred when opening in the browser of a third party smartphone application.
+
 ### 1.0.9
 * Bug fix.
 

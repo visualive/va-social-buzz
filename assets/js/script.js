@@ -2,7 +2,7 @@
  * VA Social Buzz.
  *
  * @package   VisuAlive.
- * @version   1.0.8
+ * @version   1.0.10
  * @author    KUCKLU.
  * @copyright Copyright (c) KUCKLU and VisuAlive.
  * @link      http://visualive.jp/
@@ -185,6 +185,10 @@
 
         /**
          * Google Analytics Events Send.
+         *
+         * @since 1.0.0
+         * @param t
+         * @private
          */
         _gaEventTracking: function (t) {
             var self = t,
@@ -252,10 +256,10 @@
          * @private
          */
         _shareNewWindow: function (t) {
-            var self       = this,
-                new_window = window.open('', '', 'width=550,height=500');
+            var self = this,
+                href = self._escapeHTML($(t).attr('href'));
 
-            new_window.window.location.href = self._escapeHTML($(t).attr('href'));
+            window.open(href, '', 'width=550,height=500');
         }
     };
 
