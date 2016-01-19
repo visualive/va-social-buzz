@@ -294,7 +294,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 	public function _sanitize_option( $options ) {
 		$dummy_option                              = self::dummy_option();
 		$options                                   = wp_parse_args( $options, $dummy_option );
-		$options['fb_page']                        = preg_replace( '/[^a-zA-Z0-9.]/', '', $options['fb_page'] );
+		$options['fb_page']                        = preg_replace( '/[^a-zA-Z0-9\-.]/', '', $options['fb_page'] );
 		$options['fb_appid']                       = preg_replace( '/[\D]/', '', $options['fb_appid'] );
 		$options['tw_account']                     = preg_replace( '/[\W]/', '', $options['tw_account'] );
 		$options['text']['like'][0]                = sanitize_text_field( $options['text']['like'][0] );
