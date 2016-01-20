@@ -75,13 +75,18 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 	 * @since 0.0.1 (Alpha)
 	 */
 	public function wp_enqueue_script() {
-		$localize['locale']          = esc_attr( self::_get_locale() );
+		$options = self::get_option();
+
+		if ( ! is_singular() || ! in_array( get_post_type(), (array) $options['post_type'] ) ) {
+			return null;
+		}
+
 		$dummy_option                = self::dummy_option();
-		$options                     = self::get_option();
 		$options['like_button_area'] = array_merge( $dummy_option['like_button_area'], $options['like_button_area'] );
 		$bg                          = esc_attr( implode( ',', self::_hex_to_rgb( $options['like_button_area']['bg'] ) ) );
 		$opacity                     = esc_attr( $options['like_button_area']['bg_opacity'] );
 		$color                       = esc_attr( $options['like_button_area']['color'] );
+		$localize['locale']          = esc_attr( self::_get_locale() );
 
 		if ( has_post_thumbnail() && ! post_password_required() ) {
 			$thumb = esc_url( get_the_post_thumbnail_url( null, self::$prefix . '-thumbnail' ) );
@@ -109,8 +114,8 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 }
 EOI;
 
-		if ( isset( get_option( 'va_social_buzz' )['fb_appid'] ) && ! empty( get_option( 'va_social_buzz' )['fb_appid'] ) ) {
-			$localize['appid'] = esc_attr( self::get_option()['fb_appid'] );
+		if ( isset( $options['fb_appid'] ) && ! empty( $options['fb_appid'] ) ) {
+			$localize['appid'] = esc_attr( $options['fb_appid'] );
 		}
 
 		wp_enqueue_style( 'va-social-buzz', VASOCIALBUZZ_URL . 'assets/css/style.css', array(), self::$version );
@@ -129,7 +134,7 @@ EOI;
 	protected function _content_template() {
 		$options = self::get_option();
 
-		if ( ! is_singular() || ! in_array( get_post_type(), $options['post_type'] ) ) {
+		if ( ! is_singular() || ! in_array( get_post_type(), (array) $options['post_type'] ) ) {
 			return null;
 		}
 
