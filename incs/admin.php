@@ -210,22 +210,24 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 			$options['like_button_area']['bg']
 		);
 
-		$output[] = '<p><label>' . __( 'Background color opacity:', 'va-social-buzz' ) . ' <select name="va_social_buzz[like_button_area][bg_opacity]">';
-		$fields[] = '<option value="0"' . $selected . '>0</option>';
-		for ( $i = 0; $i < 1; ) {
-			$i = (string) bcadd( $i, 0.05, 2 );
-			$i = preg_replace( '/\.?0+$/', '', $i );
+		if ( function_exists( 'bcadd' ) ) {
+			$output[] = '<p><label>' . __( 'Background color opacity:', 'va-social-buzz' ) . ' <select name="va_social_buzz[like_button_area][bg_opacity]">';
+			$fields[] = '<option value="0"' . $selected . '>0</option>';
+			for ( $i = 0; $i < 1; ) {
+				$i = (string) bcadd( $i, 0.05, 2 );
+				$i = preg_replace( '/\.?0+$/', '', $i );
 
-			if ( '1' === (string) floor( $i ) ) {
-				$i = (string) floor( $i );
+				if ( '1' === (string) floor( $i ) ) {
+					$i = (string) floor( $i );
+				}
+
+				$selected = $i === $options['like_button_area']['bg_opacity'] ? ' selected' : '';
+				$fields[] = '<option value="' . $i . '"' . $selected . '>' . $i . '</option>';
 			}
-
-			$selected = $i === $options['like_button_area']['bg_opacity'] ? ' selected' : '';
-			$fields[] = '<option value="' . $i . '"' . $selected . '>' . $i . '</option>';
+			$output   = array_merge( $output, array_reverse( $fields ) );
+			$output[] = '</select></label></p>';
+			unset( $fields );
 		}
-		$output   = array_merge( $output, array_reverse( $fields ) );
-		$output[] = '</select></label></p>';
-		unset( $fields );
 
 		$output[] = sprintf(
 			'<p><label>' . __( 'Font color:', 'va-social-buzz' ) . ' <input class="vasb-color-picker" type="text" name="va_social_buzz[like_button_area][color]" value="%s"></label></p>',

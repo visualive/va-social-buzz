@@ -38,6 +38,10 @@ To install VA Social Buzz:
 
 ## Changelog
 
+### 1.0.13
+* Bug fix.
+
+
 ### 1.0.12
 * Clean up.
 
