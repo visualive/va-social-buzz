@@ -45,7 +45,7 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 	public function __construct( $settings = array() ) {
 		$priority = 10;
 
-		add_image_size( self::$prefix . '-thumbnail', '980', '9999', false );
+		add_image_size( VASOCIALBUZZ_PREFIX . '-thumbnail', '980', '9999', false );
 
 		add_action( 'wp_enqueue_scripts', array( &$this, 'wp_enqueue_script' ) );
 		add_filter( 'the_content', array( &$this, 'the_content' ), (int) $priority );
@@ -63,7 +63,7 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 	public function the_content( $content ) {
 		$content = array(
 			$content,
-			self::_content_template(),
+			self::_template_content(),
 		);
 
 		return implode( PHP_EOL, $content );
@@ -75,13 +75,17 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 	 * @since 0.0.1 (Alpha)
 	 */
 	public function wp_enqueue_script() {
-		$options = self::get_option();
+		$options      = self::get_option();
+		$dummy_option = self::_dummy_option();
+
+		if ( empty( $options['post_type'] ) ) {
+			$options['post_type'] = apply_filters( VASOCIALBUZZ_PREFIX . '_showin_post_type', $dummy_option['post_type'] );
+		}
 
 		if ( ! is_singular() || ! in_array( get_post_type(), (array) $options['post_type'] ) ) {
 			return null;
 		}
 
-		$dummy_option                = self::dummy_option();
 		$options['like_button_area'] = array_merge( $dummy_option['like_button_area'], $options['like_button_area'] );
 		$bg                          = esc_attr( implode( ',', self::_hex_to_rgb( $options['like_button_area']['bg'] ) ) );
 		$opacity                     = esc_attr( $options['like_button_area']['bg_opacity'] );
@@ -89,7 +93,7 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 		$localize['locale']          = esc_attr( self::_get_locale() );
 
 		if ( has_post_thumbnail() && ! post_password_required() ) {
-			$thumb = esc_url( get_the_post_thumbnail_url( null, self::$prefix . '-thumbnail' ) );
+			$thumb = esc_url( get_the_post_thumbnail_url( null, VASOCIALBUZZ_PREFIX . '-thumbnail' ) );
 		} elseif ( has_site_icon() ) {
 			$thumb = esc_url( get_site_icon_url() );
 		} else {
@@ -118,27 +122,64 @@ EOI;
 			$localize['appid'] = esc_attr( $options['fb_appid'] );
 		}
 
-		wp_enqueue_style( 'va-social-buzz', VASOCIALBUZZ_URL . 'assets/css/style.css', array(), self::$version );
+		wp_enqueue_style( 'va-social-buzz', VASOCIALBUZZ_URL . 'assets/css/style.css', array(), VASOCIALBUZZ_VERSION );
 		wp_add_inline_style( 'va-social-buzz', $css );
-		wp_enqueue_script( 'va-social-buzz', VASOCIALBUZZ_URL . 'assets/js/script.js', array( 'jquery' ), self::$version, true );
+		wp_enqueue_script( 'va-social-buzz', VASOCIALBUZZ_URL . 'assets/js/script.js', array( 'jquery' ), VASOCIALBUZZ_VERSION, true );
 		wp_localize_script( 'va-social-buzz', 'vaSocialBuzzSettings', $localize );
 	}
 
 	/**
 	 * Content template.
 	 *
-	 * @todo  後で分割する
 	 * @since 0.0.1 (Alpha)
 	 * @return string
 	 */
-	protected function _content_template() {
-		$options = self::get_option();
+	protected function _template_content() {
+		$options      = self::get_option();
+		$dummy_option = self::_dummy_option();
+
+		if ( empty( $options['post_type'] ) ) {
+			$options['post_type'] = apply_filters( VASOCIALBUZZ_PREFIX . '_showin_post_type', $dummy_option['post_type'] );
+		}
 
 		if ( ! is_singular() || ! in_array( get_post_type(), (array) $options['post_type'] ) ) {
 			return null;
 		}
 
-		$template[] = '<div id="va-social-buzz" class="va-social-buzz">';
+		$template = self::_template_body();
+
+		return apply_filters( VASOCIALBUZZ_PREFIX . '_template_content', $template, $options );
+	}
+
+	/**
+	 * Content template.
+	 *
+	 * @since 1.0.14
+	 * @return string
+	 */
+	protected function _template_body() {
+		$options     = self::get_option();
+		$_template   = array();
+		$_template[] = '<div id="va-social-buzz" class="va-social-buzz">';
+		$_template[] = apply_filters( VASOCIALBUZZ_PREFIX . '_template_content_before', '', $options );
+		$_template[] = self::_template_fb_page();
+		$_template[] = self::_template_share();
+		$_template[] = self::_template_follow();
+		$_template[] = apply_filters( VASOCIALBUZZ_PREFIX . '_template_content_after', '', $options );
+		$_template[] = '<!-- //.va-social-buzz --></div>';
+		$template    = apply_filters( VASOCIALBUZZ_PREFIX . '_template_body', $_template, $options );
+
+		return implode( PHP_EOL, $template );
+	}
+
+	/**
+	 * Facebook like.
+	 *
+	 * @return string
+	 */
+	protected function _template_fb_page() {
+		$options  = self::get_option();
+		$template = array();
 
 		if ( ! empty( $options['fb_page'] ) ) {
 			$template[] = '<div class="vasb_fb">';
@@ -157,23 +198,47 @@ EOI;
 			$template[] = '<!-- //.vasb_fb --></div>';
 		}
 
-		$template[] = '<div class="vasb_share">';
-		$template[] = '<div class="vasb_share_button vasb_share_button-fb">';
-		$template[] = sprintf(
-			'<a href="https://www.facebook.com/sharer/sharer.php?u=%s"><i class="vasb_icon"></i><span>%s</span></a>',
-			rawurlencode( get_the_permalink() ),
-			esc_html( $options['text']['share'] )
-		);
-		$template[] = '</div>';
-		$template[] = '<div class="vasb_share_button vasb_share_button-tw">';
-		$template[] = sprintf(
-			'<a href="https://twitter.com/share?url=%s&text=%s"><i class="vasb_icon"></i><span>%s</span></a>',
-			rawurlencode( get_the_permalink() ),
-			rawurlencode( get_the_title() ),
-			esc_html( $options['text']['tweet'] )
-		);
-		$template[] = '</div>';
-		$template[] = '<!-- //.vasb_share --></div>';
+		return implode( PHP_EOL, $template );
+	}
+
+	/**
+	 * SNS share.
+	 *
+	 * @return array
+	 */
+	protected function _template_share() {
+		$options  = self::get_option();
+		$sns_list = self::_sns_list();
+		$template = array();
+
+		$template['before'] = '<div class="vasb_share">';
+
+		foreach ( $sns_list as $key => $value ) {
+			$template[ $key ] = sprintf( '<div class="vasb_share_button vasb_share_button-%s">', esc_html( $value['prefix'] ) );
+			$template[ $key ] .= sprintf( '<a href="%s">', esc_html( $value['endpoint'] ) );
+			$template[ $key ] .= '<i class="vasb_icon"></i>';
+			$template[ $key ] .= sprintf( '<span>%s</span>', esc_html( $options['text'][ $key ] ) );
+			$template[ $key ] .= '</a>';
+			$template[ $key ] .= '</div>';
+		}
+
+		$template['after'] = '<!-- //.vasb_share --></div>';
+
+		$template = implode( PHP_EOL, $template );
+		$template = str_replace( '%permalink%', rawurlencode( get_the_permalink() ), $template );
+		$template = str_replace( '%post_title%', rawurlencode( get_the_title() ), $template );
+
+		return $template;
+	}
+
+	/**
+	 * Twitter follow.
+	 *
+	 * @return string
+	 */
+	protected function _template_follow() {
+		$options  = self::get_option();
+		$template = array();
 
 		if ( ! empty( $options['tw_account'] ) ) {
 			$template[] = '<div class="vasb_tw">';
@@ -185,9 +250,7 @@ EOI;
 			$template[] = '<!-- //.vasb_tw --></div>';
 		}
 
-		$template[] = '<!-- //.va-social-buzz --></div>';
-
-		return apply_filters( 'va_social_buzz_content', implode( PHP_EOL, $template ), $options );
+		return implode( PHP_EOL, $template );
 	}
 
 	/**
@@ -199,7 +262,7 @@ EOI;
 	 * @return string $locale
 	 */
 	protected function _get_locale() {
-		$locale     = apply_filters( 'va_social_buzz_locale', get_locale() );
+		$locale     = apply_filters( VASOCIALBUZZ_PREFIX . '_locale', get_locale() );
 		$locales    = apply_filters(
 			'va_social_buzz_locales', array(
 				'ca' => 'ca_ES',
@@ -338,7 +401,7 @@ EOI;
 	 * @return array or string (depending on second parameter. Returns False if invalid hex color value)
 	 */
 	function _hex_to_rgb( $hexStr, $returnAsString = false, $seperator = ',' ) {
-		$dummy_options = self::dummy_option();
+		$dummy_options = self::_dummy_option();
 		$hexStr        = preg_replace( '/[^0-9A-Fa-f]/', '', $hexStr );
 		$rgbArray      = array();
 

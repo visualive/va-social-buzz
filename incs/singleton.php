@@ -42,22 +42,6 @@ abstract class VASOCIALBUZZ_Singleton {
 	private static $instances = array();
 
 	/**
-	 * Plugin prefix.
-	 *
-	 * @since 0.0.1 (Alpha)
-	 * @var string
-	 */
-	protected static $prefix = 'vasocialbuzz';
-
-	/**
-	 * Plugin version.
-	 *
-	 * @since 1.0.8
-	 * @var string
-	 */
-	protected static $version = '1.0.10';
-
-	/**
 	 * Instance.
 	 *
 	 * @since 0.0.1 (Alpha)
@@ -86,32 +70,60 @@ abstract class VASOCIALBUZZ_Singleton {
 	}
 
 	/**
+	 * SNS List.
+	 *
+	 * @since 1.0.14
+	 * @return array
+	 */
+	protected function _sns_list() {
+		$list = apply_filters( VASOCIALBUZZ_PREFIX . '_admin_sns_list', array(
+			'share' => array(
+				'prefix'   => 'fb',
+				'endpoint' => 'https://www.facebook.com/sharer/sharer.php?u=%permalink%',
+				'text'     => __( 'Share', 'va-social-buzz' ),
+			),
+			'tweet' => array(
+				'prefix'   => 'tw',
+				'endpoint' => 'https://twitter.com/share?url=%permalink%&text=%post_title%',
+				'text'     => __( 'Tweet', 'va-social-buzz' )
+			),
+		) );
+
+		return $list;
+	}
+
+	/**
 	 * Dummy settings.
 	 *
 	 * @since 0.0.1 (Alpha)
 	 * @return array
 	 */
-	protected function dummy_option() {
-		return array(
+	protected function _dummy_option() {
+		$sns_list = self::_sns_list();
+		$text     = array(
+			'like'   => array(
+				__( 'If you liked this article,', 'va-social-buzz' ),
+				__( 'please click this "like!".', 'va-social-buzz' ),
+			),
+			'follow' => __( 'Follow on Twetter !', 'va-social-buzz' ),
+		);
+
+		foreach ( $sns_list as $key => $sns ) {
+			$text[ $key ] = $sns['text'];
+		}
+
+		return apply_filters( VASOCIALBUZZ_PREFIX . '_admin_dummy_option', array(
 			'fb_page'          => 'wordpress',
 			'fb_appid'         => '',
 			'tw_account'       => 'wordpress',
-			'text'             => array(
-				'like'   => array(
-					__( 'If you liked this article,', 'va-social-buzz' ),
-					__( 'please click this "like!".', 'va-social-buzz' ),
-				),
-				'share'  => __( 'Share', 'va-social-buzz' ),
-				'tweet'  => __( 'Tweet', 'va-social-buzz' ),
-				'follow' => __( 'Follow on Twetter !', 'va-social-buzz' ),
-			),
+			'text'             => $text,
 			'like_button_area' => array(
 				'bg'         => '#2b2b2b',
 				'color'      => '#ffffff',
 				'bg_opacity' => '0.7',
 			),
 			'post_type'        => array( 'post' ),
-		);
+		) );
 	}
 
 	/**
@@ -121,6 +133,6 @@ abstract class VASOCIALBUZZ_Singleton {
 	 * @return array
 	 */
 	protected function get_option() {
-		return wp_parse_args( get_option( 'va_social_buzz' ), self::dummy_option() );
+		return wp_parse_args( get_option( 'va_social_buzz' ), self::_dummy_option() );
 	}
 }

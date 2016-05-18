@@ -54,6 +54,9 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 		register_setting( 'reading', 'va_social_buzz', array( &$this, '_sanitize_option' ) );
 
 		add_settings_section( 'vasocialbuzz_section', __( 'VA Social Buzz', 'va-social-buzz' ), null, 'reading' );
+
+		do_action( VASOCIALBUZZ_PREFIX . '_admin_form_field_0' );
+
 		add_settings_field(
 			'vasocialbuzz_fb_page',
 			'<label for="vasocialbuzz_fb_page">' . __( 'Facebook Page Web Address', 'va-social-buzz' ) . '</label>',
@@ -61,6 +64,9 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 			'reading',
 			'vasocialbuzz_section'
 		);
+
+		do_action( VASOCIALBUZZ_PREFIX . '_admin_form_field_1' );
+
 		add_settings_field(
 			'vasocialbuzz_fb_appid',
 			'<label for="vasocialbuzz_fb_appid">' . __( 'Facebook App ID', 'va-social-buzz' ) . '</label>',
@@ -68,6 +74,9 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 			'reading',
 			'vasocialbuzz_section'
 		);
+
+		do_action( VASOCIALBUZZ_PREFIX . '_admin_form_field_2' );
+
 		add_settings_field(
 			'vasocialbuzz_tw_account',
 			'<label for="vasocialbuzz_tw_account">' . __( 'Twitter Account', 'va-social-buzz' ) . '</label>',
@@ -75,6 +84,9 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 			'reading',
 			'vasocialbuzz_section'
 		);
+
+		do_action( VASOCIALBUZZ_PREFIX . '_admin_form_field_3' );
+
 		add_settings_field(
 			'vasocialbuzz_text',
 			__( 'Text', 'va-social-buzz' ),
@@ -82,6 +94,9 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 			'reading',
 			'vasocialbuzz_section'
 		);
+
+		do_action( VASOCIALBUZZ_PREFIX . '_admin_form_field_4' );
+
 		add_settings_field(
 			'vasocialbuzz_like_button_area',
 			__( 'Like Button Aria', 'va-social-buzz' ),
@@ -89,6 +104,9 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 			'reading',
 			'vasocialbuzz_section'
 		);
+
+		do_action( VASOCIALBUZZ_PREFIX . '_admin_form_field_5' );
+
 		add_settings_field(
 			'vasocialbuzz_post_types',
 			__( 'Show In', 'va-social-buzz' ),
@@ -96,6 +114,8 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 			'reading',
 			'vasocialbuzz_section'
 		);
+
+		do_action( VASOCIALBUZZ_PREFIX . '_admin_form_field_6' );
 	}
 
 	/**
@@ -185,6 +205,8 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 		$output[] = '</label></p>';
 		$output[] = '<p class="description">' . __( 'Tweet button to Twitter.', 'va-social-buzz' ) . '</p>';
 
+		$output = apply_filters( VASOCIALBUZZ_PREFIX . '_admin_form_button_text', $output );
+
 		$output[] = '<p><label for="vasocialbuzz_text_follow">';
 		$output[] = sprintf(
 			'<input id="vasocialbuzz_text_follow" class="regular-text" type="text" name="va_social_buzz[text][follow]" value="%s">',
@@ -200,7 +222,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 	 * Backgrund of the like button box.
 	 */
 	public function render_like_button_area() {
-		$dummy_option                = self::dummy_option();
+		$dummy_option                = self::_dummy_option();
 		$options                     = self::get_option();
 		$options['like_button_area'] = array_merge( $dummy_option['like_button_area'], $options['like_button_area'] );
 		$selected                    = '0' === $options['like_button_area']['bg_opacity'] ? ' selected' : '';
@@ -243,12 +265,17 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 	 * @since 1.0.3
 	 */
 	public function render_post_types() {
-		$options = self::get_option();
+		$options      = self::get_option();
+		$dummy_option = self::_dummy_option();
 
 		$post_types = array_values( get_post_types( array(
 			'public' => true,
 		) ) );
 		$output[]   = '<ul>';
+
+		if ( empty( $options['post_type'] ) ) {
+			$options['post_type'] = apply_filters( VASOCIALBUZZ_PREFIX . '_showin_post_type', $dummy_option['post_type'] );
+		}
 
 		foreach ( $post_types as $post_type ) {
 			$checked          = in_array( $post_type, $options['post_type'] ) ? ' checked' : '';
@@ -265,7 +292,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 		$output[] = '<p class="description">' . __( 'Choose the post type to display.', 'va-social-buzz' ) . '</p>';
 		$output[] = '<p class="description">' . __( 'Please select the one or more.', 'va-social-buzz' ) . '</p>';
 
-		echo implode( PHP_EOL, $output );
+		echo implode( PHP_EOL, apply_filters( VASOCIALBUZZ_PREFIX . '_admin_render_post_types', $output ) );
 	}
 
 	/**
@@ -289,13 +316,27 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 	 *
 	 * @since 0.0.1 (Alpha)
 	 *
-	 * @param $options array Settings.
+	 * @param $options_raw array Settings.
 	 *
 	 * @return array
 	 */
-	public function _sanitize_option( $options ) {
-		$dummy_option                              = self::dummy_option();
-		$options                                   = wp_parse_args( $options, $dummy_option );
+	public function _sanitize_option( $options_raw ) {
+		do_action( VASOCIALBUZZ_PREFIX . '_admin_sanitize_options_start', $options_raw );
+
+		$dummy_option = self::_dummy_option();
+		$options_raw  = apply_filters( VASOCIALBUZZ_PREFIX . '_admin_sanitize_options_raw', $options_raw );
+
+		foreach ( $options_raw['text'] as $key => $value ) {
+			if ( 'like' === $key ) {
+				foreach ( $value as $key2 => $value2 ) {
+					$options_raw['text']['like'][ $key2 ] = ! empty( $value2 ) ? $value2 : $dummy_option['text']['like'][ $key2 ];
+				}
+			} else {
+				$options_raw['text'][ $key ] = ! empty( $value ) ? $value : $dummy_option['text'][ $key ];
+			}
+		}
+
+		$options                                   = wp_parse_args( $options_raw, $dummy_option );
 		$options['fb_page']                        = preg_replace( '/[^a-zA-Z0-9\-.]/', '', $options['fb_page'] );
 		$options['fb_appid']                       = preg_replace( '/[\D]/', '', $options['fb_appid'] );
 		$options['tw_account']                     = preg_replace( '/[\W]/', '', $options['tw_account'] );
@@ -315,9 +356,13 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 			}
 		}
 
-		foreach ( $options['post_type'] as $key => $post_type ) {
-			$options['post_type'][ $key ] = sanitize_key( $post_type );
+		if ( ! empty( $options['post_type'] ) ) {
+			foreach ( $options['post_type'] as $key => $post_type ) {
+				$options['post_type'][ $key ] = sanitize_key( $post_type );
+			}
 		}
+
+		do_action( VASOCIALBUZZ_PREFIX . '_admin_sanitize_options_end', $options );
 
 		return $options;
 	}
