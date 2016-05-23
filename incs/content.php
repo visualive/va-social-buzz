@@ -96,16 +96,18 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 		$localize['locale']          = esc_attr( self::_get_locale() );
 
 		if ( has_post_thumbnail() && ! post_password_required() ) {
-			$thumb = esc_url( get_the_post_thumbnail_url( null, 'vasocialbuzz-thumbnail' ) );
+			$thumb = sprintf( 'url(%s)', esc_url( get_the_post_thumbnail_url( null, 'vasocialbuzz-thumbnail' ) ) );
 		} elseif ( has_site_icon() ) {
-			$thumb = esc_url( get_site_icon_url() );
+			$thumb = sprintf( 'url(%s)', esc_url( get_site_icon_url() ) );
+		} elseif ( has_header_image() ) {
+			$thumb = sprintf( 'url(%s)', esc_url( get_header_image() ) );
 		} else {
-			$thumb = '';
+			$thumb = 'none';
 		}
 
 		$css = <<<EOI
 .vasb_fb {
-	background-image: url({$thumb});
+	background-image: {$thumb};
 }
 .vasb_fb_like {
 	background-color: rgba({$bg}, {$opacity});
@@ -113,7 +115,7 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 }
 @media only screen and (min-width : 415px) {
 	.vasb_fb_thumbnail {
-		background-image: url({$thumb});
+		background-image: {$thumb};
 	}
 	.vasb_fb_like {
 		background-color: rgba({$bg}, 1);
