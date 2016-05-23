@@ -43,8 +43,10 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 	 * @param array $settings If the set value is required, pass a value in an array.
 	 */
 	public function __construct( $settings = array() ) {
-		add_action( 'admin_init', array( &$this, 'admin_init' ) );
-		add_action( 'admin_enqueue_scripts', array( &$this, 'admin_enqueue_scripts' ) );
+		if ( is_admin() ) {
+			add_action( 'admin_init', array( &$this, 'admin_init' ) );
+			add_action( 'admin_enqueue_scripts', array( &$this, 'admin_enqueue_scripts' ) );
+		}
 	}
 
 	/**
@@ -55,7 +57,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 
 		add_settings_section( 'vasocialbuzz_section', __( 'VA Social Buzz', 'va-social-buzz' ), null, 'reading' );
 
-		do_action( VASOCIALBUZZ_PREFIX . '_admin_form_field_0' );
+		do_action( 'vasocialbuzz_admin_form_field_0' );
 
 		add_settings_field(
 			'vasocialbuzz_fb_page',
@@ -65,27 +67,27 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 			'vasocialbuzz_section'
 		);
 
-		do_action( VASOCIALBUZZ_PREFIX . '_admin_form_field_1' );
+		do_action( 'vasocialbuzz_admin_form_field_1' );
 
 		add_settings_field(
 			'vasocialbuzz_fb_appid',
-			'<label for="vasocialbuzz_fb_appid">' . __( 'Facebook App ID', 'va-social-buzz' ) . '</label>',
+			'<label for="vasocialbuzz_fb_appid">' . esc_html__( 'Facebook App ID', 'va-social-buzz' ) . '</label>',
 			array( &$this, 'render_fb_appid' ),
 			'reading',
 			'vasocialbuzz_section'
 		);
 
-		do_action( VASOCIALBUZZ_PREFIX . '_admin_form_field_2' );
+		do_action( 'vasocialbuzz_admin_form_field_2' );
 
 		add_settings_field(
 			'vasocialbuzz_tw_account',
-			'<label for="vasocialbuzz_tw_account">' . __( 'Twitter Account', 'va-social-buzz' ) . '</label>',
+			'<label for="vasocialbuzz_tw_account">' . esc_html__( 'Twitter Account', 'va-social-buzz' ) . '</label>',
 			array( &$this, 'render_tw_account' ),
 			'reading',
 			'vasocialbuzz_section'
 		);
 
-		do_action( VASOCIALBUZZ_PREFIX . '_admin_form_field_3' );
+		do_action( 'vasocialbuzz_admin_form_field_3' );
 
 		add_settings_field(
 			'vasocialbuzz_text',
@@ -95,7 +97,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 			'vasocialbuzz_section'
 		);
 
-		do_action( VASOCIALBUZZ_PREFIX . '_admin_form_field_4' );
+		do_action( 'vasocialbuzz_admin_form_field_4' );
 
 		add_settings_field(
 			'vasocialbuzz_like_button_area',
@@ -105,7 +107,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 			'vasocialbuzz_section'
 		);
 
-		do_action( VASOCIALBUZZ_PREFIX . '_admin_form_field_5' );
+		do_action( 'vasocialbuzz_admin_form_field_5' );
 
 		add_settings_field(
 			'vasocialbuzz_post_types',
@@ -115,7 +117,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 			'vasocialbuzz_section'
 		);
 
-		do_action( VASOCIALBUZZ_PREFIX . '_admin_form_field_6' );
+		do_action( 'vasocialbuzz_admin_form_field_6' );
 	}
 
 	/**
@@ -130,7 +132,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 			'<input id="vasocialbuzz_fb_page" class="regular-text code" type="text" name="va_social_buzz[fb_page]" value="%s">',
 			esc_attr( $options['fb_page'] )
 		);
-		$output[] = '<p class="description">' . __( 'Facebook Page Web Address can only contain A-Z, a-z, 0-9, and periods (.)', 'va-social-buzz' ) . '</p>';
+		$output[] = '<p class="description">' . esc_html__( 'Facebook Page Web Address can only contain A-Z, a-z, 0-9, and periods (.)', 'va-social-buzz' ) . '</p>';
 
 		echo implode( PHP_EOL, $output );
 	}
@@ -146,7 +148,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 			'<input id="vasocialbuzz_fb_appid" class="regular-text" type="text" name="va_social_buzz[fb_appid]" value="%s">',
 			esc_attr( $options['fb_appid'] )
 		);
-		$output[] = '<p class="description">' . __( 'Facebook App ID can only contain 0-9.', 'va-social-buzz' ) . '</p>';
+		$output[] = '<p class="description">' . esc_html__( 'Facebook App ID can only contain 0-9.', 'va-social-buzz' ) . '</p>';
 
 		echo implode( PHP_EOL, $output );
 	}
@@ -162,7 +164,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 			'<input id="vasocialbuzz_tw_account" class="regular-text code" type="text" name="va_social_buzz[tw_account]" value="%s">',
 			esc_attr( $options['tw_account'] )
 		);
-		$output[] = '<p class="description">' . __( 'Twitter Account can only contain A-Z, a-z, 0-9, and underscore (_)', 'va-social-buzz' ) . '</p>';
+		$output[] = '<p class="description">' . esc_html__( 'Twitter Account can only contain A-Z, a-z, 0-9, and underscore (_)', 'va-social-buzz' ) . '</p>';
 
 		echo implode( PHP_EOL, $output );
 	}
@@ -187,7 +189,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 			esc_attr( $options['text']['like'][1] )
 		);
 		$output[] = '</label></p>';
-		$output[] = '<p class="description">' . __( 'Appear on top of the like button.', 'va-social-buzz' ) . '</p>';
+		$output[] = '<p class="description">' . esc_html__( 'Appear on top of the like button.', 'va-social-buzz' ) . '</p>';
 
 		$output[] = '<p><label for="vasocialbuzz_text_share">';
 		$output[] = sprintf(
@@ -195,7 +197,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 			esc_attr( $options['text']['share'] )
 		);
 		$output[] = '</label></p>';
-		$output[] = '<p class="description">' . __( 'Share button to Facebook.', 'va-social-buzz' ) . '</p>';
+		$output[] = '<p class="description">' . esc_html__( 'Share button to Facebook.', 'va-social-buzz' ) . '</p>';
 
 		$output[] = '<p><label for="vasocialbuzz_text_tweet">';
 		$output[] = sprintf(
@@ -203,9 +205,9 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 			esc_attr( $options['text']['tweet'] )
 		);
 		$output[] = '</label></p>';
-		$output[] = '<p class="description">' . __( 'Tweet button to Twitter.', 'va-social-buzz' ) . '</p>';
+		$output[] = '<p class="description">' . esc_html__( 'Tweet button to Twitter.', 'va-social-buzz' ) . '</p>';
 
-		$output = apply_filters( VASOCIALBUZZ_PREFIX . '_admin_form_button_text', $output );
+		$output = apply_filters( 'vasocialbuzz_admin_form_button_text', $output );
 
 		$output[] = '<p><label for="vasocialbuzz_text_follow">';
 		$output[] = sprintf(
@@ -213,7 +215,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 			esc_attr( $options['text']['follow'] )
 		);
 		$output[] = '</label></p>';
-		$output[] = '<p class="description">' . __( 'Follow button left of the text.', 'va-social-buzz' ) . '</p>';
+		$output[] = '<p class="description">' . esc_html__( 'Follow button left of the text.', 'va-social-buzz' ) . '</p>';
 
 		echo implode( PHP_EOL, $output );
 	}
@@ -228,12 +230,12 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 		$selected                    = '0' === $options['like_button_area']['bg_opacity'] ? ' selected' : '';
 
 		$output[] = sprintf(
-			'<p><label>' . __( 'Background color:', 'va-social-buzz' ) . ' <input class="vasb-color-picker" type="text" name="va_social_buzz[like_button_area][bg]" value="%s"></label></p>',
+			'<p><label>' . esc_html__( 'Background color:', 'va-social-buzz' ) . ' <input class="vasb-color-picker" type="text" name="va_social_buzz[like_button_area][bg]" value="%s"></label></p>',
 			$options['like_button_area']['bg']
 		);
 
 		if ( function_exists( 'bcadd' ) ) {
-			$output[] = '<p><label>' . __( 'Background color opacity:', 'va-social-buzz' ) . ' <select name="va_social_buzz[like_button_area][bg_opacity]">';
+			$output[] = '<p><label>' . esc_html__( 'Background color opacity:', 'va-social-buzz' ) . ' <select name="va_social_buzz[like_button_area][bg_opacity]">';
 			$fields[] = '<option value="0"' . $selected . '>0</option>';
 			for ( $i = 0; $i < 1; ) {
 				$i = (string) bcadd( $i, 0.05, 2 );
@@ -274,7 +276,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 		$output[]   = '<ul>';
 
 		if ( empty( $options['post_type'] ) ) {
-			$options['post_type'] = apply_filters( VASOCIALBUZZ_PREFIX . '_showin_post_type', $dummy_option['post_type'] );
+			$options['post_type'] = apply_filters( 'vasocialbuzz_showin_post_type', $dummy_option['post_type'] );
 		}
 
 		foreach ( $post_types as $post_type ) {
@@ -289,10 +291,10 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 		}
 
 		$output[] = '</ul>';
-		$output[] = '<p class="description">' . __( 'Choose the post type to display.', 'va-social-buzz' ) . '</p>';
-		$output[] = '<p class="description">' . __( 'Please select the one or more.', 'va-social-buzz' ) . '</p>';
+		$output[] = '<p class="description">' . esc_html__( 'Choose the post type to display.', 'va-social-buzz' ) . '</p>';
+		$output[] = '<p class="description">' . esc_html__( 'Please select the one or more.', 'va-social-buzz' ) . '</p>';
 
-		echo implode( PHP_EOL, apply_filters( VASOCIALBUZZ_PREFIX . '_admin_render_post_types', $output ) );
+		echo implode( PHP_EOL, apply_filters( 'vasocialbuzz_admin_render_post_types', $output ) );
 	}
 
 	/**
@@ -321,10 +323,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 	 * @return array
 	 */
 	public function _sanitize_option( $options_raw ) {
-		do_action( VASOCIALBUZZ_PREFIX . '_admin_sanitize_options_start', $options_raw );
-
 		$dummy_option = self::_dummy_option();
-		$options_raw  = apply_filters( VASOCIALBUZZ_PREFIX . '_admin_sanitize_options_raw', $options_raw );
 
 		foreach ( $options_raw['text'] as $key => $value ) {
 			if ( 'like' === $key ) {
@@ -351,7 +350,8 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 		foreach ( $options['like_button_area'] as $key => $hash ) {
 			if ( preg_match( '/\A#([A-Fa-f0-9]{3}){1,2}\z/i', $hash ) ) {
 				$options['like_button_area'][ $key ] = $hash;
-			} elseif ( 'bg_opacity' !== $key ) {
+			}
+			if ( 'bg_opacity' !== $key ) {
 				$options['like_button_area'][ $key ] = $dummy_option['like_button_area'][ $key ];
 			}
 		}
@@ -362,8 +362,6 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 			}
 		}
 
-		do_action( VASOCIALBUZZ_PREFIX . '_admin_sanitize_options_end', $options );
-
-		return $options;
+		return apply_filters( 'vasocialbuzz_sanitize_option', $options );
 	}
 }

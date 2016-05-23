@@ -45,10 +45,12 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 	public function __construct( $settings = array() ) {
 		$priority = 10;
 
-		add_image_size( VASOCIALBUZZ_PREFIX . '-thumbnail', '980', '9999', false );
+		add_image_size( 'vasocialbuzz-thumbnail', '980', '9999', false );
 
-		add_action( 'wp_enqueue_scripts', array( &$this, 'wp_enqueue_script' ) );
-		add_filter( 'the_content', array( &$this, 'the_content' ), (int) $priority );
+		if ( ! is_admin() ) {
+			add_action( 'wp_enqueue_scripts', array( &$this, 'wp_enqueue_script' ) );
+			add_filter( 'the_content', array( &$this, 'the_content' ), (int) $priority );
+		}
 	}
 
 	/**
@@ -77,14 +79,15 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 	public function wp_enqueue_script() {
 		$options      = self::get_option();
 		$dummy_option = self::_dummy_option();
+		$file_prefix  = '.min';
 
 		if ( empty( $options['post_type'] ) ) {
-			$options['post_type'] = apply_filters( VASOCIALBUZZ_PREFIX . '_showin_post_type', $dummy_option['post_type'] );
+			$options['post_type'] = apply_filters( 'vasocialbuzz_showin_post_type', $dummy_option['post_type'] );
 		}
 
-		if ( ! is_singular() || ! in_array( get_post_type(), (array) $options['post_type'] ) ) {
-			return null;
-		}
+//		if ( ! is_singular() || ! in_array( get_post_type(), (array) $options['post_type'] ) ) {
+//			return null;
+//		}
 
 		$options['like_button_area'] = array_merge( $dummy_option['like_button_area'], $options['like_button_area'] );
 		$bg                          = esc_attr( implode( ',', self::_hex_to_rgb( $options['like_button_area']['bg'] ) ) );
@@ -93,7 +96,7 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 		$localize['locale']          = esc_attr( self::_get_locale() );
 
 		if ( has_post_thumbnail() && ! post_password_required() ) {
-			$thumb = esc_url( get_the_post_thumbnail_url( null, VASOCIALBUZZ_PREFIX . '-thumbnail' ) );
+			$thumb = esc_url( get_the_post_thumbnail_url( null, 'vasocialbuzz-thumbnail' ) );
 		} elseif ( has_site_icon() ) {
 			$thumb = esc_url( get_site_icon_url() );
 		} else {
@@ -117,14 +120,23 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 	}
 }
 EOI;
+		$css  = trim( preg_replace(
+			array( '/(?:\r\n)|[\r\n]/', '/[\\x00-\\x09\\x0b-\\x1f]/', '/\n/' ),
+			'',
+			$css
+		) );
 
 		if ( isset( $options['fb_appid'] ) && ! empty( $options['fb_appid'] ) ) {
 			$localize['appid'] = esc_attr( $options['fb_appid'] );
 		}
 
-		wp_enqueue_style( 'va-social-buzz', VASOCIALBUZZ_URL . 'assets/css/style.css', array(), VASOCIALBUZZ_VERSION );
+		if ( defined( 'WP_DEBUG' ) && true == WP_DEBUG ) {
+			$file_prefix = '';
+		}
+
+		wp_enqueue_style( 'va-social-buzz', VASOCIALBUZZ_URL . 'assets/css/style' . $file_prefix . '.css', array(), VASOCIALBUZZ_VERSION );
 		wp_add_inline_style( 'va-social-buzz', $css );
-		wp_enqueue_script( 'va-social-buzz', VASOCIALBUZZ_URL . 'assets/js/script.js', array( 'jquery' ), VASOCIALBUZZ_VERSION, true );
+		wp_enqueue_script( 'va-social-buzz', VASOCIALBUZZ_URL . 'assets/js/script' . $file_prefix . '.js', array( 'jquery' ), VASOCIALBUZZ_VERSION, true );
 		wp_localize_script( 'va-social-buzz', 'vaSocialBuzzSettings', $localize );
 	}
 
@@ -139,7 +151,7 @@ EOI;
 		$dummy_option = self::_dummy_option();
 
 		if ( empty( $options['post_type'] ) ) {
-			$options['post_type'] = apply_filters( VASOCIALBUZZ_PREFIX . '_showin_post_type', $dummy_option['post_type'] );
+			$options['post_type'] = apply_filters( 'vasocialbuzz_showin_post_type', $dummy_option['post_type'] );
 		}
 
 		if ( ! is_singular() || ! in_array( get_post_type(), (array) $options['post_type'] ) ) {
@@ -148,7 +160,7 @@ EOI;
 
 		$template = self::_template_body();
 
-		return apply_filters( VASOCIALBUZZ_PREFIX . '_template_content', $template, $options );
+		return apply_filters( 'vasocialbuzz_template_content', $template, $options );
 	}
 
 	/**
@@ -161,13 +173,13 @@ EOI;
 		$options     = self::get_option();
 		$_template   = array();
 		$_template[] = '<div id="va-social-buzz" class="va-social-buzz">';
-		$_template[] = apply_filters( VASOCIALBUZZ_PREFIX . '_template_content_before', '', $options );
+		$_template[] = apply_filters( 'vasocialbuzz_template_content_before', '', $options );
 		$_template[] = self::_template_fb_page();
 		$_template[] = self::_template_share();
 		$_template[] = self::_template_follow();
-		$_template[] = apply_filters( VASOCIALBUZZ_PREFIX . '_template_content_after', '', $options );
+		$_template[] = apply_filters( 'vasocialbuzz_template_content_after', '', $options );
 		$_template[] = '<!-- //.va-social-buzz --></div>';
-		$template    = apply_filters( VASOCIALBUZZ_PREFIX . '_template_body', $_template, $options );
+		$template    = apply_filters( 'vasocialbuzz_template_body', $_template, $options );
 
 		return implode( PHP_EOL, $template );
 	}
@@ -262,7 +274,7 @@ EOI;
 	 * @return string $locale
 	 */
 	protected function _get_locale() {
-		$locale     = apply_filters( VASOCIALBUZZ_PREFIX . '_locale', get_locale() );
+		$locale     = apply_filters( 'vasocialbuzz_locale', get_locale() );
 		$locales    = apply_filters(
 			'va_social_buzz_locales', array(
 				'ca' => 'ca_ES',

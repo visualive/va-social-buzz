@@ -76,7 +76,7 @@ abstract class VASOCIALBUZZ_Singleton {
 	 * @return array
 	 */
 	protected function _sns_list() {
-		$list = apply_filters( VASOCIALBUZZ_PREFIX . '_admin_sns_list', array(
+		$list = apply_filters( 'vasocialbuzz_admin_sns_list', array(
 			'share' => array(
 				'prefix'   => 'fb',
 				'endpoint' => 'https://www.facebook.com/sharer/sharer.php?u=%permalink%',
@@ -112,7 +112,7 @@ abstract class VASOCIALBUZZ_Singleton {
 			$text[ $key ] = $sns['text'];
 		}
 
-		return apply_filters( VASOCIALBUZZ_PREFIX . '_admin_dummy_option', array(
+		return apply_filters( 'vasocialbuzz_admin_dummy_option', array(
 			'fb_page'          => 'wordpress',
 			'fb_appid'         => '',
 			'tw_account'       => 'wordpress',
