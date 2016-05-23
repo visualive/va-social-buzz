@@ -39,6 +39,11 @@
     line-height: 1.3;
     margin: 0 0 .5em;
 }
+#va-social-buzz .vasb_fb .vasb_fb_like .fb-like {
+    height: 21px;
+    line-height: 1;
+    overflow: hidden;
+}
 #va-social-buzz .vasb_fb .vasb_fb_like iframe {
     max-width: initial;
 }
@@ -139,3 +144,5 @@
         line-height: 1.5;
     }
 }
+
+
