@@ -79,7 +79,7 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 	public function wp_enqueue_script() {
 		$options      = self::get_option();
 		$dummy_option = self::_dummy_option();
-		$file_prefix  = '.min';
+		$file_prefix  = ( defined( 'WP_DEBUG' ) && true == WP_DEBUG ) ? '': '.min';
 
 		if ( empty( $options['post_type'] ) ) {
 			$options['post_type'] = apply_filters( 'vasocialbuzz_showin_post_type', $dummy_option['post_type'] );
@@ -128,10 +128,6 @@ EOI;
 
 		if ( isset( $options['fb_appid'] ) && ! empty( $options['fb_appid'] ) ) {
 			$localize['appid'] = esc_attr( $options['fb_appid'] );
-		}
-
-		if ( defined( 'WP_DEBUG' ) && true == WP_DEBUG ) {
-			$file_prefix = '';
 		}
 
 		wp_enqueue_style( 'va-social-buzz', VASOCIALBUZZ_URL . 'assets/css/style' . $file_prefix . '.css', array(), VASOCIALBUZZ_VERSION );
