@@ -2,7 +2,7 @@
  * VA Social Buzz.
  *
  * @package   VisuAlive.
- * @version   1.0.10
+ * @version   1.0.11
  * @author    KUCKLU.
  * @copyright Copyright (c) KUCKLU and VisuAlive.
  * @link      http://visualive.jp/
@@ -62,7 +62,7 @@
 
             // Run on document ready
             self.cache.$document.on('ready', function () {
-                self.run();
+                self.gaEventTracking();
                 self.createElements();
                 self.getJavaScriptSDK();
             });
@@ -73,7 +73,7 @@
          *
          * @since 1.0.0
          */
-        run: function () {
+        gaEventTracking: function () {
             var self = this,
                 $vasb = $('#va-social-buzz'),
                 $facebook = $vasb.find('.vasb_share_button-fb').children('a'),
@@ -126,19 +126,26 @@
          * @since 1.0.0
          */
         getJavaScriptSDK: function () {
-            var self = this;
+            var self = this,
+                fb_init;
 
             $.getScript('//connect.facebook.net/' + self._deletionOtherAlphanumeric(self.cache.wordpress.locale) + '/sdk.js', function () {
+                fb_init = {
+                    version: 'v2.5',
+                    status : true,
+                    cookie : true,
+                    xfbml  : true
+                };
+
                 if (typeof self.cache.wordpress.appid != 'undefined') {
-                    FB.init({
-                        appId  : self._deletionOtherNumeric(self.cache.wordpress.appid),
-                        version: 'v2.5',
-                        status : true,
-                        cookie : true,
-                        xfbml  : true
-                    });
+                    fb_init.appId = self._deletionOtherNumeric(self.cache.wordpress.appid);
+                    window.fbAsyncInit = function() {
+                        FB.init(fb_init);
+                    };
                 } else {
-                    FB.init({version: 'v2.5', status: true, cookie: true, xfbml: true});
+                    window.fbAsyncInit = function() {
+                        FB.init(fb_init);
+                    };
                 }
             });
 
