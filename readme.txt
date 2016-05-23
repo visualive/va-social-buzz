@@ -21,7 +21,7 @@ If Google Universal Analytics is introduced to the website, it will become possi
 * Japanese: KUCKLU
 
 = Requires =
-* WordPress 4.4. or higher
+* WordPress 4.5 or higher
 * PHP 5.6+
 
 = Note =
