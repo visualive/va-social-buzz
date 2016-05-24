@@ -79,15 +79,15 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 	public function wp_enqueue_script() {
 		$options      = self::get_option();
 		$dummy_option = self::_dummy_option();
-		$file_prefix  = ( defined( 'WP_DEBUG' ) && true == WP_DEBUG ) ? '': '.min';
+		$file_prefix  = ( defined( 'WP_DEBUG' ) && true == WP_DEBUG ) ? '' : '.min';
 
 		if ( empty( $options['post_type'] ) ) {
 			$options['post_type'] = apply_filters( 'vasocialbuzz_showin_post_type', $dummy_option['post_type'] );
 		}
 
-//		if ( ! is_singular() || ! in_array( get_post_type(), (array) $options['post_type'] ) ) {
-//			return null;
-//		}
+		//		if ( ! is_singular() || ! in_array( get_post_type(), (array) $options['post_type'] ) ) {
+		//			return null;
+		//		}
 
 		$options['like_button_area'] = array_merge( $dummy_option['like_button_area'], $options['like_button_area'] );
 		$bg                          = esc_attr( implode( ',', self::_hex_to_rgb( $options['like_button_area']['bg'] ) ) );
@@ -122,7 +122,7 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 	}
 }
 EOI;
-		$css  = trim( preg_replace(
+		$css = trim( preg_replace(
 			array( '/(?:\r\n)|[\r\n]/', '/[\\x00-\\x09\\x0b-\\x1f]/', '/\n/' ),
 			'',
 			$css
@@ -174,6 +174,7 @@ EOI;
 		$_template[] = apply_filters( 'vasocialbuzz_template_content_before', '', $options );
 		$_template[] = self::_template_fb_page();
 		$_template[] = self::_template_share();
+		$_template[] = self::_template_push7();
 		$_template[] = self::_template_follow();
 		$_template[] = apply_filters( 'vasocialbuzz_template_content_after', '', $options );
 		$_template[] = '<!-- //.va-social-buzz --></div>';
@@ -261,6 +262,77 @@ EOI;
 		}
 
 		return implode( PHP_EOL, $template );
+	}
+
+	/**
+	 * Push notification.
+	 *
+	 * @return array
+	 */
+	protected function _template_push7() {
+		$options            = self::get_option();
+		$template           = array();
+		$push7_register_url = self::_get_push7_register_url();
+
+		if ( is_null( $push7_register_url ) ) {
+			return null;
+		}
+
+		$template['before'] = '<div class="vasb_push">';
+		$template['body']   = '<div class="vasb_push_button">';
+		$template['body'] .= sprintf( '<a href="%s">', esc_url( $push7_register_url ) );
+		$template['body'] .= '<i class="vasb_icon"></i>';
+		$template['body'] .= sprintf( '<span>%s</span>', esc_html( $options['text']['push7'] ) );
+		$template['body'] .= '</a>';
+		$template['body'] .= '</div>';
+		$template['after'] = '<!-- //.vasb_push --></div>';
+
+		return implode( PHP_EOL, $template );
+	}
+
+	/**
+	 * Get Push7 register url.
+	 *
+	 * @return null|string
+	 */
+	protected function _get_push7_register_url() {
+		$push7_appno        = get_option( 'push7_appno', null );
+		$push7_register_url = get_transient( 'vasocialbuzz_push7_register_url' );
+
+		if ( is_null( $push7_appno ) ) {
+			$push7_register_url = null;
+		}
+
+		if ( false === $push7_register_url ) {
+			$push7_api      = 'https://api.push7.jp/api/v1/' . $push7_appno . '/head';
+			$push7_response = wp_remote_get( $push7_api );
+			$response_code  = wp_remote_retrieve_response_code( $push7_response );
+			$body           = wp_remote_retrieve_body( $push7_response );
+
+			if ( 200 === $response_code && ! empty( $body ) ) {
+				$body = json_decode( $body );
+			} else {
+				return null;
+			}
+
+			$domain = isset( $body->domain ) ? filter_var( $body->domain, FILTER_SANITIZE_URL ) : null;
+			$alias  = isset( $body->alias ) ? filter_var( $body->alias, FILTER_SANITIZE_URL ) : null;
+
+			if ( ! isset( $domain ) ) {
+				return null;
+			}
+
+			if ( isset( $domain ) ) {
+				$push7_register_url = esc_url_raw( 'https://' . $domain );
+			}
+			if ( isset( $alias ) ) {
+				$push7_register_url = esc_url_raw( 'https://' . $alias );
+			}
+
+			set_transient( 'vasocialbuzz_push7_register_url', $push7_register_url, WEEK_IN_SECONDS );
+		}
+
+		return $push7_register_url;
 	}
 
 	/**

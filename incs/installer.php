@@ -48,5 +48,9 @@ class VASOCIALBUZZ_Installer extends VASOCIALBUZZ_Singleton {
 	 */
 	public static function uninstall() {
 		delete_option( 'va_social_buzz' );
+
+		if ( ! is_null( get_option( 'push7_appno', null ) ) ) {
+			delete_transient( 'vasocialbuzz_push7_register_url' );
+		}
 	}
 }

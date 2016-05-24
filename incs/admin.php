@@ -209,6 +209,16 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 
 		$output = apply_filters( 'vasocialbuzz_admin_form_button_text', $output );
 
+		if ( ! is_null( get_option( 'push7_appno', null ) ) ) {
+			$output[] = '<p><label for="vasocialbuzz_text_push7">';
+			$output[] = sprintf(
+				'<input id="vasocialbuzz_text_push7" class="regular-text" type="text" name="va_social_buzz[text][push7]" value="%s">',
+				esc_attr( $options['text']['push7'] )
+			);
+			$output[] = '</label></p>';
+			$output[] = '<p class="description">' . esc_html__( 'Follow Push7 button of the text.', 'va-social-buzz' ) . '</p>';
+		}
+
 		$output[] = '<p><label for="vasocialbuzz_text_follow">';
 		$output[] = sprintf(
 			'<input id="vasocialbuzz_text_follow" class="regular-text" type="text" name="va_social_buzz[text][follow]" value="%s">',
@@ -346,6 +356,10 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 		$options['text']['follow']                 = sanitize_text_field( $options['text']['follow'] );
 		$options['like_button_area']               = array_merge( $dummy_option['like_button_area'], $options['like_button_area'] );
 		$options['like_button_area']['bg_opacity'] = preg_replace( '/[^0-9.]/', '', $options['like_button_area']['bg_opacity'] );
+
+		if ( ! is_null( get_option( 'push7_appno', null ) ) ) {
+			$options['text']['push7'] = sanitize_text_field( $options['text']['push7'] );
+		}
 
 		foreach ( $options['like_button_area'] as $key => $hash ) {
 			if ( preg_match( '/\A#([A-Fa-f0-9]{3}){1,2}\z/i', $hash ) ) {

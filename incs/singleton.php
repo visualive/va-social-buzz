@@ -106,6 +106,7 @@ abstract class VASOCIALBUZZ_Singleton {
 				__( 'please click this "like!".', 'va-social-buzz' ),
 			),
 			'follow' => __( 'Follow on Twetter !', 'va-social-buzz' ),
+			'push7'  => __( 'Receive the latest posts with push notifications', 'va-social-buzz' ),
 		);
 
 		foreach ( $sns_list as $key => $sns ) {
@@ -113,9 +114,9 @@ abstract class VASOCIALBUZZ_Singleton {
 		}
 
 		return apply_filters( 'vasocialbuzz_admin_dummy_option', array(
-			'fb_page'          => 'wordpress',
+			'fb_page'          => '',
 			'fb_appid'         => '',
-			'tw_account'       => 'wordpress',
+			'tw_account'       => '',
 			'text'             => $text,
 			'like_button_area' => array(
 				'bg'         => '#2b2b2b',
@@ -133,6 +134,15 @@ abstract class VASOCIALBUZZ_Singleton {
 	 * @return array
 	 */
 	protected function get_option() {
-		return wp_parse_args( get_option( 'va_social_buzz' ), self::_dummy_option() );
+		$dummy_options               = self::_dummy_option();
+		$options                     = wp_parse_args( get_option( 'va_social_buzz' ), $dummy_options );
+		$like_button_area            = wp_parse_args( $options['like_button_area'], $dummy_options['like_button_area'] );
+		$text                        = wp_parse_args( $options['text'], $dummy_options['text'] );
+		$post_type                   = wp_parse_args( $options['post_type'], $dummy_options['post_type'] );
+		$options['like_button_area'] = $like_button_area;
+		$options['text']             = $text;
+		$options['post_type']        = $post_type;
+
+		return $options;
 	}
 }

@@ -1,10 +1,11 @@
 @font-face {
     font-family: 'vasocialbuzz';
-    src: url('../font/vasocialbuzz.eot?by0d1u');
-    src: url('../font/vasocialbuzz.eot?by0d1u#iefix') format('embedded-opentype'),
-    url('../font/vasocialbuzz.ttf?by0d1u') format('truetype'),
-    url('../font/vasocialbuzz.woff?by0d1u') format('woff'),
-    url('../font/vasocialbuzz.svg?by0d1u#vasocialbuzz') format('svg');
+    src: url('../font/vasocialbuzz.eot?11197594');
+    src: url('../font/vasocialbuzz.eot?11197594#iefix') format('embedded-opentype'),
+    url('../font/vasocialbuzz.ttf?11197594') format('truetype'),
+    url('../font/vasocialbuzz.woff?11197594') format('woff'),
+    url('../font/vasocialbuzz.woff2?11197594') format('woff2'),
+    url('../font/vasocialbuzz.svg?11197594#vasocialbuzz') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -53,7 +54,8 @@
     text-align: center;
     width: 100%;
 }
-#va-social-buzz .vasb_share .vasb_icon {
+#va-social-buzz .vasb_share .vasb_icon,
+#va-social-buzz .vasb_push .vasb_push_button .vasb_icon:before {
     font-family: 'vasocialbuzz';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -77,7 +79,8 @@
     padding-left: 7px;
     padding-right: 0;
 }
-#va-social-buzz .vasb_share .vasb_share_button a {
+#va-social-buzz .vasb_share .vasb_share_button a,
+#va-social-buzz .vasb_push .vasb_push_button a {
     border-bottom: none;
     border-radius: 5px;
     color: #ffffff;
@@ -90,8 +93,8 @@
 }
 #va-social-buzz .vasb_share .vasb_share_button-fb {}
 #va-social-buzz .vasb_share .vasb_share_button-fb .vasb_icon:before {
-    content: "\e900";
-    margin-right: 4px;
+    content: "\e800";
+    margin-right: 8px;
 }
 #va-social-buzz .vasb_share .vasb_share_button-fb a {
     background-color: #3b55a0;
@@ -101,7 +104,7 @@
 }
 #va-social-buzz .vasb_share .vasb_share_button-tw {}
 #va-social-buzz .vasb_share .vasb_share_button-tw .vasb_icon:before {
-    content: "\e901";
+    content: "\e801";
     margin-right: 8px;
 }
 #va-social-buzz .vasb_share .vasb_share_button-tw a {
@@ -122,6 +125,20 @@
     display: inline-block !important;
     margin-bottom: 0 !important;
     vertical-align: middle !important;
+}
+#va-social-buzz .vasb_push .vasb_push_button {
+    margin-bottom: .75em;
+}
+#va-social-buzz .vasb_push .vasb_push_button .vasb_icon:before {
+    content: "\e804";
+    margin-right: 8px;
+}
+#va-social-buzz .vasb_push .vasb_push_button a {
+    background-color: #e5a717;
+    text-align: center;
+}
+#va-social-buzz .vasb_push .vasb_push_button a:hover {
+    background-color: #bf9214;
 }
 
 @media only screen and (min-width : 415px) {
