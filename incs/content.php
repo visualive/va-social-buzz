@@ -297,11 +297,12 @@ EOI;
 	 */
 	protected function _get_push7_register_url() {
 		$push7_appno        = get_option( 'push7_appno', null );
-		$push7_appno        = preg_replace( '/[^a-zA-Z0-9]/', '', $push7_appno );
 		$push7_register_url = get_transient( 'vasocialbuzz_push7_register_url' );
 
 		if ( is_null( $push7_appno ) ) {
 			$push7_register_url = null;
+		} else {
+			$push7_appno = preg_replace( '/[^a-zA-Z0-9]/', '', $push7_appno );
 		}
 
 		if ( false === $push7_register_url ) {
