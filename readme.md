@@ -38,6 +38,9 @@ To install VA Social Buzz:
 
 ## Changelog
 
+### 1.0.17
+* Fixed bug: cannot change color.
+
 ### 1.0.16
 * Bug fix.
 

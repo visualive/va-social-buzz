@@ -288,7 +288,6 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 		if ( empty( $options['post_type'] ) ) {
 			$options['post_type'] = apply_filters( 'vasocialbuzz_showin_post_type', $dummy_option['post_type'] );
 		}
-
 		foreach ( $post_types as $post_type ) {
 			$checked          = in_array( $post_type, $options['post_type'] ) ? ' checked' : '';
 			$post_type_object = get_post_type_object( $post_type );
@@ -344,7 +343,6 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 				$options_raw['text'][ $key ] = ! empty( $value ) ? $value : $dummy_option['text'][ $key ];
 			}
 		}
-
 		$options                                   = wp_parse_args( $options_raw, $dummy_option );
 		$options['fb_page']                        = preg_replace( '/[^a-zA-Z0-9\-.]/', '', $options['fb_page'] );
 		$options['fb_appid']                       = preg_replace( '/[\D]/', '', $options['fb_appid'] );
@@ -354,18 +352,16 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 		$options['text']['share']                  = sanitize_text_field( $options['text']['share'] );
 		$options['text']['tweet']                  = sanitize_text_field( $options['text']['tweet'] );
 		$options['text']['follow']                 = sanitize_text_field( $options['text']['follow'] );
-		$options['like_button_area']               = array_merge( $dummy_option['like_button_area'], $options['like_button_area'] );
-		$options['like_button_area']['bg_opacity'] = preg_replace( '/[^0-9.]/', '', $options['like_button_area']['bg_opacity'] );
+		$options['like_button_area']['bg']         = self::sanitize_hex_color( $options['like_button_area']['bg'] );
+		$options['like_button_area']['color']      = self::sanitize_hex_color( $options['like_button_area']['color'] );
+		$options['like_button_area']['bg_opacity'] = filter_var( $options['like_button_area']['bg_opacity'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION );
 
 		if ( ! is_null( get_option( 'push7_appno', null ) ) ) {
 			$options['text']['push7'] = sanitize_text_field( $options['text']['push7'] );
 		}
 
 		foreach ( $options['like_button_area'] as $key => $hash ) {
-			if ( preg_match( '/\A#([A-Fa-f0-9]{3}){1,2}\z/i', $hash ) ) {
-				$options['like_button_area'][ $key ] = $hash;
-			}
-			if ( 'bg_opacity' !== $key ) {
+			if ( empty( $options['like_button_area'][ $key ] ) ) {
 				$options['like_button_area'][ $key ] = $dummy_option['like_button_area'][ $key ];
 			}
 		}

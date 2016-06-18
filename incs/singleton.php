@@ -70,6 +70,26 @@ abstract class VASOCIALBUZZ_Singleton {
 	}
 
 	/**
+	 * Sanitizes a hex color.
+	 *
+	 * Returns either '', a 3 or 6 digit hex color (with #), or nothing.
+	 * For sanitizing values without a #, see sanitize_hex_color_no_hash().
+	 *
+	 * @since 3.4.0
+	 *
+	 * @param string $color
+	 * @return string|void
+	 */
+	protected function sanitize_hex_color( $color ) {
+		if ( '' === $color )
+			return '';
+
+		// 3 or 6 hex digits, or the empty string.
+		if ( preg_match('|^#([A-Fa-f0-9]{3}){1,2}$|', $color ) )
+			return $color;
+	}
+
+	/**
 	 * SNS List.
 	 *
 	 * @since 1.0.14
@@ -135,13 +155,12 @@ abstract class VASOCIALBUZZ_Singleton {
 	 */
 	protected function get_option() {
 		$dummy_options               = self::_dummy_option();
-		$options                     = wp_parse_args( get_option( 'va_social_buzz' ), $dummy_options );
+		$options                     = get_option( 'va_social_buzz' );
+		$options                     = wp_parse_args( $options, $dummy_options );
 		$like_button_area            = wp_parse_args( $options['like_button_area'], $dummy_options['like_button_area'] );
 		$text                        = wp_parse_args( $options['text'], $dummy_options['text'] );
-		$post_type                   = wp_parse_args( $options['post_type'], $dummy_options['post_type'] );
 		$options['like_button_area'] = $like_button_area;
 		$options['text']             = $text;
-		$options['post_type']        = $post_type;
 
 		return $options;
 	}
