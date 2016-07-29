@@ -34,10 +34,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+$vasocialbuzz_data = get_file_data( __FILE__, array(
+	'Name' => 'Plugin Name',
+	'PluginURI' => 'Plugin URI',
+	'Version' => 'Version',
+	'Description' => 'Description',
+	'Author' => 'Author',
+	'AuthorURI' => 'Author URI',
+	'TextDomain' => 'Text Domain',
+	'DomainPath' => 'Domain Path',
+	'Network' => 'Network',
+) );;
+
 define( 'VASOCIALBUZZ_URL', plugin_dir_url( __FILE__ ) );
 define( 'VASOCIALBUZZ_PATH', plugin_dir_path( __FILE__ ) );
 define( 'VASOCIALBUZZ_PREFIX', 'vasocialbuzz' );
-define( 'VASOCIALBUZZ_VERSION', '1.0.18' );
+define( 'VASOCIALBUZZ_VERSION', $vasocialbuzz_data['Version'] );
+
+unset( $vasocialbuzz_data );
 
 require_once dirname( __FILE__ ) . '/incs/singleton.php';
 require_once dirname( __FILE__ ) . '/incs/admin.php';
