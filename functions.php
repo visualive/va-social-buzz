@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'VASOCIALBUZZ_URL', plugin_dir_url( __FILE__ ) );
 define( 'VASOCIALBUZZ_PATH', plugin_dir_path( __FILE__ ) );
 define( 'VASOCIALBUZZ_PREFIX', 'vasocialbuzz' );
-define( 'VASOCIALBUZZ_VERSION', '1.0.17' );
+define( 'VASOCIALBUZZ_VERSION', '1.0.18' );
 
 require_once dirname( __FILE__ ) . '/incs/singleton.php';
 require_once dirname( __FILE__ ) . '/incs/admin.php';
