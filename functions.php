@@ -50,8 +50,10 @@ require_once dirname( __FILE__ ) . '/incs/installer.php';
  * @since 0.0.1 (Alpha)
  */
 add_action( 'plugins_loaded', function () {
-	new \VASOCIALBUZZ\Modules\VASOCIALBUZZ_Admin();
-	new \VASOCIALBUZZ\Modules\VASOCIALBUZZ_Content();
+	$vasocialbuzz_admin_class = apply_filters( 'vasocialbuzz_admin_class', \VASOCIALBUZZ\Modules\VASOCIALBUZZ_Admin::class );
+	new $vasocialbuzz_admin_class;
+	$vasocialbuzz_content_class = apply_filters( 'vasocialbuzz_content_class', \VASOCIALBUZZ\Modules\VASOCIALBUZZ_Content::class );
+	new $vasocialbuzz_content_class;
 	load_plugin_textdomain( 'va-social-buzz', false, dirname( plugin_basename( __FILE__ ) ) . '/langs' );
 } );
 
