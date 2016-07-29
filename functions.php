@@ -64,8 +64,10 @@ add_action( 'plugins_loaded', function () {
  *
  * @since 0.0.1 (Alpha)
  */
+register_activation_hook( __FILE__, function(){
+	register_uninstall_hook( __FILE__, array( VASOCIALBUZZ\Modules\VASOCIALBUZZ_Installer::class , 'uninstall' ) );
+} );
+
 if ( defined( 'WP_DEBUG' ) && WP_DEBUG === true ) {
-	register_deactivation_hook( __FILE__, array( '\VASOCIALBUZZ\Modules\VASOCIALBUZZ_Installer', 'uninstall' ) );
-} else {
-	register_uninstall_hook( __FILE__, array( '\VASOCIALBUZZ\Modules\VASOCIALBUZZ_Installer', 'uninstall' ) );
+	register_deactivation_hook( __FILE__, array( VASOCIALBUZZ\Modules\VASOCIALBUZZ_Installer::class , 'uninstall' ) );
 }
