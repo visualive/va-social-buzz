@@ -46,6 +46,7 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 		if ( is_admin() ) {
 			add_action( 'admin_init', array( &$this, 'admin_init' ) );
 			add_action( 'admin_enqueue_scripts', array( &$this, 'admin_enqueue_scripts' ) );
+			add_action( 'admin_enqueue_scripts', array( &$this, 'add_pointer_script' ) );
 		}
 	}
 
@@ -312,14 +313,39 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 	 * @param string $hook
 	 */
 	public function admin_enqueue_scripts( $hook ) {
+		wp_enqueue_style( 'wp-pointer' );
+		wp_enqueue_script( 'va-social-buzz-pointer', VASOCIALBUZZ_URL . 'assets/js/pointer.js', array(
+			'wp-pointer'
+		), false, true );
+
 		if ( 'options-reading.php' === $hook ) {
 			wp_enqueue_style( 'va-social-buzz-admin', VASOCIALBUZZ_URL . 'assets/css/admin.css' );
+
 			wp_enqueue_style( 'wp-color-picker' );
 			wp_enqueue_script( 'va-social-buzz-admin', VASOCIALBUZZ_URL . 'assets/js/admin.js', array(
 				'jquery',
 				'wp-color-picker',
 			), false, true );
 		}
+	}
+
+
+	/**
+	 * add css/js for pointer
+	 */
+	public function add_pointer_script() {
+		$pointer_name = 'va-social-buzz';
+		$dismissed = explode( ',', get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
+		$pointer_enable = ( false === array_search( $pointer_name, $dismissed ) );
+
+		$pointer_content = '<h3>' . __( 'VA Social Buzz', 'va-social-buzz' ) . '</h3>';
+		$pointer_content .= '<p>' . __( 'You can setting VA Social Buzz in <a href="options-reading.php">Reading</a>.', 'va-social-buzz' ) . '</p>';
+
+		wp_localize_script('va-social-buzz-pointer', 'VASocialBuzz', array(
+			'pointerContent' => $pointer_content,
+			'pointerName'   => $pointer_name,
+			'pointerEnable' => $pointer_enable,
+		));
 	}
 
 	/**
