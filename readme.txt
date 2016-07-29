@@ -1,5 +1,5 @@
 === VA Social Buzz ===
-Contributors: kuck1u, mayukojpn
+Contributors: kuck1u, mayukojpn, toro_unit
 Donate link: http://www.amazon.co.jp/registry/wishlist/AN9BLYUQMVZ5/
 Tags: automatic, social, socialmedia, social media, viral, viralmedia, viral media, share, facebook, twitter
 Requires at least: 4.5.2
@@ -46,6 +46,11 @@ To install "VA Social Buzz":
 4. Google Analytics - Social Plugin.
 
 == Changelog ==
+
+= 1.0.18 =
+* Add composer support.
+* Add new filters.
+* Code cleanup.
 
 = 1.0.17 =
 * Fixed bug: cannot change color.

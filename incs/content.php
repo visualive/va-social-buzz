@@ -80,6 +80,7 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 	 */
 	public function get_thumbnail( $post = null ) {
 		$thumb = '';
+
 		if ( has_post_thumbnail( $post ) && ! post_password_required( $post ) ) {
 			$thumb = get_the_post_thumbnail_url( $post, 'vasocialbuzz-thumbnail' );
 		} elseif ( has_site_icon() ) {
@@ -88,7 +89,7 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 			$thumb = get_header_image();
 		}
 
-		return apply_filters( 'vasocialbuzz_get_thumbnail' , $thumb );
+		return apply_filters( 'vasocialbuzz_get_thumbnail', $thumb );
 	}
 
 	/**
@@ -114,10 +115,10 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 		$opacity                     = esc_attr( $options['like_button_area']['bg_opacity'] );
 		$color                       = esc_attr( $options['like_button_area']['color'] );
 		$localize['locale']          = esc_attr( self::_get_locale() );
+		$thumb                       = 'none';
 
-		$thumb = 'none';
 		if ( $thumb_url = $this->get_thumbnail() ) {
-			$thumb = sprintf( 'url(%s)', esc_url ( $thumb_url ) );
+			$thumb = sprintf( 'url(%s)', esc_url( $thumb_url ) );
 		}
 
 		$css = <<<EOI

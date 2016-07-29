@@ -38,6 +38,11 @@ To install VA Social Buzz:
 
 ## Changelog
 
+### 1.0.18
+* Add composer support.
+* Add new filters.
+* Code cleanup.
+
 ### 1.0.17
 * Fixed bug: cannot change color.
 
