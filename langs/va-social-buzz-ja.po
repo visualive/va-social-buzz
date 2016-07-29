@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: VA Social Buzz\n"
-"POT-Creation-Date: 2016-05-24 13:00+0900\n"
-"PO-Revision-Date: 2016-05-24 13:00+0900\n"
+"POT-Creation-Date: 2016-07-30 04:30+0900\n"
+"PO-Revision-Date: 2016-07-30 04:31+0900\n"
 "Last-Translator: \n"
 "Language-Team: VisuAlive <kuck1u@visualive.jp>\n"
 "Language: en_001\n"
@@ -16,111 +16,119 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_x;_e;esc_html__;esc_html_e\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: incs/admin.php:58
+#: incs/admin.php:59 incs/admin.php:343
 msgid "VA Social Buzz"
 msgstr "VA Social Buzz"
 
-#: incs/admin.php:64
+#: incs/admin.php:65
 msgid "Facebook Page Web Address"
 msgstr "Facebook ページ<br>Web アドレス"
 
-#: incs/admin.php:74
+#: incs/admin.php:75
 msgid "Facebook App ID"
 msgstr "Facebook App ID"
 
-#: incs/admin.php:84
+#: incs/admin.php:85
 msgid "Twitter Account"
 msgstr "Twitter アカウント"
 
-#: incs/admin.php:94
+#: incs/admin.php:95
 msgid "Text"
 msgstr "テキスト"
 
-#: incs/admin.php:104
+#: incs/admin.php:105
 msgid "Like Button Aria"
 msgstr "いいね！ボタンエリア"
 
-#: incs/admin.php:114
+#: incs/admin.php:115
 msgid "Show In"
 msgstr "自動挿入"
 
-#: incs/admin.php:135
+#: incs/admin.php:136
 msgid ""
 "Facebook Page Web Address can only contain A-Z, a-z, 0-9, and periods (.)"
 msgstr ""
-"Facebook ページ Web アドレスには、A-Z,、a-z,、0-9 と ピリオド (.) のみ入"
-"力できます。"
+"Facebook ページ Web アドレスには、A-Z,、a-z,、0-9 と ピリオド (.) のみ入力"
+"できます。"
 
-#: incs/admin.php:151
+#: incs/admin.php:152
 msgid "Facebook App ID can only contain 0-9."
 msgstr "Facebook アプリケーション ID には 0-9 のみ入力できます。"
 
-#: incs/admin.php:167
+#: incs/admin.php:168
 msgid "Twitter Account can only contain A-Z, a-z, 0-9, and underscore (_)"
 msgstr ""
-"Twitter アカウントには、A-Z、a-z、0-9 と アンダースコア (_) のみ入力でき"
-"ます。"
+"Twitter アカウントには、A-Z、a-z、0-9 と アンダースコア (_) のみ入力できま"
+"す。"
 
-#: incs/admin.php:192
+#: incs/admin.php:193
 msgid "Appear on top of the like button."
 msgstr "いいね！ボタンの上のテキスト。"
 
-#: incs/admin.php:200
+#: incs/admin.php:201
 msgid "Share button to Facebook."
 msgstr "Facebook へのシェアボタンのテキスト。"
 
-#: incs/admin.php:208
+#: incs/admin.php:209
 msgid "Tweet button to Twitter."
 msgstr "Twitter へのツイートボタンのテキスト。"
 
-#: incs/admin.php:218
+#: incs/admin.php:220
 msgid "Follow Push7 button of the text."
 msgstr "Push7 の登録ボタンのテキスト。"
 
-#: incs/admin.php:226
+#: incs/admin.php:229
 msgid "Follow button left of the text."
 msgstr "フォローボタンの左横のテキスト。"
 
-#: incs/admin.php:241
+#: incs/admin.php:244
 msgid "Background color:"
 msgstr "背景色"
 
-#: incs/admin.php:246
+#: incs/admin.php:249
 msgid "Background color opacity:"
 msgstr "背景色の透明度"
 
-#: incs/admin.php:265
+#: incs/admin.php:268
 msgid "Font color:"
 msgstr "文字色"
 
-#: incs/admin.php:302
+#: incs/admin.php:304
 msgid "Choose the post type to display."
 msgstr "表示するポストタイプを選択してください。"
 
-#: incs/admin.php:303
+#: incs/admin.php:305
 msgid "Please select the one or more."
 msgstr "1 つ以上選択してください。"
 
-#: incs/singleton.php:83
+#: incs/admin.php:344
+msgid ""
+"You can setting VA Social Buzz in <a href=\"options-reading.php\">Reading</"
+"a>."
+msgstr ""
+"VA Social Buzz の設定は<a href=\"options-reading.php\">表示設定</a>で行えま"
+"す。"
+
+#: incs/singleton.php:103
 msgid "Share"
 msgstr "シェアする"
 
-#: incs/singleton.php:88
+#: incs/singleton.php:108
 msgid "Tweet"
 msgstr "ツイートする"
 
-#: incs/singleton.php:105
+#: incs/singleton.php:125
 msgid "If you liked this article,"
 msgstr "この記事が気に入ったら"
 
-#: incs/singleton.php:106
+#: incs/singleton.php:126
 msgid "please click this \"like!\"."
 msgstr "いいね！しよう"
 
-#: incs/singleton.php:108
+#: incs/singleton.php:128
 msgid "Follow on Twetter !"
 msgstr "Twitter で"
 
-#: incs/singleton.php:109
+#: incs/singleton.php:129
 msgid "Receive the latest posts with push notifications"
 msgstr "更新情報を Push 通知で受けとる"
