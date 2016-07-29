@@ -332,6 +332,8 @@ class VASOCIALBUZZ_Admin extends VASOCIALBUZZ_Singleton {
 
 	/**
 	 * add css/js for pointer
+	 *
+	 * @since 1.0.19
 	 */
 	public function add_pointer_script() {
 		$pointer_name = 'va-social-buzz';

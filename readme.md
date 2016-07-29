@@ -38,10 +38,14 @@ To install VA Social Buzz:
 
 ## Changelog
 
+### 1.0.19
+* Add pointer. (contributors: toro_unit)
+* Code cleanup. (contributors: toro_unit)
+
 ### 1.0.18
-* Add composer support.
-* Add new filters.
-* Code cleanup.
+* Add composer support. (contributors: toro_unit)
+* Add new filters. (contributors: toro_unit)
+* Code cleanup. (contributors: toro_unit)
 
 ### 1.0.17
 * Fixed bug: cannot change color.
@@ -90,7 +94,7 @@ To install VA Social Buzz:
 ### 1.0.3
 * Choose the post type to display.
 * Google Analytics Events Tracking.
-* Add i18n.
+* Add i18n. (contributors: mayukojpn)
 
 ### 1.0.2
 * Add image size.
