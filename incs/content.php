@@ -115,14 +115,9 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 		$color                       = esc_attr( $options['like_button_area']['color'] );
 		$localize['locale']          = esc_attr( self::_get_locale() );
 
-		if ( has_post_thumbnail() && ! post_password_required() ) {
-			$thumb = sprintf( 'url(%s)', esc_url( get_the_post_thumbnail_url( null, 'vasocialbuzz-thumbnail' ) ) );
-		} elseif ( has_site_icon() ) {
-			$thumb = sprintf( 'url(%s)', esc_url( get_site_icon_url() ) );
-		} elseif ( has_header_image() ) {
-			$thumb = sprintf( 'url(%s)', esc_url( get_header_image() ) );
-		} else {
-			$thumb = 'none';
+		$thumb = 'none';
+		if ( $thumb_url = $this->get_thumbnail() ) {
+			$thumb = sprintf( 'url(%s)', esc_url ( $thumb_url ) );
 		}
 
 		$css = <<<EOI
