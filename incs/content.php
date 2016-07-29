@@ -72,6 +72,26 @@ class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 	}
 
 	/**
+	 * Get thumbnail image url
+	 *
+	 * @param null|\WP_Post $post
+	 *
+	 * @return string
+	 */
+	public function get_thumbnail( $post = null ) {
+		$thumb = '';
+		if ( has_post_thumbnail( $post ) && ! post_password_required( $post ) ) {
+			$thumb = get_the_post_thumbnail_url( $post, 'vasocialbuzz-thumbnail' );
+		} elseif ( has_site_icon() ) {
+			$thumb = get_site_icon_url();
+		} elseif ( has_header_image() ) {
+			$thumb = get_header_image();
+		}
+
+		return apply_filters( 'vasocialbuzz_get_thumbnail' , $thumb );
+	}
+
+	/**
 	 * Echo scripts.
 	 *
 	 * @since 0.0.1 (Alpha)
