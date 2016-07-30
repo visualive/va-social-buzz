@@ -36,6 +36,17 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class VASOCIALBUZZ_Content extends VASOCIALBUZZ_Singleton {
 	/**
+	 * Get my class.
+	 *
+	 * @since 1.0.20
+	 *
+	 * @return string
+	 */
+	public static function get_vasocialbuzz_content() {
+		return get_called_class();
+	}
+
+	/**
 	 * This hook is called once any activated themes have been loaded.
 	 *
 	 * @since 0.0.1 (Alpha)

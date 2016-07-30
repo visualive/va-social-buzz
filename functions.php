@@ -4,7 +4,7 @@
  * Plugin URI: https://github.com/visualive/va-social-buzz
  * Description: It displays buttons at the end of every article for readers to "Like" your recommended Facebook page, to share the article on Facebook, to tweet about it on Twitter, and to follow you on Twitter.
  * Author: KUCKLU
- * Version: 1.0.19
+ * Version: 1.0.20
  * Author URI: https://www.visualive.jp/
  * Text Domain: va-social-buzz
  * Domain Path: /langs
@@ -64,8 +64,8 @@ require_once dirname( __FILE__ ) . '/incs/installer.php';
  * @since 0.0.1 (Alpha)
  */
 add_action( 'plugins_loaded', function () {
-	$vasocialbuzz_admin_class   = apply_filters( 'vasocialbuzz_admin_class', \VASOCIALBUZZ\Modules\VASOCIALBUZZ_Admin::class );
-	$vasocialbuzz_content_class = apply_filters( 'vasocialbuzz_content_class', \VASOCIALBUZZ\Modules\VASOCIALBUZZ_Content::class );
+	$vasocialbuzz_admin_class   = apply_filters( 'vasocialbuzz_admin_class', \VASOCIALBUZZ\Modules\VASOCIALBUZZ_Admin::get_vasocialbuzz_admin() );
+	$vasocialbuzz_content_class = apply_filters( 'vasocialbuzz_content_class', \VASOCIALBUZZ\Modules\VASOCIALBUZZ_Content::get_vasocialbuzz_content() );
 
 	new $vasocialbuzz_admin_class;
 	new $vasocialbuzz_content_class;
@@ -78,10 +78,10 @@ add_action( 'plugins_loaded', function () {
  *
  * @since 0.0.1 (Alpha)
  */
-register_activation_hook( __FILE__, function(){
-	register_uninstall_hook( __FILE__, array( VASOCIALBUZZ\Modules\VASOCIALBUZZ_Installer::class , 'uninstall' ) );
+register_activation_hook( __FILE__, function() {
+	register_uninstall_hook( __FILE__, array( \VASOCIALBUZZ\Modules\VASOCIALBUZZ_Installer::get_vasocialbuzz_installer(), 'uninstall' ) );
 } );
 
 if ( defined( 'WP_DEBUG' ) && WP_DEBUG === true ) {
-	register_deactivation_hook( __FILE__, array( VASOCIALBUZZ\Modules\VASOCIALBUZZ_Installer::class , 'uninstall' ) );
+	register_deactivation_hook( __FILE__, array( \VASOCIALBUZZ\Modules\VASOCIALBUZZ_Installer::get_vasocialbuzz_installer(), 'uninstall' ) );
 }

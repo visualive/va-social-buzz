@@ -36,6 +36,17 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class VASOCIALBUZZ_Installer extends VASOCIALBUZZ_Singleton {
 	/**
+	 * Get my class.
+	 *
+	 * @since 1.0.20
+	 *
+	 * @return string
+	 */
+	public static function get_vasocialbuzz_installer() {
+		return get_called_class();
+	}
+
+	/**
 	 * This hook is called once any activated plugins have been loaded.
 	 */
 	public function __construct() {
