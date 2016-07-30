@@ -38,6 +38,9 @@ To install VA Social Buzz:
 
 ## Changelog
 
+### 1.0.20
+* Support PHP 5.4
+
 ### 1.0.19
 * Add pointer. (contributors: toro_unit)
 * Code cleanup. (contributors: toro_unit)
