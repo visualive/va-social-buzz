@@ -67,24 +67,15 @@ if ( true === va_socialbuzz_version_check() ) :
 	/**
 	 * Install.
 	 */
-	register_activation_hook( __FILE__, array(
-		\VASOCIALBUZZ\Modules\Installer::get_called_class(),
-		'install',
-	) );
+	register_activation_hook( __FILE__, array( \VASOCIALBUZZ\Modules\Installer::get_called_class(), 'install' ) );
 
 	/**
 	 * Uninstall.
 	 */
 	register_activation_hook( __FILE__, function () {
-		register_uninstall_hook( __FILE__, array(
-			\VASOCIALBUZZ\Modules\Installer::get_called_class(),
-			'uninstall',
-		) );
+		register_uninstall_hook( __FILE__, array( \VASOCIALBUZZ\Modules\Installer::get_called_class(), 'uninstall' ) );
 	} );
 	if ( defined( 'WP_DEBUG' ) && true === WP_DEBUG ) {
-		register_deactivation_hook( __FILE__, array(
-			\VASOCIALBUZZ\Modules\Installer::get_called_class(),
-			'uninstall',
-		) );
+		register_deactivation_hook( __FILE__, array( \VASOCIALBUZZ\Modules\Installer::get_called_class(), 'uninstall' ) );
 	}
 endif;
