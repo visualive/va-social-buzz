@@ -33,7 +33,7 @@ namespace VASOCIALBUZZ\Modules {
 	 * @package VASOCIALBUZZ\Modules
 	 */
 	class Uninstall {
-		use Instance;
+		use Instance, Options;
 
 		/**
 		 * This hook is called once any activated plugins have been loaded.
@@ -45,7 +45,8 @@ namespace VASOCIALBUZZ\Modules {
 		/**
 		 * Run uninstall.
 		 */
-		public static function run() {
+		public function run() {
+			Options::delete();
 		}
 	}
 }

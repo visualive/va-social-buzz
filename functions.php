@@ -51,19 +51,12 @@ if ( true === va_socialbuzz_check_version() ) :
 	require_once dirname( __FILE__ ) . '/incs/class-module-install.php';
 	require_once dirname( __FILE__ ) . '/incs/class-module-uninstall.php';
 	require_once dirname( __FILE__ ) . '/incs/class-module-update.php';
+	require_once dirname( __FILE__ ) . '/incs/class-module-core.php';
 
 	/**
 	 * Run plugin.
 	 */
-	add_action( 'plugins_loaded', function () {
-		$install   = apply_filters( VA_SOCIALBUZZ_PREFIX . 'module_install', \VASOCIALBUZZ\Modules\Install::get_called_class() );
-		$uninstall = apply_filters( VA_SOCIALBUZZ_PREFIX . 'module_uninstall', \VASOCIALBUZZ\Modules\Uninstall::get_called_class() );
-		$update    = apply_filters( VA_SOCIALBUZZ_PREFIX . 'module_update', \VASOCIALBUZZ\Modules\Update::get_called_class() );
-
-		$install::get_instance();
-		$uninstall::get_instance();
-		$update::get_instance();
-	} );
+	add_action( 'plugins_loaded', array( '\VASOCIALBUZZ\Modules\Core', 'get_instance' ) );
 
 	/**
 	 * Install.
@@ -76,6 +69,10 @@ if ( true === va_socialbuzz_check_version() ) :
 	register_activation_hook( __FILE__, function () {
 		register_uninstall_hook( __FILE__, array( \VASOCIALBUZZ\Modules\Installer::get_called_class(), 'uninstall' ) );
 	} );
+
+	/**
+	 * Uninstall [Debug mode].
+	 */
 	if ( defined( 'WP_DEBUG' ) && true === WP_DEBUG ) {
 		register_deactivation_hook( __FILE__, array( \VASOCIALBUZZ\Modules\Installer::get_called_class(), 'uninstall' ) );
 	}

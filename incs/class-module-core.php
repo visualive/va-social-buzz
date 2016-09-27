@@ -1,6 +1,6 @@
 <?php
 /**
- * WordPress plugin installer class.
+ * WordPress plugin core class.
  *
  * @package    WordPress
  * @subpackage VA Social Buzz
@@ -28,43 +28,31 @@ namespace VASOCIALBUZZ\Modules {
 	}
 
 	/**
-	 * Class Installer.
+	 * Class Core.
 	 *
 	 * @package VASOCIALBUZZ\Modules
 	 */
-	class Installer {
+	class Core {
 		use Instance;
 
 		/**
 		 * This hook is called once any activated plugins have been loaded.
 		 */
-		private function __construct() {}
-
-		/**
-		 * Install.
-		 *
-		 * @return void
-		 */
-		public static function install() {
-			do_action( VA_SOCIALBUZZ_PREFIX . 'install' );
+		private function __construct() {
+			self::init();
 		}
 
 		/**
-		 * Uninstall.
-		 *
-		 * @return void
+		 * Singleton.
 		 */
-		public static function uninstall() {
-			do_action( VA_SOCIALBUZZ_PREFIX . 'uninstall' );
-		}
+		protected function init() {
+			$install   = apply_filters( VA_SOCIALBUZZ_PREFIX . 'module_install', Install::get_called_class() );
+			$uninstall = apply_filters( VA_SOCIALBUZZ_PREFIX . 'module_uninstall', Uninstall::get_called_class() );
+			$update    = apply_filters( VA_SOCIALBUZZ_PREFIX . 'module_update', Update::get_called_class() );
 
-		/**
-		 * Update.
-		 *
-		 * @return void
-		 */
-		public static function update() {
-			do_action( VA_SOCIALBUZZ_PREFIX . 'update' );
+			$install::get_instance();
+			$uninstall::get_instance();
+			$update::get_instance();
 		}
 	}
 }

@@ -46,7 +46,7 @@ namespace VASOCIALBUZZ\Modules {
 		/**
 		 * Run update.
 		 */
-		public static function run() {
+		public function run() {
 			$options = Options::get( 'all' );
 
 			self::version_0( $options );
@@ -57,7 +57,7 @@ namespace VASOCIALBUZZ\Modules {
 		 *
 		 * @param array $options Options.
 		 */
-		public static function version_0( $options = [] ) {
+		protected function version_0( $options = [] ) {
 			$db_version = isset( $options['db_version'] ) ? $options['db_version'] : '0';
 
 			if ( ! empty( $options ) && version_compare( '0', $db_version, '==' ) ) {

@@ -45,7 +45,6 @@ namespace VASOCIALBUZZ\Modules {
 		/**
 		 * Run install.
 		 */
-		public static function run() {
-		}
+		public function run() {}
 	}
 }

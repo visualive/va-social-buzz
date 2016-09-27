@@ -73,5 +73,23 @@ namespace VASOCIALBUZZ\Modules {
 
 			update_option( VA_SOCIALBUZZ_NAME_OPTION, $options );
 		}
+
+		/**
+		 * Delete options.
+		 *
+		 * @param string $key Option key.
+		 */
+		public static function delete( $key = '' ) {
+			if ( '' === $key ) {
+				delete_option( VA_SOCIALBUZZ_NAME_OPTION );
+			}
+
+			$options = get_option( VA_SOCIALBUZZ_NAME_OPTION, [] );
+
+			if ( '' !== $key && isset( $options[ $key ] ) ) {
+				unset( $options[ $key ] );
+				self::update( $options );
+			}
+		}
 	}
 }
