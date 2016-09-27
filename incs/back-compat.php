@@ -1,11 +1,12 @@
 <?php
 /**
- * WordPress plugin installer class.
+ * WordPress plugin back compat functionality.
  *
  * @package    WordPress
  * @subpackage VA Social Buzz
+ * @since      1.1.0
  * @author     KUCKLU <kuck1u@visualive.jp>
- *             Copyright (C) 2015 KUCKLU and VisuAlive.
+ *             Copyright (C) 2016 KUCKLU and VisuAlive.
  *             This program is free software; you can redistribute it and/or modify
  *             it under the terms of the GNU General Public License as published by
  *             the Free Software Foundation; either version 2 of the License, or
@@ -21,47 +22,16 @@
  *             http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-namespace VASOCIALBUZZ\Modules;
-
-use VASOCIALBUZZ\VASOCIALBUZZ_Singleton;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 /**
- * Class Installer.
- *
- * @since 0.0.1 (Alpha)
+ * Plugin only works in WordPress 4.3 or later and PHP 5.4 or later.
  */
-class VASOCIALBUZZ_Installer extends VASOCIALBUZZ_Singleton {
-	/**
-	 * Get my class.
-	 *
-	 * @since 1.0.20
-	 *
-	 * @return string
-	 */
-	public static function get_vasocialbuzz_installer() {
-		return get_called_class();
-	}
-
-	/**
-	 * This hook is called once any activated plugins have been loaded.
-	 */
-	public function __construct() {
-	}
-
-	/**
-	 * Uninstall.
-	 *
-	 * @since 0.0.1 (Alpha)
-	 */
-	public static function uninstall() {
-		delete_option( 'va_social_buzz' );
-
-		if ( ! is_null( get_option( 'push7_appno', null ) ) ) {
-			delete_transient( 'vasocialbuzz_push7_register_url' );
-		}
-	}
+if ( false === va_socialbuzz_version_check() ) {
+	add_action( 'admin_notices', function () {
+		$message = sprintf( __( '%1$s requires at least WordPress version %2$s and PHP version %3$s. You are running WordPress version %4$s and PHP version %5$s. Please upgrade and try again.', 'va-social-buzz' ), VA_SOCIALBUZZ_NAME, VA_SOCIALBUZZ_VERSION_WP, VA_SOCIALBUZZ_VERSION_PHP, $GLOBALS['wp_version'], PHP_VERSION );
+		printf( '<div class="error"><p>%s</p></div>', esc_html( $message ) );
+	} );
 }
