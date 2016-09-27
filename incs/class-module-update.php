@@ -74,6 +74,7 @@ namespace VASOCIALBUZZ\Modules {
 					'text_follow'     => $old_options['text']['follow'],
 					'like_area_bg'    => $old_options['like_button_area']['bg'],
 					'like_area_color' => $old_options['like_button_area']['color'],
+					'post_types'      => $old_options['post_type'],
 				];
 
 				if ( Functions::exists_push7() ) {
@@ -84,7 +85,7 @@ namespace VASOCIALBUZZ\Modules {
 					$new_options['like_area_opacity'] = $old_options['like_button_area']['bg_opacity'];
 				}
 
-				Options::update( $new_options );
+				Options::update( ksort( $new_options ) );
 			}
 		}
 	}
