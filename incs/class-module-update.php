@@ -33,7 +33,7 @@ namespace VASOCIALBUZZ\Modules {
 	 * @package VASOCIALBUZZ\Modules
 	 */
 	class Update {
-		use Instance, Option;
+		use Instance, Options, Functions;
 
 		/**
 		 * This hook is called once any activated plugins have been loaded.
@@ -47,7 +47,7 @@ namespace VASOCIALBUZZ\Modules {
 		 * Run update.
 		 */
 		public static function run() {
-			$options = Option::get( 'all' );
+			$options = Options::get( 'all' );
 
 			self::version_0( $options );
 		}
@@ -76,15 +76,15 @@ namespace VASOCIALBUZZ\Modules {
 					'like_area_color' => $old_options['like_button_area']['color'],
 				];
 
-				if ( ! is_null( get_option( 'push7_appno', null ) ) ) {
+				if ( Functions::exists_push7() ) {
 					$new_options['text_push7'] = $old_options['text']['push7'];
 				}
 
-				if ( function_exists( 'bcadd' ) ) {
+				if ( Functions::exists_bcadd() ) {
 					$new_options['like_area_opacity'] = $old_options['like_button_area']['bg_opacity'];
 				}
 
-				Option::update( $new_options );
+				Options::update( $new_options );
 			}
 		}
 	}

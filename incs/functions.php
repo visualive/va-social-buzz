@@ -33,7 +33,7 @@ load_plugin_textdomain( 'va-social-buzz', false, VA_SOCIALBUZZ_BASENAME . '/lang
  *
  * @return bool
  */
-function va_socialbuzz_version_check() {
+function va_socialbuzz_check_version() {
 	$result = false;
 
 	if ( version_compare( $GLOBALS['wp_version'], VA_SOCIALBUZZ_VERSION_WP, '>=' ) && version_compare( PHP_VERSION, VA_SOCIALBUZZ_VERSION_PHP, '>=' ) ) {

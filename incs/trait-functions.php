@@ -1,6 +1,6 @@
 <?php
 /**
- * WordPress plugin option class.
+ * WordPress plugin functions class.
  *
  * @package    WordPress
  * @subpackage VA Social Buzz
@@ -28,50 +28,27 @@ namespace VASOCIALBUZZ\Modules {
 	}
 
 	/**
-	 * Class Option.
+	 * Class Instance.
 	 *
 	 * @package VASOCIALBUZZ\Modules
 	 */
-	trait Option {
+	trait Functions {
 		/**
-		 * Get option.
+		 * Exists push7.
 		 *
-		 * @param string $key Option key.
-		 *
-		 * @return string|array
+		 * @return bool
 		 */
-		public static function get( $key = '' ) {
-			$options = get_option( VA_SOCIALBUZZ_NAME_OPTION, [] );
-
-			if ( '' !== $key && 'all' !== $key && isset( $options[ $key ] ) ) {
-				$result = $options[ $key ];
-			} else {
-				$result = $options;
-			}
-
-			return $result;
+		public static function exists_push7() {
+			return ! is_null( get_option( 'push7_appno', null ) );
 		}
 
 		/**
-		 * Update options.
+		 * Exists bcadd function.
 		 *
-		 * @param string|array $value Option value.
-		 * @param string       $key   Option key.
+		 * @return bool
 		 */
-		public static function update( $value = '', $key = '' ) {
-			$options = get_option( VA_SOCIALBUZZ_NAME_OPTION, [] );
-
-			if ( '' === $value ) {
-				return;
-			}
-
-			if ( ! is_array( $value ) && '' !== $key ) {
-				$options[ $key ] = $value;
-			} elseif ( is_array( $value ) ) {
-				$options = $value;
-			}
-
-			update_option( VA_SOCIALBUZZ_NAME_OPTION, $options );
+		public static function exists_bcadd() {
+			return function_exists( 'bcadd' );
 		}
 	}
 }
