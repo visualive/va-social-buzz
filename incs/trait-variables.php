@@ -37,6 +37,7 @@ namespace VASOCIALBUZZ\Modules {
 
 		/**
 		 * Get setting labels.
+		 * recommend you don't use this when registering your own settings.
 		 *
 		 * @return array
 		 */
@@ -150,6 +151,11 @@ namespace VASOCIALBUZZ\Modules {
 				'_builtin'      => true,
 			];
 
+			/**
+			 * Setting items to be displayed in the settings page.
+			 *
+			 * @param array $settings Recommend you don't use this "_builtin" parameter registering your own settings.
+			 */
 			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'admin_settings', $settings );
 		}
 

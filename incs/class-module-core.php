@@ -55,6 +55,29 @@ namespace VASOCIALBUZZ\Modules {
 			$uninstall::get_instance();
 			$update::get_instance();
 			$admin::get_instance();
+
+			// Recommend you don't use this short code registering your own post data.
+			add_shortcode( 'socialbuzz', array( &$this, 'add_shortcode' ) );
+			add_filter( 'the_content', array( &$this, 'the_content' ) );
+		}
+
+		/**
+		 * Add short code.
+		 * Recommend you don't use this short code registering your own post data.
+		 */
+		public function add_shortcode() {
+			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'add_shortcode', null );
+		}
+
+		/**
+		 * Show in Social Buzz.
+		 *
+		 * @param string $content The content.
+		 *
+		 * @return string
+		 */
+		public function the_content( $content ) {
+			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'the_content', $content );
 		}
 	}
 }
