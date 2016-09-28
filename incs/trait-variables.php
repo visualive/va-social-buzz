@@ -156,6 +156,7 @@ namespace VASOCIALBUZZ\Modules {
 			 *
 			 * @param array $settings Recommend you don't use this "_builtin" parameter registering your own settings.
 			 */
+
 			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'admin_settings', $settings );
 		}
 
@@ -173,6 +174,39 @@ namespace VASOCIALBUZZ\Modules {
 			}
 
 			return $options;
+		}
+
+		/**
+		 * SNS list.
+		 *
+		 * @return array
+		 */
+		public static function sns_list() {
+			$options         = get_option( VA_SOCIALBUZZ_NAME_OPTION, [] );
+			$default_options = self::default_options();
+			$text_share      = isset( $options['text_share'] ) ? $options['text_share'] : $default_options['text_share']['default_value'];
+			$text_tweet      = isset( $options['text_tweet'] ) ? $options['text_tweet'] : $default_options['text_tweet']['default_value'];
+			$links           = [
+				'fb'    => [
+					'endpoint'    => 'https://www.facebook.com/sharer/sharer.php?u={{permalink}}',
+					'anchor_text' => $text_share,
+				],
+				'twttr' => [
+					'endpoint'    => 'https://twitter.com/share?url={{permalink}}&text={{post_title}}',
+					'anchor_text' => $text_tweet,
+				],
+			];
+
+			if ( Functions::exists_push7() ) {
+				$endpoint_push7 = Functions::get_push7_register_url();
+				$text_push7     = isset( $options['text_push7'] ) ? $options['text_push7'] : $default_options['text_push7']['default_value'];
+				$links['push7'] = [
+					'endpoint'    => $endpoint_push7,
+					'anchor_text' => $text_push7,
+				];
+			}
+
+			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'sns_list', $links );
 		}
 	}
 }
