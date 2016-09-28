@@ -68,7 +68,7 @@ namespace VASOCIALBUZZ\Modules {
 			$settings['text_like_0'] = [
 				'label'         => __( 'Like Aria Text 1', 'va-social-buzz' ),
 				'description'   => '',
-				'default_value' => 'If you liked this article,',
+				'default_value' => __( 'If you liked this article,', 'va-social-buzz' ),
 				'render'        => 'render_text_like_0',
 				'sanitize'      => 'sanitize_text_field',
 				'_builtin'      => true,
@@ -76,7 +76,7 @@ namespace VASOCIALBUZZ\Modules {
 			$settings['text_like_1'] = [
 				'label'         => __( 'Like Aria Text 2', 'va-social-buzz' ),
 				'description'   => '',
-				'default_value' => 'please click this "like!',
+				'default_value' => __( 'please click this "like!".', 'va-social-buzz' ),
 				'render'        => 'render_text_like_1',
 				'sanitize'      => 'sanitize_text_field',
 				'_builtin'      => true,
@@ -84,7 +84,7 @@ namespace VASOCIALBUZZ\Modules {
 			$settings['text_share']  = [
 				'label'         => __( 'Share Button Text', 'va-social-buzz' ),
 				'description'   => '',
-				'default_value' => '',
+				'default_value' => __( 'Share', 'va-social-buzz' ),
 				'render'        => 'render_text_share',
 				'sanitize'      => 'sanitize_text_field',
 				'_builtin'      => true,
@@ -92,7 +92,7 @@ namespace VASOCIALBUZZ\Modules {
 			$settings['text_tweet']  = [
 				'label'         => __( 'Tweet Button Text', 'va-social-buzz' ),
 				'description'   => '',
-				'default_value' => '',
+				'default_value' => __( 'Tweet', 'va-social-buzz' ),
 				'render'        => 'render_text_tweet',
 				'sanitize'      => 'sanitize_text_field',
 				'_builtin'      => true,
@@ -100,7 +100,7 @@ namespace VASOCIALBUZZ\Modules {
 			$settings['text_follow'] = [
 				'label'         => __( 'Twitter Follow Text', 'va-social-buzz' ),
 				'description'   => '',
-				'default_value' => '',
+				'default_value' => __( 'Follow on Twetter !', 'va-social-buzz' ),
 				'render'        => 'render_text_follow',
 				'sanitize'      => 'sanitize_text_field',
 				'_builtin'      => true,
@@ -110,7 +110,7 @@ namespace VASOCIALBUZZ\Modules {
 				$settings['text_push7'] = [
 					'label'         => __( 'Push7 Button Text', 'va-social-buzz' ),
 					'description'   => '',
-					'default_value' => '',
+					'default_value' => __( 'Receive the latest posts with push notifications', 'va-social-buzz' ),
 					'render'        => 'render_text_push7',
 					'sanitize'      => 'sanitize_text_field',
 					'_builtin'      => true,
@@ -130,7 +130,7 @@ namespace VASOCIALBUZZ\Modules {
 				$settings['like_area_opacity'] = [
 					'label'         => __( 'Like Aria Background Opacity', 'va-social-buzz' ),
 					'description'   => '',
-					'default_value' => '',
+					'default_value' => '0.7',
 					'render'        => 'render_like_area_opacity',
 					'sanitize'      => '_sanitize_number_float',
 					'_builtin'      => true,
