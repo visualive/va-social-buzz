@@ -59,31 +59,35 @@ namespace VASOCIALBUZZ\Modules {
 		 * @return null|string
 		 */
 		public function add_shortcode( $atts ) {
-			$result = null;
-			$atts   = shortcode_atts( array(
+			global $post;
+
+			$output      = null;
+			$tmp_wrapper = self::_tmp_wrapper();
+			$atts        = shortcode_atts( array(
 				'box' => '',
 			), $atts, 'socialbuzz' );
 
 			switch ( $atts['box'] ) {
 				case 'like':
-					$result = self::_shortcode_likeblock();
+					$output = self::_shortcode_likeblock();
 					break;
 				case 'share':
-					$result = 'share';
+					$output = self::_shortcode_shareblock( $post );
 					break;
 				case 'follow':
-					$result = 'follow';
+					$output = 'follow';
 					break;
 				default:
-					$result = 'Default';
+					$output = self::_shortcode_likeblock();
+					$output .= self::_shortcode_shareblock( $post );
 					break;
 			}
 
-			if ( ! empty( $result ) ) {
-				$result = str_replace( '{{content}}', $result, self::_tmp_wrapper() );
+			if ( ! empty( $output ) ) {
+				$output = str_replace( '{{content}}', $output, $tmp_wrapper );
 			}
 
-			return $result;
+			return $output;
 		}
 
 		/**
@@ -110,6 +114,39 @@ namespace VASOCIALBUZZ\Modules {
 
 				$output = str_replace( '{{text}}', implode( '<br>', $text ), $output );
 				$output = str_replace( '{{fb_page}}', esc_attr( $options['fb_page'] ), $output );
+			}
+
+			return $output;
+		}
+
+		/**
+		 * Short code the share block.
+		 *
+		 * @param null|\WP_Query $post The post object.
+		 *
+		 * @return string
+		 */
+		protected function _shortcode_shareblock( $post = null ) {
+			$output      = null;
+			$tmp         = self::_tmp_shareblock();
+			$tmp_wrapper = self::_tmp_wrapper_shareblock();
+			$sns         = Variable::sns_list();
+
+			if ( ! empty( $post ) && ! is_wp_error( $post ) ) {
+				foreach ( $sns as $key => $value ) {
+					$output[ $key ] = $tmp;
+					$output[ $key ] = str_replace( '{{prefix}}', sanitize_html_class( $key ), $output[ $key ] );
+					$output[ $key ] = str_replace( '{{endpoint}}', $value['endpoint'], $output[ $key ] );
+					$output[ $key ] = str_replace( '{{anchor_text}}', $value['anchor_text'], $output[ $key ] );
+					$output[ $key ] = str_replace( '{{permalink}}', rawurlencode( get_the_permalink( $post->ID ) ), $output[ $key ] );
+					$output[ $key ] = str_replace( '{{post_title}}', rawurlencode( get_the_title( $post->ID ) ), $output[ $key ] );
+				}
+
+				$output = implode( '', $output );
+			}
+
+			if ( ! empty( $output ) ) {
+				$output = str_replace( '{{content}}', $output, $tmp_wrapper );
 			}
 
 			return $output;
@@ -143,6 +180,35 @@ namespace VASOCIALBUZZ\Modules {
 			$tmp .= '</div><!-- //.vasb_fb -->';
 
 			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'tmp_likeblock', $tmp );
+		}
+
+		/**
+		 * Wrapper Template.
+		 *
+		 * @return string
+		 */
+		protected function _tmp_wrapper_shareblock() {
+			$tmp = '<div class="vasb_share">';
+			$tmp .= '{{content}}';
+			$tmp .= '</div><!-- //.vasb_share -->';
+
+			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'tmp_wrapper_shareblock', $tmp );
+		}
+
+		/**
+		 * Share block Template.
+		 *
+		 * @return string
+		 */
+		protected function _tmp_shareblock() {
+			$tmp = '<div class="vasb_share_button vasb_share_button-{{prefix}}">';
+			$tmp .= '<a href="{{endpoint}}">';
+			$tmp .= '<i class="vasb_icon"></i>';
+			$tmp .= '<span class="vasb_share_button_text">{{anchor_text}}</span>';
+			$tmp .= '</a>';
+			$tmp .= '</div><!-- //.vasb_share_button-{{prefix}} -->';
+
+			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'tmp_shareblock', $tmp );
 		}
 	}
 }
