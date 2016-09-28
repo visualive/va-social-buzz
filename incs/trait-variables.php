@@ -117,7 +117,7 @@ namespace VASOCIALBUZZ\Modules {
 				];
 			}
 
-			$settings['like_area_bg'] = [
+			$settings['like_area_bg']      = [
 				'label'         => __( 'Like Aria Background Color', 'va-social-buzz' ),
 				'description'   => '',
 				'default_value' => '#2b2b2b',
@@ -125,19 +125,15 @@ namespace VASOCIALBUZZ\Modules {
 				'sanitize'      => 'sanitize_hex_color',
 				'_builtin'      => true,
 			];
-
-			if ( Functions::exists_bcadd() ) {
-				$settings['like_area_opacity'] = [
-					'label'         => __( 'Like Aria Background Opacity', 'va-social-buzz' ),
-					'description'   => '',
-					'default_value' => '0.7',
-					'render'        => 'render_like_area_opacity',
-					'sanitize'      => '_sanitize_number_float',
-					'_builtin'      => true,
-				];
-			}
-
-			$settings['like_area_color'] = [
+			$settings['like_area_opacity'] = [
+				'label'         => __( 'Like Aria Background Opacity', 'va-social-buzz' ),
+				'description'   => '',
+				'default_value' => '0.7',
+				'render'        => 'render_like_area_opacity',
+				'sanitize'      => '_sanitize_number_float',
+				'_builtin'      => true,
+			];
+			$settings['like_area_color']   = [
 				'label'         => __( 'Like Aria Text Color', 'va-social-buzz' ),
 				'description'   => '',
 				'default_value' => '#ffffff',
@@ -145,7 +141,7 @@ namespace VASOCIALBUZZ\Modules {
 				'sanitize'      => 'sanitize_hex_color',
 				'_builtin'      => true,
 			];
-			$settings['post_types']      = [
+			$settings['post_types']        = [
 				'label'         => __( 'Show in', 'va-social-buzz' ),
 				'description'   => '',
 				'default_value' => [],

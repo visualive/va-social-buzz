@@ -82,13 +82,13 @@ namespace VASOCIALBUZZ\Modules {
 		 */
 		public function add_pointer_script() {
 			$dismissed       = explode( ',', get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
-			$pointer_enable  = ( false === array_search( VA_SOCIALBUZZ_BASENAME, $dismissed ) );
+			$pointer_enable  = ( false === array_search( VA_SOCIALBUZZ_NAME_OPTION, $dismissed ) );
 			$pointer_content = '<h3>' . __( 'VA Social Buzz', 'va-social-buzz' ) . '</h3>';
 			$pointer_content .= '<p>' . __( 'You can setting VA Social Buzz in <a href="options-reading.php">Reading</a>.', 'va-social-buzz' ) . '</p>';
 
 			wp_localize_script( 'va-social-buzz-pointer', 'VASocialBuzz', array(
 				'pointerContent' => $pointer_content,
-				'pointerName'    => VA_SOCIALBUZZ_BASENAME,
+				'pointerName'    => VA_SOCIALBUZZ_NAME_OPTION,
 				'pointerEnable'  => $pointer_enable,
 			) );
 		}
@@ -185,13 +185,6 @@ namespace VASOCIALBUZZ\Modules {
 		/**
 		 * Render form parts.
 		 */
-		public function render_like_area_opacity() {
-			self::_render_text_field( 'like_area_opacity' );
-		}
-
-		/**
-		 * Render form parts.
-		 */
 		public function render_like_area_color() {
 			self::_render_text_field( 'like_area_color' );
 		}
@@ -206,10 +199,36 @@ namespace VASOCIALBUZZ\Modules {
 		/**
 		 * Render form parts.
 		 */
+		public function render_like_area_opacity() {
+			$output     = null;
+			$value      = 0;
+			$loop       = 11;
+			$key        = 'like_area_opacity';
+			$option     = Options::get( $key );
+			$settings   = $this->settings[ $key ];
+			$dom_select = '<select name="%s[%s]">%s</select>';
+
+			do {
+				$output[] = sprintf( '<option value="%s"%s>%s</option>', esc_attr( $value ), selected( $value, $option, false ), esc_html( $value ) );
+				$value    = $value + 0.1;
+				$loop     = $loop - 1;
+			} while ( $loop );
+
+			if ( isset( $settings['description'] ) && '' !== $settings['description'] ) {
+				$output[] = sprintf( '<p class="description">%s</p>', esc_html( $settings['description'] ) );
+			}
+
+			echo sprintf( $dom_select, esc_attr( VA_SOCIALBUZZ_NAME_OPTION ), esc_attr( $key ), implode( PHP_EOL, $output ) );
+		}
+
+		/**
+		 * Render form parts.
+		 */
 		public function render_post_types() {
 			$output     = null;
-			$show_ins   = Options::get( 'post_types' );
-			$settings   = $this->settings;
+			$key        = 'post_types';
+			$show_ins   = Options::get( $key );
+			$settings   = $this->settings[ $key ];
 			$post_types = array_values( get_post_types( array(
 				'public' => true,
 			) ) );
@@ -218,8 +237,10 @@ namespace VASOCIALBUZZ\Modules {
 				$post_type_object = get_post_type_object( $post_type );
 				$checked          = in_array( $post_type, (array) $show_ins ) ? ' checked' : '';
 				$output[]         = sprintf(
-					'<li><label><input class="%s" type="checkbox" name="va_social_buzz[post_types][]" value="%s"%s> %s</label></li>',
+					'<li><label><input class="%s" type="checkbox" name="%s[%s][]" value="%s"%s> %s</label></li>',
 					esc_attr( VA_SOCIALBUZZ_PREFIX . 'post_types' ),
+					esc_attr( VA_SOCIALBUZZ_NAME_OPTION ),
+					esc_attr( $key ),
 					esc_attr( $post_type ),
 					esc_attr( $checked ),
 					esc_html( $post_type_object->labels->name )
@@ -240,11 +261,12 @@ namespace VASOCIALBUZZ\Modules {
 		 */
 		protected function _render_text_field( $key = '' ) {
 			$value    = Options::get( $key );
-			$settings = $this->settings;
+			$settings = $this->settings[ $key ];
 			$output[] = sprintf(
-				'<input id="%1$s" class="regular-text" type="text" name="va_social_buzz[%2$s]" value="%3$s">',
+				'<input id="%s" class="regular-text" type="text" name="%s[%s]" value="%s">',
 				esc_attr( VA_SOCIALBUZZ_PREFIX . $key ),
-				$key,
+				esc_attr( VA_SOCIALBUZZ_NAME_OPTION ),
+				esc_attr( $key ),
 				esc_attr( $value )
 			);
 
