@@ -44,15 +44,6 @@ require_once dirname( __FILE__ ) . '/incs/functions.php';
 require_once dirname( __FILE__ ) . '/incs/back-compat.php';
 
 if ( true === va_socialbuzz_check_version() ) :
-	require_once dirname( __FILE__ ) . '/incs/trait-instance.php';
-	require_once dirname( __FILE__ ) . '/incs/trait-functions.php';
-	require_once dirname( __FILE__ ) . '/incs/trait-variables.php';
-	require_once dirname( __FILE__ ) . '/incs/trait-options.php';
-	require_once dirname( __FILE__ ) . '/incs/class-module-installer.php';
-	require_once dirname( __FILE__ ) . '/incs/class-module-install.php';
-	require_once dirname( __FILE__ ) . '/incs/class-module-uninstall.php';
-	require_once dirname( __FILE__ ) . '/incs/class-module-update.php';
-	require_once dirname( __FILE__ ) . '/incs/class-module-admin.php';
 	require_once dirname( __FILE__ ) . '/incs/class-module-core.php';
 
 	/**

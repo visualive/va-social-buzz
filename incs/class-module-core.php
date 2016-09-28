@@ -27,6 +27,17 @@ namespace VASOCIALBUZZ\Modules {
 		exit;
 	}
 
+	require_once dirname( __FILE__ ) . '/trait-instance.php';
+	require_once dirname( __FILE__ ) . '/trait-functions.php';
+	require_once dirname( __FILE__ ) . '/trait-variables.php';
+	require_once dirname( __FILE__ ) . '/trait-options.php';
+	require_once dirname( __FILE__ ) . '/class-module-installer.php';
+	require_once dirname( __FILE__ ) . '/class-module-install.php';
+	require_once dirname( __FILE__ ) . '/class-module-uninstall.php';
+	require_once dirname( __FILE__ ) . '/class-module-update.php';
+	require_once dirname( __FILE__ ) . '/class-module-admin.php';
+	require_once dirname( __FILE__ ) . '/class-module-shortcode.php';
+
 	/**
 	 * Class Core.
 	 *
@@ -50,11 +61,13 @@ namespace VASOCIALBUZZ\Modules {
 			$uninstall = apply_filters( VA_SOCIALBUZZ_PREFIX . 'module_uninstall', Uninstall::get_called_class() );
 			$update    = apply_filters( VA_SOCIALBUZZ_PREFIX . 'module_update', Update::get_called_class() );
 			$admin     = apply_filters( VA_SOCIALBUZZ_PREFIX . 'module_admin', Admin::get_called_class() );
+			$shortcode = apply_filters( VA_SOCIALBUZZ_PREFIX . 'module_shortcode', ShortCode::get_called_class() );
 
 			$install::get_instance();
 			$uninstall::get_instance();
 			$update::get_instance();
 			$admin::get_instance();
+			$shortcode::get_instance();
 
 			// Recommend you don't use this short code registering your own post data.
 			add_shortcode( 'socialbuzz', array( &$this, 'add_shortcode' ) );
@@ -64,9 +77,13 @@ namespace VASOCIALBUZZ\Modules {
 		/**
 		 * Add short code.
 		 * Recommend you don't use this short code registering your own post data.
+		 *
+		 * @param array $atts Short code parameter.
+		 *
+		 * @return null|string
 		 */
-		public function add_shortcode() {
-			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'add_shortcode', null );
+		public function add_shortcode( $atts ) {
+			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'add_shortcode', $atts );
 		}
 
 		/**
