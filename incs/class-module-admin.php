@@ -33,7 +33,7 @@ namespace VASOCIALBUZZ\Modules {
 	 * @package VASOCIALBUZZ\Modules
 	 */
 	class Admin {
-		use Instance, Variable, Options;
+		use Instance, Options;
 
 		/**
 		 * Setting items.
@@ -46,9 +46,51 @@ namespace VASOCIALBUZZ\Modules {
 		 * This hook is called once any activated plugins have been loaded.
 		 */
 		public function __construct() {
-			$this->settings = self::settings();
+			$this->settings = Variable::settings();
 
 			add_action( 'admin_init', array( &$this, 'admin_init' ) );
+			add_action( 'admin_enqueue_scripts', array( &$this, 'admin_enqueue_scripts' ) );
+			add_action( 'admin_enqueue_scripts', array( &$this, 'add_pointer_script' ) );
+		}
+
+		/**
+		 * Admin enqueue scripts.
+		 *
+		 * @param string $hook The current admin page.
+		 */
+		public function admin_enqueue_scripts( $hook ) {
+			wp_enqueue_style( 'wp-pointer' );
+			wp_enqueue_script( 'va-social-buzz-pointer', VA_SOCIALBUZZ_URL . 'assets/js/pointer.js', array(
+				'wp-pointer',
+			), false, true );
+
+			if ( 'options-reading.php' === $hook ) {
+				wp_enqueue_style( 'va-social-buzz-admin', VA_SOCIALBUZZ_URL . 'assets/css/admin.css' );
+				wp_enqueue_style( 'wp-color-picker' );
+				wp_enqueue_script( 'va-social-buzz-admin', VA_SOCIALBUZZ_URL . 'assets/js/admin.js', array(
+					'jquery',
+					'wp-color-picker',
+				), false, true );
+			}
+		}
+
+		/**
+		 * Add css/js for pointer.
+		 *
+		 * @since  1.0.19
+		 * @author Toro_Unit (contributor)
+		 */
+		public function add_pointer_script() {
+			$dismissed       = explode( ',', get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
+			$pointer_enable  = ( false === array_search( VA_SOCIALBUZZ_BASENAME, $dismissed ) );
+			$pointer_content = '<h3>' . __( 'VA Social Buzz', 'va-social-buzz' ) . '</h3>';
+			$pointer_content .= '<p>' . __( 'You can setting VA Social Buzz in <a href="options-reading.php">Reading</a>.', 'va-social-buzz' ) . '</p>';
+
+			wp_localize_script( 'va-social-buzz-pointer', 'VASocialBuzz', array(
+				'pointerContent' => $pointer_content,
+				'pointerName'    => VA_SOCIALBUZZ_BASENAME,
+				'pointerEnable'  => $pointer_enable,
+			) );
 		}
 
 		/**
@@ -176,7 +218,7 @@ namespace VASOCIALBUZZ\Modules {
 				$post_type_object = get_post_type_object( $post_type );
 				$checked          = in_array( $post_type, (array) $show_ins ) ? ' checked' : '';
 				$output[]         = sprintf(
-					'<li><label><input class="%s" type="checkbox" name="va_social_buzz[post_type][]" value="%s"%s> %s</label></li>',
+					'<li><label><input class="%s" type="checkbox" name="va_social_buzz[post_types][]" value="%s"%s> %s</label></li>',
 					esc_attr( VA_SOCIALBUZZ_PREFIX . 'post_types' ),
 					esc_attr( $post_type ),
 					esc_attr( $checked ),
@@ -222,16 +264,22 @@ namespace VASOCIALBUZZ\Modules {
 		 */
 		public function sanitize_option( $options ) {
 			$settings = $this->settings;
+			$default  = Options::get( 'default' );
+			$options  = wp_parse_args( $options, $default );
+
+			unset( $options['db_version'] );
 
 			foreach ( $options as $key => $option ) {
 				$sanitize = $settings[ $key ]['sanitize'];
 
-				if ( true === $option[ $key ]['_builtin'] && preg_match( '/\A_(.*?)+\z/', $settings[ $key ]['sanitize'] ) ) {
+				if ( true === $settings[ $key ]['_builtin'] && 1 === preg_match( '/\A_(.*?)+\z/', $settings[ $key ]['sanitize'] ) ) {
 					$sanitize = [ &$this, $sanitize ];
 				}
 
 				$options[ $key ] = call_user_func( $sanitize, $option );
 			}
+
+			$options['db_version'] = VA_SOCIALBUZZ_VERSION_DB;
 
 			return $options;
 		}
@@ -263,6 +311,30 @@ namespace VASOCIALBUZZ\Modules {
 		}
 
 		/**
+		 * Sanitize number float.
+		 *
+		 * @param string $value
+		 *
+		 * @return string
+		 */
+		protected function _sanitize_number_float( $value = '' ) {
+			return filter_var( $value, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION );
+		}
+
+		/**
+		 * Sanitize Facebook oage.
+		 *
+		 * @param string $value Twitter name.
+		 *
+		 * @return string
+		 */
+		protected function _sanitize_fb_page( $value = '' ) {
+			$value = preg_replace( '/[^\w\-.]/', '', $value );
+
+			return $value;
+		}
+
+		/**
 		 * Sanitize Twitter name.
 		 *
 		 * @param string $value Twitter name.
@@ -282,9 +354,12 @@ namespace VASOCIALBUZZ\Modules {
 		 *
 		 * @return array
 		 */
-		protected function _sanitize_key_for_array_value( $value = [ ] ) {
+		protected function _sanitize_key_for_array_value( $value = [] ) {
+			if ( ! empty( $value ) ) {
+				$value = array_map( 'sanitize_key', $value );
+			}
 
-			return array_map( 'sanitize_key', $value );
+			return $value;
 		}
 	}
 }

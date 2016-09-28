@@ -42,106 +42,135 @@ namespace VASOCIALBUZZ\Modules {
 		 */
 		public static function settings() {
 			$settings['fb_page']     = [
-				'label'       => __( 'Facebook Page Web Address', 'va-social-buzz' ),
-				'description' => '',
-				'render'      => 'render_fb_page',
-				'sanitize'    => '_sanitize_checkbox',
-				'_builtin'    => true,
+				'label'         => __( 'Facebook Page Web Address', 'va-social-buzz' ),
+				'description'   => '',
+				'default_value' => '',
+				'render'        => 'render_fb_page',
+				'sanitize'      => '_sanitize_fb_page',
+				'_builtin'      => true,
 			];
 			$settings['fb_appid']    = [
-				'label'       => __( 'Facebook App ID', 'va-social-buzz' ),
-				'description' => '',
-				'render'      => 'render_fb_appid',
-				'sanitize'    => '_sanitize_intval',
-				'_builtin'    => true,
+				'label'         => __( 'Facebook App ID', 'va-social-buzz' ),
+				'description'   => '',
+				'default_value' => '',
+				'render'        => 'render_fb_appid',
+				'sanitize'      => '_sanitize_intval',
+				'_builtin'      => true,
 			];
 			$settings['twttr_name']  = [
-				'label'       => __( 'Twitter Account', 'va-social-buzz' ),
-				'description' => '',
-				'render'      => 'render_twttr_name',
-				'sanitize'    => '_sanitize_twttr_name',
-				'_builtin'    => true,
+				'label'         => __( 'Twitter Account', 'va-social-buzz' ),
+				'description'   => '',
+				'default_value' => '',
+				'render'        => 'render_twttr_name',
+				'sanitize'      => '_sanitize_twttr_name',
+				'_builtin'      => true,
 			];
 			$settings['text_like_0'] = [
-				'label'       => __( 'Like Aria Text 1', 'va-social-buzz' ),
-				'description' => '',
-				'render'      => 'render_text_like_0',
-				'sanitize'    => 'sanitize_text_field',
-				'_builtin'    => true,
+				'label'         => __( 'Like Aria Text 1', 'va-social-buzz' ),
+				'description'   => '',
+				'default_value' => 'If you liked this article,',
+				'render'        => 'render_text_like_0',
+				'sanitize'      => 'sanitize_text_field',
+				'_builtin'      => true,
 			];
 			$settings['text_like_1'] = [
-				'label'       => __( 'Like Aria Text 2', 'va-social-buzz' ),
-				'description' => '',
-				'render'      => 'render_text_like_1',
-				'sanitize'    => 'sanitize_text_field',
-				'_builtin'    => true,
+				'label'         => __( 'Like Aria Text 2', 'va-social-buzz' ),
+				'description'   => '',
+				'default_value' => 'please click this "like!',
+				'render'        => 'render_text_like_1',
+				'sanitize'      => 'sanitize_text_field',
+				'_builtin'      => true,
 			];
 			$settings['text_share']  = [
-				'label'       => __( 'Share Button Text', 'va-social-buzz' ),
-				'description' => '',
-				'render'      => 'render_text_share',
-				'sanitize'    => 'sanitize_text_field',
-				'_builtin'    => true,
+				'label'         => __( 'Share Button Text', 'va-social-buzz' ),
+				'description'   => '',
+				'default_value' => '',
+				'render'        => 'render_text_share',
+				'sanitize'      => 'sanitize_text_field',
+				'_builtin'      => true,
 			];
 			$settings['text_tweet']  = [
-				'label'       => __( 'Tweet Button Text', 'va-social-buzz' ),
-				'description' => '',
-				'render'      => 'render_text_tweet',
-				'sanitize'    => 'sanitize_text_field',
-				'_builtin'    => true,
+				'label'         => __( 'Tweet Button Text', 'va-social-buzz' ),
+				'description'   => '',
+				'default_value' => '',
+				'render'        => 'render_text_tweet',
+				'sanitize'      => 'sanitize_text_field',
+				'_builtin'      => true,
 			];
 			$settings['text_follow'] = [
-				'label'       => __( 'Twitter Follow Text', 'va-social-buzz' ),
-				'description' => '',
-				'render'      => 'render_text_follow',
-				'sanitize'    => 'sanitize_text_field',
-				'_builtin'    => true,
+				'label'         => __( 'Twitter Follow Text', 'va-social-buzz' ),
+				'description'   => '',
+				'default_value' => '',
+				'render'        => 'render_text_follow',
+				'sanitize'      => 'sanitize_text_field',
+				'_builtin'      => true,
 			];
 
 			if ( Functions::exists_push7() ) {
 				$settings['text_push7'] = [
-					'label'       => __( 'Push7 Button Text', 'va-social-buzz' ),
-					'description' => '',
-					'render'      => 'render_text_push7',
-					'sanitize'    => 'sanitize_text_field',
-					'_builtin'    => true,
+					'label'         => __( 'Push7 Button Text', 'va-social-buzz' ),
+					'description'   => '',
+					'default_value' => '',
+					'render'        => 'render_text_push7',
+					'sanitize'      => 'sanitize_text_field',
+					'_builtin'      => true,
 				];
 			}
 
 			$settings['like_area_bg'] = [
-				'label'       => __( 'Like Aria Background Color', 'va-social-buzz' ),
-				'description' => '',
-				'render'      => 'render_like_area_bg',
-				'sanitize'    => 'sanitize_hex_color_no_hash',
-				'_builtin'    => true,
+				'label'         => __( 'Like Aria Background Color', 'va-social-buzz' ),
+				'description'   => '',
+				'default_value' => '#2b2b2b',
+				'render'        => 'render_like_area_bg',
+				'sanitize'      => 'sanitize_hex_color',
+				'_builtin'      => true,
 			];
 
 			if ( Functions::exists_bcadd() ) {
 				$settings['like_area_opacity'] = [
-					'label'       => __( 'Like Aria Background Opacity', 'va-social-buzz' ),
-					'description' => '',
-					'render'      => 'render_like_area_opacity',
-					'sanitize'    => '_sanitize_number_float',
-					'_builtin'    => true,
+					'label'         => __( 'Like Aria Background Opacity', 'va-social-buzz' ),
+					'description'   => '',
+					'default_value' => '',
+					'render'        => 'render_like_area_opacity',
+					'sanitize'      => '_sanitize_number_float',
+					'_builtin'      => true,
 				];
 			}
 
 			$settings['like_area_color'] = [
-				'label'       => __( 'Like Aria Text Color', 'va-social-buzz' ),
-				'description' => '',
-				'render'      => 'render_like_area_color',
-				'sanitize'    => 'sanitize_hex_color_no_hash',
-				'_builtin'    => true,
+				'label'         => __( 'Like Aria Text Color', 'va-social-buzz' ),
+				'description'   => '',
+				'default_value' => '#ffffff',
+				'render'        => 'render_like_area_color',
+				'sanitize'      => 'sanitize_hex_color',
+				'_builtin'      => true,
 			];
 			$settings['post_types']      = [
-				'label'       => __( 'Show in', 'va-social-buzz' ),
-				'description' => '',
-				'render'      => 'render_post_types',
-				'sanitize'    => '_sanitize_key_for_array_value',
-				'_builtin'    => true,
+				'label'         => __( 'Show in', 'va-social-buzz' ),
+				'description'   => '',
+				'default_value' => [],
+				'render'        => 'render_post_types',
+				'sanitize'      => '_sanitize_key_for_array_value',
+				'_builtin'      => true,
 			];
 
 			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'admin_settings', $settings );
+		}
+
+		/**
+		 * Default setting values.
+		 *
+		 * @return array
+		 */
+		public static function default_options() {
+			$settings = self::settings();
+			$options  = [];
+
+			foreach ( $settings as $key => $setting ) {
+				$options[ $key ] = $setting['default_value'];
+			}
+
+			return $options;
 		}
 	}
 }

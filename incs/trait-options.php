@@ -33,6 +33,8 @@ namespace VASOCIALBUZZ\Modules {
 	 * @package VASOCIALBUZZ\Modules
 	 */
 	trait Options {
+		use Variable;
+
 		/**
 		 * Get option.
 		 *
@@ -41,13 +43,16 @@ namespace VASOCIALBUZZ\Modules {
 		 * @return string|array
 		 */
 		public static function get( $key = '' ) {
-			$result  = '';
-			$options = get_option( VA_SOCIALBUZZ_NAME_OPTION, [] );
+			$result          = '';
+			$options         = get_option( VA_SOCIALBUZZ_NAME_OPTION, [] );
+			$default_options = Variable::default_options();
 
-			if ( '' !== $key && 'all' !== $key && isset( $options[ $key ] ) ) {
-				$result = $options[ $key ];
+			if ( '' !== $key && ! in_array( $key, [ 'all', 'default' ] ) ) {
+				$result = isset( $options[ $key ] ) ? $options[ $key ] : $default_options[ $key ];
 			} elseif ( 'all' === $key ) {
 				$result = $options;
+			} elseif ( 'default' === $key ) {
+				$result = $default_options;
 			}
 
 			return $result;
