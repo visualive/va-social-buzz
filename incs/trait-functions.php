@@ -52,6 +52,32 @@ namespace VASOCIALBUZZ\Modules {
 		}
 
 		/**
+		 * Get thumbnail image url
+		 *
+		 * @param null|\WP_Post $_post Post data object.
+		 *
+		 * @return string
+		 */
+		public static function get_thumbnail( $_post = null ) {
+			$thumb = '';
+
+			if ( empty( $_post ) ) {
+				global $post;
+				$_post = $post;
+			}
+
+			if ( has_post_thumbnail( $_post ) && ! post_password_required( $_post ) ) {
+				$thumb = get_the_post_thumbnail_url( $_post, VA_SOCIALBUZZ_PREFIX . 'thumbnail' );
+			} elseif ( has_header_image() ) {
+				$thumb = get_header_image();
+			} elseif ( has_site_icon() ) {
+				$thumb = get_site_icon_url();
+			}
+
+			return $thumb;
+		}
+
+		/**
 		 * Get Push7 register url.
 		 *
 		 * @return null|string

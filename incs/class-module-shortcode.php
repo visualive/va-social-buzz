@@ -33,12 +33,21 @@ namespace VASOCIALBUZZ\Modules {
 	 * @package VASOCIALBUZZ\Modules
 	 */
 	class ShortCode {
-		use Instance;
+		use Instance, Options;
+
+		/**
+		 * Option items.
+		 *
+		 * @var array
+		 */
+		private $options = [];
 
 		/**
 		 * This hook is called once any activated plugins have been loaded.
 		 */
 		private function __construct() {
+			$this->options = Options::get( 'all' );
+
 			add_filter( VA_SOCIALBUZZ_PREFIX . 'add_shortcode', [ &$this, 'add_shortcode' ] );
 		}
 
@@ -57,7 +66,7 @@ namespace VASOCIALBUZZ\Modules {
 
 			switch ( $atts['box'] ) {
 				case 'like':
-					$result = 'like';
+					$result = self::_shortcode_likeblock();
 					break;
 				case 'share':
 					$result = 'share';
@@ -70,7 +79,70 @@ namespace VASOCIALBUZZ\Modules {
 					break;
 			}
 
+			if ( ! empty( $result ) ) {
+				$result = str_replace( '{{content}}', $result, self::_tmp_wrapper() );
+			}
+
 			return $result;
+		}
+
+		/**
+		 * Short code the like block.
+		 *
+		 * @return string
+		 */
+		protected function _shortcode_likeblock() {
+			$output  = null;
+			$tmp     = self::_tmp_likeblock();
+			$options = $this->options;
+
+			if ( ! empty( $options['fb_page'] ) ) {
+				$text   = [];
+				$output = $tmp;
+
+				if ( ! empty( $options['text_like_0'] ) ) {
+					$text[] = esc_html( $options['text_like_0'] );
+				}
+
+				if ( ! empty( $options['text_like_1'] ) ) {
+					$text[] = esc_html( $options['text_like_1'] );
+				}
+
+				$output = str_replace( '{{text}}', implode( '<br>', $text ), $output );
+				$output = str_replace( '{{fb_page}}', esc_attr( $options['fb_page'] ), $output );
+			}
+
+			return $output;
+		}
+
+		/**
+		 * Wrapper Template.
+		 *
+		 * @return string
+		 */
+		protected function _tmp_wrapper() {
+			$tmp = '<div id="va-social-buzz" class="va-social-buzz">';
+			$tmp .= '{{content}}';
+			$tmp .= '</div><!-- //.va-social-buzz -->';
+
+			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'tmp_wrapper', $tmp );
+		}
+
+		/**
+		 * Like block Template.
+		 *
+		 * @return string
+		 */
+		protected function _tmp_likeblock() {
+			$tmp = '<div class="vasb_fb">';
+			$tmp .= '<div class="vasb_fb_thumbnail"></div>';
+			$tmp .= '<div class="vasb_fb_like">';
+			$tmp .= '<p class="vasb_fb_like_text">{{text}}</p>';
+			$tmp .= '<div class="fb-like" data-href="https://www.facebook.com/{{fb_page}}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>';
+			$tmp .= '</div><!-- //.vasb_fb_like -->';
+			$tmp .= '</div><!-- //.vasb_fb -->';
+
+			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'tmp_likeblock', $tmp );
 		}
 	}
 }

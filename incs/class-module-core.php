@@ -69,8 +69,8 @@ namespace VASOCIALBUZZ\Modules {
 			$admin::get_instance();
 			$shortcode::get_instance();
 
-			// Recommend you don't use this short code registering your own post data.
-			add_shortcode( 'socialbuzz', array( &$this, 'add_shortcode' ) );
+			add_image_size( VA_SOCIALBUZZ_PREFIX . 'thumbnail', '980', '9999', false );
+			add_shortcode( 'socialbuzz', array( &$this, 'add_shortcode' ) ); // Recommend you don't use this short code registering your own post data.
 			add_filter( 'the_content', array( &$this, 'the_content' ) );
 		}
 
