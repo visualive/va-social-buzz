@@ -84,8 +84,9 @@ namespace VASOCIALBUZZ\Modules {
 		 */
 		public static function get_push7_register_url() {
 			$push7              = false;
+			$transient_key      = VA_SOCIALBUZZ_PREFIX . 'push7_register_url';
 			$push7_appno        = get_option( 'push7_appno', null );
-			$push7_register_url = get_transient( VA_SOCIALBUZZ_PREFIX . 'push7_register_url' );
+			$push7_register_url = get_transient( $transient_key );
 
 			if ( ! empty( $push7_appno ) ) {
 				$push7_appno = preg_replace( '/[^a-zA-Z0-9]/', '', $push7_appno );
@@ -115,7 +116,7 @@ namespace VASOCIALBUZZ\Modules {
 					}
 
 					if ( false !== $push7_register_url ) {
-						set_transient( 'vasocialbuzz_push7_register_url', $push7_register_url, WEEK_IN_SECONDS );
+						set_transient( $transient_key, $push7_register_url, WEEK_IN_SECONDS );
 					}
 				}
 			endif;

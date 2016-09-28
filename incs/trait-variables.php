@@ -184,8 +184,8 @@ namespace VASOCIALBUZZ\Modules {
 		public static function sns_list() {
 			$options         = get_option( VA_SOCIALBUZZ_NAME_OPTION, [] );
 			$default_options = self::default_options();
-			$text_share      = isset( $options['text_share'] ) ? $options['text_share'] : $default_options['text_share']['default_value'];
-			$text_tweet      = isset( $options['text_tweet'] ) ? $options['text_tweet'] : $default_options['text_tweet']['default_value'];
+			$text_share      = isset( $options['text_share'] ) ? $options['text_share'] : $default_options['text_share'];
+			$text_tweet      = isset( $options['text_tweet'] ) ? $options['text_tweet'] : $default_options['text_tweet'];
 			$links           = [
 				'fb'    => [
 					'endpoint'    => 'https://www.facebook.com/sharer/sharer.php?u={{permalink}}',
@@ -199,7 +199,7 @@ namespace VASOCIALBUZZ\Modules {
 
 			if ( Functions::exists_push7() ) {
 				$endpoint_push7 = Functions::get_push7_register_url();
-				$text_push7     = isset( $options['text_push7'] ) ? $options['text_push7'] : $default_options['text_push7']['default_value'];
+				$text_push7     = isset( $options['text_push7'] ) ? $options['text_push7'] : $default_options['text_push7'];
 				$links['push7'] = [
 					'endpoint'    => $endpoint_push7,
 					'anchor_text' => $text_push7,

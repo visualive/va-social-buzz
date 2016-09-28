@@ -61,8 +61,10 @@ namespace VASOCIALBUZZ\Modules {
 			$db_version = isset( $options['db_version'] ) ? $options['db_version'] : '0';
 
 			if ( ! empty( $options ) && version_compare( '0', $db_version, '==' ) ) {
-				$old_options = $options;
-				$new_options = [
+				$transient_key = 'vasocialbuzz_push7_register_url';
+				$transient     = get_transient( $transient_key );
+				$old_options   = $options;
+				$new_options   = [
 					'db_version'      => VA_SOCIALBUZZ_VERSION_DB,
 					'fb_page'         => $old_options['fb_page'],
 					'fb_appid'        => $old_options['fb_appid'],
@@ -83,6 +85,10 @@ namespace VASOCIALBUZZ\Modules {
 
 				if ( Functions::exists_bcadd() ) {
 					$new_options['like_area_opacity'] = $old_options['like_button_area']['bg_opacity'];
+				}
+
+				if ( false !== $transient ) {
+					delete_transient( $transient_key );
 				}
 
 				Options::update( $new_options );
