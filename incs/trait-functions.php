@@ -106,12 +106,12 @@ namespace VASOCIALBUZZ\Modules {
 					$domain = isset( $body->domain ) ? filter_var( $body->domain, FILTER_SANITIZE_URL ) : false;
 					$alias  = isset( $body->alias ) ? filter_var( $body->alias, FILTER_SANITIZE_URL ) : false;
 
-					if ( false !== $domain ) {
-						$push7_register_url = esc_url_raw( 'https://' . $domain );
+					if ( false !== $alias ) {
+						$push7_register_url = esc_url_raw( 'https://' . $alias );
 					}
 
-					if ( false === $domain && false !== $alias ) {
-						$push7_register_url = esc_url_raw( 'https://' . $alias );
+					if ( false === $alias && false !== $domain ) {
+						$push7_register_url = esc_url_raw( 'https://' . $domain );
 					}
 
 					if ( false !== $push7_register_url ) {
