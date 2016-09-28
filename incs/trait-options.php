@@ -41,11 +41,12 @@ namespace VASOCIALBUZZ\Modules {
 		 * @return string|array
 		 */
 		public static function get( $key = '' ) {
+			$result  = '';
 			$options = get_option( VA_SOCIALBUZZ_NAME_OPTION, [] );
 
 			if ( '' !== $key && 'all' !== $key && isset( $options[ $key ] ) ) {
 				$result = $options[ $key ];
-			} else {
+			} elseif ( 'all' === $key ) {
 				$result = $options;
 			}
 

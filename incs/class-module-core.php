@@ -49,10 +49,12 @@ namespace VASOCIALBUZZ\Modules {
 			$install   = apply_filters( VA_SOCIALBUZZ_PREFIX . 'module_install', Install::get_called_class() );
 			$uninstall = apply_filters( VA_SOCIALBUZZ_PREFIX . 'module_uninstall', Uninstall::get_called_class() );
 			$update    = apply_filters( VA_SOCIALBUZZ_PREFIX . 'module_update', Update::get_called_class() );
+			$admin     = apply_filters( VA_SOCIALBUZZ_PREFIX . 'module_admin', Admin::get_called_class() );
 
 			$install::get_instance();
 			$uninstall::get_instance();
 			$update::get_instance();
+			$admin::get_instance();
 		}
 	}
 }

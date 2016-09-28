@@ -1,0 +1,290 @@
+<?php
+/**
+ * WordPress plugin admin class.
+ *
+ * @package    WordPress
+ * @subpackage VA Extra Settings
+ * @since      1.1.0
+ * @author     KUCKLU <kuck1u@visualive.jp>
+ *             Copyright (C) 2015 KUCKLU and VisuAlive.
+ *             This program is free software; you can redistribute it and/or modify
+ *             it under the terms of the GNU General Public License as published by
+ *             the Free Software Foundation; either version 2 of the License, or
+ *             (at your option) any later version.
+ *             This program is distributed in the hope that it will be useful,
+ *             but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *             MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *             GNU General Public License for more details.
+ *             You should have received a copy of the GNU General Public License along
+ *             with this program; if not, write to the Free Software Foundation, Inc.,
+ *             51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *             It is also available through the world-wide-web at this URL:
+ *             http://www.gnu.org/licenses/gpl-2.0.txt
+ */
+
+namespace VASOCIALBUZZ\Modules {
+	if ( ! defined( 'ABSPATH' ) ) {
+		exit;
+	}
+
+	/**
+	 * Class Admin
+	 *
+	 * @package VASOCIALBUZZ\Modules
+	 */
+	class Admin {
+		use Instance, Variable, Options;
+
+		/**
+		 * Setting items.
+		 *
+		 * @var array
+		 */
+		private $settings = [];
+
+		/**
+		 * This hook is called once any activated plugins have been loaded.
+		 */
+		public function __construct() {
+			$this->settings = self::settings();
+
+			add_action( 'admin_init', array( &$this, 'admin_init' ) );
+		}
+
+		/**
+		 * Add settings.
+		 */
+		public function admin_init() {
+			$settings = $this->settings;
+
+			register_setting( 'reading', VA_SOCIALBUZZ_NAME_OPTION, array( &$this, 'sanitize_option' ) );
+			add_settings_section( VA_SOCIALBUZZ_PREFIX . 'section', __( 'VA Social Buzz', 'va-social-buzz' ), null, 'reading' );
+
+			foreach ( $settings as $key => $setting ) {
+				$render = $setting['render'];
+
+				if ( true === $setting['_builtin'] ) {
+					$render = [ &$this, $render ];
+				}
+
+				add_settings_field(
+					VA_SOCIALBUZZ_PREFIX . $key,
+					'<label for="' . esc_attr( VA_SOCIALBUZZ_PREFIX . $key ) . '">' . esc_html( $setting['label'] ) . '</label>',
+					$render,
+					'reading',
+					VA_SOCIALBUZZ_PREFIX . 'section'
+				);
+			}
+		}
+
+		/**
+		 * Render form parts.
+		 */
+		public function render_fb_appid() {
+			self::_render_text_field( 'fb_appid' );
+		}
+
+		/**
+		 * Render form parts.
+		 */
+		public function render_twttr_name() {
+			self::_render_text_field( 'twttr_name' );
+		}
+
+		/**
+		 * Render form parts.
+		 */
+		public function render_fb_page() {
+			self::_render_text_field( 'fb_page' );
+		}
+
+		/**
+		 * Render form parts.
+		 */
+		public function render_text_like_0() {
+			self::_render_text_field( 'text_like_0' );
+		}
+
+		/**
+		 * Render form parts.
+		 */
+		public function render_text_like_1() {
+			self::_render_text_field( 'text_like_1' );
+		}
+
+		/**
+		 * Render form parts.
+		 */
+		public function render_text_share() {
+			self::_render_text_field( 'text_share' );
+		}
+
+		/**
+		 * Render form parts.
+		 */
+		public function render_text_tweet() {
+			self::_render_text_field( 'text_tweet' );
+		}
+
+		/**
+		 * Render form parts.
+		 */
+		public function render_text_follow() {
+			self::_render_text_field( 'text_follow' );
+		}
+
+		/**
+		 * Render form parts.
+		 */
+		public function render_like_area_bg() {
+			self::_render_text_field( 'like_area_bg' );
+		}
+
+		/**
+		 * Render form parts.
+		 */
+		public function render_like_area_opacity() {
+			self::_render_text_field( 'like_area_opacity' );
+		}
+
+		/**
+		 * Render form parts.
+		 */
+		public function render_like_area_color() {
+			self::_render_text_field( 'like_area_color' );
+		}
+
+		/**
+		 * Render form parts.
+		 */
+		public function render_text_push7() {
+			self::_render_text_field( 'text_push7' );
+		}
+
+		/**
+		 * Render form parts.
+		 */
+		public function render_post_types() {
+			$output     = null;
+			$show_ins   = Options::get( 'post_types' );
+			$settings   = $this->settings;
+			$post_types = array_values( get_post_types( array(
+				'public' => true,
+			) ) );
+
+			foreach ( $post_types as $post_type ) {
+				$post_type_object = get_post_type_object( $post_type );
+				$checked          = in_array( $post_type, (array) $show_ins ) ? ' checked' : '';
+				$output[]         = sprintf(
+					'<li><label><input class="%s" type="checkbox" name="va_social_buzz[post_type][]" value="%s"%s> %s</label></li>',
+					esc_attr( VA_SOCIALBUZZ_PREFIX . 'post_types' ),
+					esc_attr( $post_type ),
+					esc_attr( $checked ),
+					esc_html( $post_type_object->labels->name )
+				);
+			}
+
+			if ( isset( $settings['description'] ) && '' !== $settings['description'] ) {
+				$output[] = sprintf( '<p class="description">%s</p>', esc_html( $settings['description'] ) );
+			}
+
+			echo sprintf( '<ul>%s</ul>', implode( PHP_EOL, $output ) );
+		}
+
+		/**
+		 * Render text field.
+		 *
+		 * @param string $key Option key.
+		 */
+		protected function _render_text_field( $key = '' ) {
+			$value    = Options::get( $key );
+			$settings = $this->settings;
+			$output[] = sprintf(
+				'<input id="%1$s" class="regular-text" type="text" name="va_social_buzz[%2$s]" value="%3$s">',
+				esc_attr( VA_SOCIALBUZZ_PREFIX . $key ),
+				$key,
+				esc_attr( $value )
+			);
+
+			if ( isset( $settings['description'] ) && '' !== $settings['description'] ) {
+				$output[] = sprintf( '<p class="description">%s</p>', esc_html( $settings['description'] ) );
+			}
+
+			echo implode( PHP_EOL, $output );
+		}
+
+		/**
+		 * Sanitize.
+		 *
+		 * @param array $options Option.
+		 *
+		 * @return array
+		 */
+		public function sanitize_option( $options ) {
+			$settings = $this->settings;
+
+			foreach ( $options as $key => $option ) {
+				$sanitize = $settings[ $key ]['sanitize'];
+
+				if ( true === $option[ $key ]['_builtin'] && preg_match( '/\A_(.*?)+\z/', $settings[ $key ]['sanitize'] ) ) {
+					$sanitize = [ &$this, $sanitize ];
+				}
+
+				$options[ $key ] = call_user_func( $sanitize, $option );
+			}
+
+			return $options;
+		}
+
+		/**
+		 * Sanitize checkbox.
+		 *
+		 * @param string $value 0 or 1.
+		 *
+		 * @return string
+		 */
+		protected function _sanitize_checkbox( $value = '0' ) {
+			$value = '1' === $value ? $value : '0';
+
+			return $value;
+		}
+
+		/**
+		 * Sanitize integer.
+		 *
+		 * @param string $value Integer.
+		 *
+		 * @return string
+		 */
+		protected function _sanitize_intval( $value = '' ) {
+			$value = preg_replace( '/[^0-9]/', '', $value );
+
+			return $value;
+		}
+
+		/**
+		 * Sanitize Twitter name.
+		 *
+		 * @param string $value Twitter name.
+		 *
+		 * @return string
+		 */
+		protected function _sanitize_twttr_name( $value = '' ) {
+			$value = preg_replace( '/[^\w]/', '', $value );
+
+			return $value;
+		}
+
+		/**
+		 * Sanitize post type name.
+		 *
+		 * @param array $value Post types.
+		 *
+		 * @return array
+		 */
+		protected function _sanitize_key_for_array_value( $value = [ ] ) {
+
+			return array_map( 'sanitize_key', $value );
+		}
+	}
+}

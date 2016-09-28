@@ -85,7 +85,7 @@ namespace VASOCIALBUZZ\Modules {
 					$new_options['like_area_opacity'] = $old_options['like_button_area']['bg_opacity'];
 				}
 
-				Options::update( ksort( $new_options ) );
+				Options::update( $new_options );
 			}
 		}
 	}
