@@ -33,10 +33,7 @@ namespace VASOCIALBUZZ\Modules {
 	 * @package VASOCIALBUZZ\Modules
 	 */
 	class Update {
-		use Instance, Options, Functions {
-			Functions::exists_push7 insteadof Options;
-			Functions::exists_bcadd insteadof Options;
-		}
+		use Instance, Options;
 
 		/**
 		 * This hook is called once any activated plugins have been loaded.
