@@ -53,7 +53,7 @@ define( 'VA_SOCIALBUZZ_VERSION_WP', $va_socialbuzz_data['WordPressVersion'] );
 define( 'VA_SOCIALBUZZ_VERSION_PHP', $va_socialbuzz_data['PHPVersion'] );
 define( 'VA_SOCIALBUZZ_VERSION_DB', $va_socialbuzz_data['DBVersion'] );
 
-$va_socialbuzz_option_name = str_replace( '-', '_', VA_SOCIALBUZZ_BASENAME );
+$va_socialbuzz_option_name = rtrim( VA_SOCIALBUZZ_PREFIX, '_' );
 
 define( 'VA_SOCIALBUZZ_NAME_OPTION', $va_socialbuzz_option_name );
 

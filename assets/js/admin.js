@@ -12,6 +12,6 @@
 (function ($) {
     'use strict';
 
-    $('#va_socialbuzz_like_area_bg').wpColorPicker();
-    $('#va_socialbuzz_like_area_color').wpColorPicker();
+    $('#va_social_buzz_like_area_bg').wpColorPicker();
+    $('#va_social_buzz_like_area_color').wpColorPicker();
 })(window.jQuery);

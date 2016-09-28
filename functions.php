@@ -11,7 +11,7 @@
  * Author URI: https://www.visualive.jp
  * Domain Path: /langs
  * Text Domain: va-social-buzz
- * Prefix: va_socialbuzz_
+ * Prefix: va_social_buzz_
  * License: GNU General Public License v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  *
