@@ -59,8 +59,6 @@ namespace VASOCIALBUZZ\Modules {
 		 * @return null|string
 		 */
 		public function add_shortcode( $atts ) {
-			global $post;
-
 			$output      = null;
 			$tmp_wrapper = self::_tmp_wrapper();
 			$atts        = shortcode_atts( array(
@@ -72,14 +70,14 @@ namespace VASOCIALBUZZ\Modules {
 					$output = self::_shortcode_likeblock();
 					break;
 				case 'share':
-					$output = self::_shortcode_shareblock( $post );
+					$output = self::_shortcode_shareblock();
 					break;
 				case 'follow':
 					$output = self::_shortcode_followblock();
 					break;
 				default:
 					$output = self::_shortcode_likeblock();
-					$output .= self::_shortcode_shareblock( $post );
+					$output .= self::_shortcode_shareblock();
 					$output .= self::_shortcode_followblock();
 					break;
 			}
@@ -128,19 +126,21 @@ namespace VASOCIALBUZZ\Modules {
 		 * @return string
 		 */
 		protected function _shortcode_shareblock( $post = null ) {
-			$output      = null;
-			$tmp         = self::_tmp_shareblock();
-			$tmp_wrapper = self::_tmp_wrapper_shareblock();
-			$sns         = Variable::sns_list();
+			$output        = null;
+			$tmp           = self::_tmp_shareblock();
+			$tmp_wrapper   = self::_tmp_wrapper_shareblock();
+			$sns           = Variable::sns_list();
+			$current_url   = home_url( add_query_arg( array() ) );
+			$current_title = wp_get_document_title();
 
-			if ( ! empty( $post ) && ! is_wp_error( $post ) ) {
+			if ( ! empty( $current_url ) && ! empty( $current_title ) ) {
 				foreach ( $sns as $key => $value ) {
 					$output[ $key ] = $tmp;
 					$output[ $key ] = str_replace( '{{prefix}}', sanitize_html_class( $key ), $output[ $key ] );
 					$output[ $key ] = str_replace( '{{endpoint}}', $value['endpoint'], $output[ $key ] );
 					$output[ $key ] = str_replace( '{{anchor_text}}', $value['anchor_text'], $output[ $key ] );
-					$output[ $key ] = str_replace( '{{permalink}}', rawurlencode( get_the_permalink( $post->ID ) ), $output[ $key ] );
-					$output[ $key ] = str_replace( '{{post_title}}', rawurlencode( get_the_title( $post->ID ) ), $output[ $key ] );
+					$output[ $key ] = str_replace( '{{permalink}}', rawurlencode( esc_url( $current_url ) ), $output[ $key ] );
+					$output[ $key ] = str_replace( '{{post_title}}', $current_title, $output[ $key ] );
 				}
 
 				$output = implode( '', $output );
