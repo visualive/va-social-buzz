@@ -152,7 +152,7 @@ namespace VASOCIALBUZZ\Modules {
 					$output[ $key ] = str_replace( '{{endpoint}}', $value['endpoint'], $output[ $key ] );
 					$output[ $key ] = str_replace( '{{anchor_text}}', $value['anchor_text'], $output[ $key ] );
 					$output[ $key ] = str_replace( '{{permalink}}', rawurlencode( esc_url( $current_url ) ), $output[ $key ] );
-					$output[ $key ] = str_replace( '{{post_title}}', rawurlencode( $current_title ), $output[ $key ] );
+					$output[ $key ] = str_replace( '{{post_title}}', urlencode( $current_title ), $output[ $key ] );
 				}
 
 				$output = implode( '', $output );
