@@ -37,6 +37,7 @@ namespace VASOCIALBUZZ\Modules {
 	require_once dirname( __FILE__ ) . '/class-module-update.php';
 	require_once dirname( __FILE__ ) . '/class-module-admin.php';
 	require_once dirname( __FILE__ ) . '/class-module-shortcode.php';
+	require_once dirname( __FILE__ ) . '/class-module-view.php';
 
 	/**
 	 * Class Core.
@@ -62,18 +63,42 @@ namespace VASOCIALBUZZ\Modules {
 			$update    = apply_filters( VA_SOCIALBUZZ_PREFIX . 'module_update', Update::get_called_class() );
 			$admin     = apply_filters( VA_SOCIALBUZZ_PREFIX . 'module_admin', Admin::get_called_class() );
 			$shortcode = apply_filters( VA_SOCIALBUZZ_PREFIX . 'module_shortcode', ShortCode::get_called_class() );
+			$view      = apply_filters( VA_SOCIALBUZZ_PREFIX . 'module_view', View::get_called_class() );
 
 			$install::get_instance();
 			$uninstall::get_instance();
 			$update::get_instance();
 			$admin::get_instance();
 			$shortcode::get_instance();
+			$view::get_instance();
 
 			add_image_size( VA_SOCIALBUZZ_PREFIX . 'thumbnail', '980', '9999', false );
-			add_filter( 'the_content', array( &$this, 'the_content' ) );
+
+			if ( ! is_admin() ) {
+				add_action( 'wp_enqueue_scripts', array( &$this, 'wp_enqueue_scripts' ) );
+				add_filter( 'the_content', array( &$this, 'the_content' ) );
+			}
 
 			// Recommend you don't use this short code registering your own post data.
 			add_shortcode( 'socialbuzz', array( &$this, 'add_shortcode' ) );
+		}
+
+		/**
+		 * Echo scripts.
+		 */
+		public function wp_enqueue_scripts() {
+			do_action( VA_SOCIALBUZZ_PREFIX . 'enqueue_scripts' );
+		}
+
+		/**
+		 * Show in Social Buzz.
+		 *
+		 * @param string $content The content.
+		 *
+		 * @return string
+		 */
+		public function the_content( $content ) {
+			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'the_content', $content );
 		}
 
 		/**
@@ -86,17 +111,6 @@ namespace VASOCIALBUZZ\Modules {
 		 */
 		public function add_shortcode( $atts ) {
 			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'add_shortcode', $atts );
-		}
-
-		/**
-		 * Show in Social Buzz.
-		 *
-		 * @param string $content The content.
-		 *
-		 * @return string
-		 */
-		public function the_content( $content ) {
-			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'the_content', $content );
 		}
 	}
 }
