@@ -53,6 +53,7 @@ namespace VASOCIALBUZZ\Modules {
 
 		/**
 		 * Add short code.
+		 * Recommend you don't use this short code registering your own post data.
 		 *
 		 * @param array $atts Short code parameter.
 		 *
