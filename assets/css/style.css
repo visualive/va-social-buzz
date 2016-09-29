@@ -68,6 +68,14 @@
     text-align: center;
     width: 100%;
 }
+#va-social-buzz .vasb_share:before,
+#va-social-buzz .vasb_share:after {
+    content: ' ';
+    display: table;
+}
+#va-social-buzz .vasb_share:after {
+    clear: both;
+}
 #va-social-buzz .vasb_share .vasb_icon {
     font-family: 'vasocialbuzz';
     -webkit-font-smoothing: antialiased;
@@ -140,7 +148,6 @@
     clear: both;
     display: block;
     float: none;
-    margin-bottom: .75em;
     padding-left: 0;
     padding-right: 0;
     padding-top: .75em;
