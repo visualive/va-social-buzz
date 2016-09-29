@@ -98,7 +98,6 @@ namespace VASOCIALBUZZ\Modules {
 
 			if (
 				! is_embed()
-			    && ! is_dynamic_sidebar()
 			    && ! has_shortcode( $content, 'socialbuzz' )
 				&& in_the_loop()
 				&& is_singular()
