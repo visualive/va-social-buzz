@@ -75,11 +75,12 @@ namespace VASOCIALBUZZ\Modules {
 					$output = self::_shortcode_shareblock( $post );
 					break;
 				case 'follow':
-					$output = 'follow';
+					$output = self::_shortcode_followblock();
 					break;
 				default:
 					$output = self::_shortcode_likeblock();
 					$output .= self::_shortcode_shareblock( $post );
+					$output .= self::_shortcode_followblock();
 					break;
 			}
 
@@ -153,6 +154,29 @@ namespace VASOCIALBUZZ\Modules {
 		}
 
 		/**
+		 * Short code the follow block.
+		 *
+		 * @return string
+		 */
+		protected function _shortcode_followblock() {
+			$output  = null;
+			$tmp     = self::_tmp_followblock();
+			$options = $this->options;
+
+			if ( ! empty( $options['twttr_name'] ) ) {
+				$output = $tmp;
+				$twttr  = esc_attr( $options['twttr_name'] );
+				$output = str_replace( '{{twttr_name}}', $twttr, $output );
+
+				if ( ! empty( $options['text_follow'] ) ) {
+					$output = str_replace( '{{text}}', esc_html( $options['text_follow'] ) . ' ', $output );
+				}
+			}
+
+			return $output;
+		}
+
+		/**
 		 * Wrapper Template.
 		 *
 		 * @return string
@@ -209,6 +233,19 @@ namespace VASOCIALBUZZ\Modules {
 			$tmp .= '</div><!-- //.vasb_share_button-{{prefix}} -->';
 
 			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'tmp_shareblock', $tmp );
+		}
+
+		/**
+		 * Followb block Template.
+		 *
+		 * @return string
+		 */
+		protected function _tmp_followblock() {
+			$tmp = '<div class="vasb_tw">';
+			$tmp .= '{{text}}<a href="https://twitter.com/{{twttr_name}}" class="twitter-follow-button" data-show-count="true" data-size="large" data-show-screen-name="false">Follow {{twttr_name}}</a>';
+			$tmp .= '</div><!-- //.vasb_tw -->';
+
+			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'tmp_followblock', $tmp );
 		}
 	}
 }
