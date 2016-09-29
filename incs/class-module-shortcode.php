@@ -59,9 +59,12 @@ namespace VASOCIALBUZZ\Modules {
 		 * @return null|string
 		 */
 		public function add_shortcode( $atts ) {
-			$output      = null;
-			$tmp_wrapper = self::_tmp_wrapper();
-			$atts        = shortcode_atts( array(
+			$output         = null;
+			$tmp_wrapper    = self::_tmp_wrapper();
+			$show_in_like   = apply_filters( VA_SOCIALBUZZ_PREFIX . 'show_in_like', true );
+			$show_in_share  = apply_filters( VA_SOCIALBUZZ_PREFIX . 'show_in_share', true );
+			$show_in_follow = apply_filters( VA_SOCIALBUZZ_PREFIX . 'show_in_follow', true );
+			$atts           = shortcode_atts( array(
 				'box' => '',
 			), $atts, 'socialbuzz' );
 
@@ -76,10 +79,20 @@ namespace VASOCIALBUZZ\Modules {
 					$output = self::_shortcode_followblock();
 					break;
 				default:
-					$output = self::_shortcode_likeblock();
-					$output .= self::_shortcode_shareblock();
-					$output .= self::_shortcode_followblock();
+					if ( true === $show_in_like ) {
+						$output[] = self::_shortcode_likeblock();
+					}
+					if ( true === $show_in_share ) {
+						$output[] = self::_shortcode_shareblock();
+					}
+					if ( true === $show_in_follow ) {
+						$output[] = self::_shortcode_followblock();
+					}
 					break;
+			}
+
+			if ( is_array( $output ) ) {
+				$output = implode( '', $output );
 			}
 
 			if ( ! empty( $output ) ) {
