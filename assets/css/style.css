@@ -12,6 +12,7 @@
 
 #va-social-buzz {
     font-family: Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "ヒラギノ丸ゴ ProN W4", "Hiragino Maru Gothic ProN", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, fantasy, sans-serif;
+    margin-bottom: 1.5em;
 }
 
 #va-social-buzz .vasb_fb {
@@ -48,14 +49,13 @@
 #va-social-buzz .vasb_fb .vasb_fb_like iframe {
     max-width: initial;
 }
+
 #va-social-buzz .vasb_share {
-    display: table;
     margin-bottom: .75em;
     text-align: center;
     width: 100%;
 }
-#va-social-buzz .vasb_share .vasb_icon,
-#va-social-buzz .vasb_push .vasb_push_button .vasb_icon:before {
+#va-social-buzz .vasb_share .vasb_icon {
     font-family: 'vasocialbuzz';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -66,21 +66,15 @@
     text-transform: none;
 }
 #va-social-buzz .vasb_share .vasb_share_button {
-    display: table-cell;
+    float: left;
     padding-left: 7px;
     padding-right: 7px;
     width: 50%;
 }
 #va-social-buzz .vasb_share .vasb_share_button:first-child {
-    padding-left: 0;
-    padding-right: 7px;
+
 }
-#va-social-buzz .vasb_share .vasb_share_button:last-child {
-    padding-left: 7px;
-    padding-right: 0;
-}
-#va-social-buzz .vasb_share .vasb_share_button a,
-#va-social-buzz .vasb_push .vasb_push_button a {
+#va-social-buzz .vasb_share .vasb_share_button a {
     border-bottom: none;
     border-radius: 5px;
     color: #ffffff;
@@ -91,7 +85,10 @@
 #va-social-buzz .vasb_share .vasb_share_button a:focus {
     outline: none;
 }
-#va-social-buzz .vasb_share .vasb_share_button-fb {}
+#va-social-buzz .vasb_share .vasb_share_button-fb {
+    padding-left: 0;
+    padding-right: 7px;
+}
 #va-social-buzz .vasb_share .vasb_share_button-fb .vasb_icon:before {
     content: "\e800";
     margin-right: 8px;
@@ -102,46 +99,66 @@
 #va-social-buzz .vasb_share .vasb_share_button-fb a:hover {
     background-color: #384182;
 }
-#va-social-buzz .vasb_share .vasb_share_button-tw {}
-#va-social-buzz .vasb_share .vasb_share_button-tw .vasb_icon:before {
+
+#va-social-buzz .vasb_share .vasb_share_button-twttr {
+    padding-left: 7px;
+    padding-right: 0;
+}
+#va-social-buzz .vasb_share .vasb_share_button-twttr .vasb_icon:before {
     content: "\e801";
     margin-right: 8px;
 }
-#va-social-buzz .vasb_share .vasb_share_button-tw a {
+#va-social-buzz .vasb_share .vasb_share_button-twttr a {
     background-color: #1b95e0;
 }
-#va-social-buzz .vasb_share .vasb_share_button-tw a:hover {
+#va-social-buzz .vasb_share .vasb_share_button-twttr a:hover {
     background-color: #0c7abf;
 }
-#va-social-buzz .vasb_tw {
+
+#va-social-buzz .vasb_share .vasb_share_button-push7:before,
+#va-social-buzz .vasb_share .vasb_share_button-push7:after {
+    content: ' ';
+    display: table;
+}
+#va-social-buzz .vasb_share .vasb_share_button-push7:after {
+    clear: both;
+}
+#va-social-buzz .vasb_share .vasb_share_button-push7 {
+    clear: both;
+    display: block;
+    float: none;
+    margin-bottom: .75em;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: .75em;
+    width: 100%;
+}
+#va-social-buzz .vasb_share .vasb_share_button-push7 .vasb_icon:before {
+    content: "\e804";
+    margin-right: 8px;
+}
+#va-social-buzz .vasb_share .vasb_share_button-push7 a {
+    background-color: #e5a717;
+    text-align: center;
+}
+#va-social-buzz .vasb_share .vasb_share_button-push7 a:hover {
+    background-color: #bf9214;
+}
+
+#va-social-buzz .vasb_follow {
     background-color: #eeeeee;
     color: #707070;
-    margin-bottom: .75em;
     padding: .75em 0;
     text-align: center;
     width: 100%;
 }
-#va-social-buzz .vasb_tw iframe {
+#va-social-buzz .vasb_follow iframe {
     display: inline-block !important;
     margin-bottom: 0 !important;
     vertical-align: middle !important;
 }
-#va-social-buzz .vasb_push .vasb_push_button {
-    margin-bottom: .75em;
-}
-#va-social-buzz .vasb_push .vasb_push_button .vasb_icon:before {
-    content: "\e804";
-    margin-right: 8px;
-}
-#va-social-buzz .vasb_push .vasb_push_button a {
-    background-color: #e5a717;
-    text-align: center;
-}
-#va-social-buzz .vasb_push .vasb_push_button a:hover {
-    background-color: #bf9214;
-}
 
-@media only screen and (min-width : 415px) {
+@media only screen and (min-width : 711px) {
     #va-social-buzz .vasb_fb {
         background-image: none;
     }
@@ -161,5 +178,3 @@
         line-height: 1.5;
     }
 }
-
-
