@@ -1,8 +1,8 @@
 VA Social Buzz
 ==============================
 
-[![Latest Stable Version](https://img.shields.io/badge/stable-1.1.0-blue.svg)](https://packagist.org/packages/visualive/va-social-buzz)
-[![License](https://img.shields.io/badge/license-GPL--2.0%2B-yellowgreen.svg)](https://packagist.org/packages/visualive/va-social-buzz)
+[![Latest Stable Version](https://poser.pugx.org/visualive/va-social-buzz/v/stable)](https://packagist.org/packages/visualive/va-social-buzz)
+[![License](https://poser.pugx.org/visualive/va-social-buzz/license)](https://packagist.org/packages/visualive/va-social-buzz)
 
 It displays buttons at the end of every article for readers to "Like" your recommended Facebook page, to share the article on social, and to follow you on social.
 
