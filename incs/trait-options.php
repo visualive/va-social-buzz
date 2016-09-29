@@ -50,7 +50,7 @@ namespace VASOCIALBUZZ\Modules {
 			if ( '' !== $key && ! in_array( $key, [ 'all', 'default' ] ) ) {
 				$result = isset( $options[ $key ] ) ? $options[ $key ] : $default_options[ $key ];
 			} elseif ( 'all' === $key ) {
-				$result = $options;
+				$result = wp_parse_args( $options, $default_options );
 			} elseif ( 'default' === $key ) {
 				$result = $default_options;
 			}
