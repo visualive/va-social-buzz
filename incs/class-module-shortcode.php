@@ -121,11 +121,9 @@ namespace VASOCIALBUZZ\Modules {
 		/**
 		 * Short code the share block.
 		 *
-		 * @param null|\WP_Query $post The post object.
-		 *
 		 * @return string
 		 */
-		protected function _shortcode_shareblock( $post = null ) {
+		protected function _shortcode_shareblock() {
 			$output        = null;
 			$tmp           = self::_tmp_shareblock();
 			$tmp_wrapper   = self::_tmp_wrapper_shareblock();
