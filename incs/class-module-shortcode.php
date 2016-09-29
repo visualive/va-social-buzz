@@ -193,7 +193,7 @@ namespace VASOCIALBUZZ\Modules {
 		 * @return string
 		 */
 		protected function _tmp_wrapper() {
-			$tmp = '<div id="va-social-buzz" class="va-social-buzz">';
+			$tmp = '<div class="va-social-buzz">';
 			$tmp .= '{{content}}';
 			$tmp .= '</div><!-- //.va-social-buzz -->';
 
