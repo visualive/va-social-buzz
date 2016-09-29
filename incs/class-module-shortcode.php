@@ -252,7 +252,7 @@ namespace VASOCIALBUZZ\Modules {
 		 * @return string
 		 */
 		protected function _tmp_followblock() {
-			$tmp = '<div class="vasb_tw">';
+			$tmp = '<div class="vasb_follow">';
 			$tmp .= '{{text}}<a href="https://twitter.com/{{twttr_name}}" class="twitter-follow-button" data-show-count="true" data-size="large" data-show-screen-name="false">Follow {{twttr_name}}</a>';
 			$tmp .= '</div><!-- //.vasb_tw -->';
 
