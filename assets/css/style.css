@@ -11,8 +11,19 @@
 }
 
 #va-social-buzz {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
     font-family: Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "ヒラギノ丸ゴ ProN W4", "Hiragino Maru Gothic ProN", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, fantasy, sans-serif;
     margin-bottom: 1.5em;
+}
+
+#va-social-buzz *,
+#va-social-buzz *:before,
+#va-social-buzz *:after {
+    -webkit-box-sizing: inherit;
+    -moz-box-sizing: inherit;
+    box-sizing: inherit;
 }
 
 #va-social-buzz .vasb_fb {
