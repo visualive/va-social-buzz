@@ -64,21 +64,21 @@ namespace VASOCIALBUZZ\Modules {
 			$css                = self::_tmp_head_css();
 			$file_prefix        = ( defined( 'WP_DEBUG' ) && true === WP_DEBUG ) ? '' : '.min';
 			$options            = $this->options;
-			$background_color   = Functions::hex_to_rgb( $options['like_area_bg'], true );
-			$opacity            = $options['like_area_opacity'];
-			$color              = $options['like_area_color'];
+			$background_color   = Functions::hex_to_rgb( sanitize_hex_color( $options['like_area_bg'] ), true );
+			$opacity            = preg_replace( '/[^0-9\.]/', '', $options['like_area_opacity'] );
+			$color              = sanitize_hex_color( $options['like_area_color'] );
 
 			if ( 'none' !== $thumbnail ) {
 				$thumbnail = sprintf( 'url(%s)', $thumbnail );
 			}
 
-			$css                = str_replace( '{{thumbnail}}', $thumbnail, $css );
-			$css                = str_replace( '{{background_color}}', $background_color, $css );
-			$css                = str_replace( '{{opacity}}', $opacity, $css );
-			$css                = str_replace( '{{color}}', $color, $css );
+			$css = str_replace( '{{thumbnail}}', $thumbnail, $css );
+			$css = str_replace( '{{background_color}}', $background_color, $css );
+			$css = str_replace( '{{opacity}}', $opacity, $css );
+			$css = str_replace( '{{color}}', $color, $css );
 
 			if ( ! empty( $options['fb_appid'] ) ) {
-				$localize['appid'] = esc_attr( $options['fb_appid'] );
+				$localize['appid'] = esc_attr( preg_replace( '/[^0-9]/', '', $options['fb_appid'] ) );
 			}
 
 			wp_enqueue_style( VA_SOCIALBUZZ_BASENAME, VA_SOCIALBUZZ_URL . 'assets/css/style' . $file_prefix . '.css', array(), VA_SOCIALBUZZ_VERSION );

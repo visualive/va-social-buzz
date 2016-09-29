@@ -152,7 +152,7 @@ namespace VASOCIALBUZZ\Modules {
 					$output[ $key ] = str_replace( '{{endpoint}}', $value['endpoint'], $output[ $key ] );
 					$output[ $key ] = str_replace( '{{anchor_text}}', $value['anchor_text'], $output[ $key ] );
 					$output[ $key ] = str_replace( '{{permalink}}', rawurlencode( esc_url( $current_url ) ), $output[ $key ] );
-					$output[ $key ] = str_replace( '{{post_title}}', $current_title, $output[ $key ] );
+					$output[ $key ] = str_replace( '{{post_title}}', rawurlencode( $current_title ), $output[ $key ] );
 				}
 
 				$output = implode( '', $output );
@@ -177,8 +177,7 @@ namespace VASOCIALBUZZ\Modules {
 
 			if ( ! empty( $options['twttr_name'] ) ) {
 				$output = $tmp;
-				$twttr  = esc_attr( $options['twttr_name'] );
-				$output = str_replace( '{{twttr_name}}', $twttr, $output );
+				$output = str_replace( '{{twttr_name}}', esc_attr( $options['twttr_name'] ), $output );
 
 				if ( ! empty( $options['text_follow'] ) ) {
 					$output = str_replace( '{{text}}', esc_html( $options['text_follow'] ) . ' ', $output );
