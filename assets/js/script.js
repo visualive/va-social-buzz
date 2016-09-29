@@ -75,7 +75,7 @@
          */
         gaEventTracking: function () {
             var self = this,
-                $vasb = $('#va-social-buzz'),
+                $vasb = $('.va-social-buzz'),
                 $facebook = $vasb.find('.vasb_share_button-fb').children('a'),
                 $twitter = $vasb.find('.vasb_share_button-twttr').children('a'),
                 $push7 = $vasb.find('.vasb_share_button-push7').children('a');

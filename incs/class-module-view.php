@@ -122,18 +122,18 @@ namespace VASOCIALBUZZ\Modules {
 		 */
 		protected function _tmp_head_css() {
 			$css = <<<EOI
-.vasb_fb {
+.va-social-buzz .vasb_fb .vasb_fb_thumbnail {
 	background-image: {{thumbnail}};
 }
-.vasb_fb_like {
+.va-social-buzz .vasb_fb .vasb_fb_like {
 	background-color: rgba({{background_color}}, {{opacity}});
 	color: {{color}};
 }
+.textwidget .va-social-buzz .vasb_fb .vasb_fb_like {
+    background-color: rgba({{background_color}}, {{opacity}}) !important;
+}
 @media only screen and (min-width : 711px) {
-	.vasb_fb_thumbnail {
-		background-image: {{thumbnail}};
-	}
-	.vasb_fb_like {
+	.va-social-buzz .vasb_fb .vasb_fb_like {
 		background-color: rgba({{background_color}}, 1);
 	}
 }
