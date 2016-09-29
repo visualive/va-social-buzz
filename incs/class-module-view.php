@@ -60,17 +60,22 @@ namespace VASOCIALBUZZ\Modules {
 		 */
 		public function enqueue_scripts() {
 			$thumbnail          = Functions::get_thumbnail();
+			$localize['locale'] = esc_attr( Functions::get_locale() );
 			$css                = self::_tmp_head_css();
 			$file_prefix        = ( defined( 'WP_DEBUG' ) && true === WP_DEBUG ) ? '' : '.min';
 			$options            = $this->options;
 			$background_color   = Functions::hex_to_rgb( $options['like_area_bg'], true );
 			$opacity            = $options['like_area_opacity'];
 			$color              = $options['like_area_color'];
+
+			if ( 'none' !== $thumbnail ) {
+				$thumbnail = sprintf( 'url(%s)', $thumbnail );
+			}
+
 			$css                = str_replace( '{{thumbnail}}', $thumbnail, $css );
 			$css                = str_replace( '{{background_color}}', $background_color, $css );
 			$css                = str_replace( '{{opacity}}', $opacity, $css );
 			$css                = str_replace( '{{color}}', $color, $css );
-			$localize['locale'] = esc_attr( Functions::get_locale() );
 
 			if ( ! empty( $options['fb_appid'] ) ) {
 				$localize['appid'] = esc_attr( $options['fb_appid'] );
