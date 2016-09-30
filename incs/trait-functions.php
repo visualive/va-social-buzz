@@ -52,6 +52,17 @@ namespace VASOCIALBUZZ\Modules {
 		}
 
 		/**
+		 * Is the query for an amp post?
+		 *
+		 * @return bool Whether we're in an amp post or not.
+		 */
+		public static function is_amp() {
+			$var = get_query_var( 'amp', 0 );
+
+			return 1 === (int) $var;
+		}
+
+		/**
 		 * Get thumbnail image url
 		 *
 		 * @param null|\WP_Post $_post Post data object.
