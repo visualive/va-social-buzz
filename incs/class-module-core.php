@@ -81,6 +81,7 @@ namespace VASOCIALBUZZ\Modules {
 
 			// Recommend you don't use this short code registering your own post data.
 			add_shortcode( 'socialbuzz', array( &$this, 'add_shortcode' ) );
+			add_filter( 'widget_text', 'do_shortcode' );
 		}
 
 		/**
