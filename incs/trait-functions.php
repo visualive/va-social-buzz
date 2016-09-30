@@ -57,9 +57,7 @@ namespace VASOCIALBUZZ\Modules {
 		 * @return bool Whether we're in an amp post or not.
 		 */
 		public static function is_amp() {
-			$var = get_query_var( 'amp', 0 );
-
-			return 1 === (int) $var;
+			return function_exists( 'is_amp_endpoint' ) && is_amp_endpoint();
 		}
 
 		/**

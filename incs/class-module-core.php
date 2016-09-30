@@ -45,7 +45,7 @@ namespace VASOCIALBUZZ\Modules {
 	 * @package VASOCIALBUZZ\Modules
 	 */
 	class Core {
-		use Instance;
+		use Instance, Functions;
 
 		/**
 		 * This hook is called once any activated plugins have been loaded.
