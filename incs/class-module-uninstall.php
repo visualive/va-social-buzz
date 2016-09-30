@@ -47,6 +47,7 @@ namespace VASOCIALBUZZ\Modules {
 		 */
 		public function run() {
 			Options::delete();
+			delete_transient( VA_SOCIALBUZZ_PREFIX . 'push7_register_url' );
 		}
 	}
 }

@@ -92,7 +92,7 @@ namespace VASOCIALBUZZ\Modules {
 
 			$options = get_option( VA_SOCIALBUZZ_NAME_OPTION, [] );
 
-			if ( '' !== $key && isset( $options[ $key ] ) ) {
+			if ( isset( $options[ $key ] ) ) {
 				unset( $options[ $key ] );
 				self::update( $options );
 			}

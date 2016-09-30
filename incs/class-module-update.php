@@ -40,6 +40,7 @@ namespace VASOCIALBUZZ\Modules {
 		 */
 		private function __construct() {
 			add_action( VA_SOCIALBUZZ_PREFIX . 'update', [ &$this, 'run' ] );
+			add_action( 'init', [ Installer::get_called_class(), 'update' ] );
 			add_action( 'admin_init', [ Installer::get_called_class(), 'update' ] );
 		}
 
@@ -91,6 +92,7 @@ namespace VASOCIALBUZZ\Modules {
 					delete_transient( $transient_key );
 				}
 
+				Options::delete();
 				Options::update( $new_options );
 			}
 		}
