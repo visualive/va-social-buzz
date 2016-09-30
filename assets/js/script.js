@@ -80,7 +80,7 @@
                 $twitter = $vasb.find('.vasb_share_button-twttr').children('a'),
                 $push7 = $vasb.find('.vasb_share_button-push7').children('a');
 
-            if (typeof self.cache.window.GoogleAnalyticsObject != 'undefined' && self.cache.window.GoogleAnalyticsObject == 'ga') {
+            if (typeof self.cache.window.GoogleAnalyticsObject != 'undefined' && ( self.cache.window.GoogleAnalyticsObject == 'ga' || self.cache.window.GoogleAnalyticsObject == '__gaTracker' )) {
                 self._gaEventTracking(self);
             } else {
                 $facebook.on('click', function (e) {
@@ -206,20 +206,24 @@
          */
         _gaEventTracking: function (t) {
             var self = t,
-                $vasb = $('#va-social-buzz'),
+                $vasb = $('.va-social-buzz'),
                 $facebook = $vasb.find('.vasb_share_button-fb').children('a'),
                 $twitter = $vasb.find('.vasb_share_button-twttr').children('a'),
                 $push7 = $vasb.find('.vasb_share_button-push7').children('a');
+
+            if (null != self.cache.window.__gaTracker) {
+                window.ga = self.cache.window.__gaTracker;
+            }
 
             window.onload = function () {
                 if (typeof (FB) != 'undefined') {
                     FB.Event.subscribe('edge.create', function (url) {
                         ga('send', 'event', 'VA Social Buzz', 'Facebook Like', url);
-                        ga('send', 'social', 'Facebook', 'like', url);
+                        ga('send', 'social', 'Facebook', 'Like', url);
                     });
                     FB.Event.subscribe('edge.remove', function (url) {
                         ga('send', 'event', 'VA Social Buzz', 'Facebook Unlike', url);
-                        ga('send', 'social', 'Facebook', 'unlike', url);
+                        ga('send', 'social', 'Facebook', 'Unlike', url);
                     });
                 }
 
