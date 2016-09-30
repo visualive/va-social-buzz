@@ -77,7 +77,7 @@ namespace VASOCIALBUZZ\Modules {
 			add_shortcode( 'socialbuzz', array( &$this, 'add_shortcode' ) );
 			add_filter( 'widget_text', 'do_shortcode' );
 
-			if ( ! is_admin() && ! Functions::is_amp() ) {
+			if ( ! is_admin() ) {
 				add_action( 'wp_enqueue_scripts', array( &$this, 'wp_enqueue_scripts' ) );
 				add_filter( 'the_content', array( &$this, 'the_content' ) );
 			}
