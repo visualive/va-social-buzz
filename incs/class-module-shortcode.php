@@ -69,38 +69,36 @@ namespace VASOCIALBUZZ\Modules {
 				'box' => '',
 			), $atts, 'socialbuzz' );
 
-			if ( ! Functions::is_amp() ) :
-				switch ( $atts['box'] ) {
-					case 'like':
-						$output = self::_shortcode_likeblock();
-						break;
-					case 'share':
-						$output = self::_shortcode_shareblock();
-						break;
-					case 'follow':
-						$output = self::_shortcode_followblock();
-						break;
-					default:
-						if ( true === $show_in_like ) {
-							$output[] = self::_shortcode_likeblock();
-						}
-						if ( true === $show_in_share ) {
-							$output[] = self::_shortcode_shareblock();
-						}
-						if ( true === $show_in_follow ) {
-							$output[] = self::_shortcode_followblock();
-						}
-						break;
-				}
+			switch ( $atts['box'] ) {
+				case 'like':
+					$output = self::_shortcode_likeblock();
+					break;
+				case 'share':
+					$output = self::_shortcode_shareblock();
+					break;
+				case 'follow':
+					$output = self::_shortcode_followblock();
+					break;
+				default:
+					if ( true === $show_in_like ) {
+						$output[] = self::_shortcode_likeblock();
+					}
+					if ( true === $show_in_share ) {
+						$output[] = self::_shortcode_shareblock();
+					}
+					if ( true === $show_in_follow ) {
+						$output[] = self::_shortcode_followblock();
+					}
+					break;
+			}
 
-				if ( is_array( $output ) ) {
-					$output = implode( '', $output );
-				}
+			if ( is_array( $output ) ) {
+				$output = implode( '', $output );
+			}
 
-				if ( ! empty( $output ) ) {
-					$output = str_replace( '{{content}}', $output, $tmp_wrapper );
-				}
-			endif;
+			if ( ! empty( $output ) ) {
+				$output = str_replace( '{{content}}', $output, $tmp_wrapper );
+			}
 
 			return $output;
 		}
