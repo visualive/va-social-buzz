@@ -144,7 +144,7 @@ namespace VASOCIALBUZZ\Modules {
 			];
 			$settings['post_types']        = [
 				'label'         => __( 'Show in', 'va-social-buzz' ),
-				'description'   => '',
+				'description'   => __( 'Please select the one or more.', 'va-social-buzz' ),
 				'default_value' => [ 'post' ],
 				'render'        => 'render_post_types',
 				'sanitize'      => '_sanitize_key_for_array_value',
