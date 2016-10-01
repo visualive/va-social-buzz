@@ -59,31 +59,20 @@ namespace VASOCIALBUZZ\Modules {
 		 * @since 1.1.0 Refactoring.
 		 */
 		public function enqueue_scripts() {
-			$thumbnail          = Functions::get_thumbnail();
-			$localize['locale'] = esc_attr( Functions::get_locale() );
-			$css                = self::_tmp_head_css();
 			$file_prefix        = ( defined( 'WP_DEBUG' ) && true === WP_DEBUG ) ? '' : '.min';
+			$localize['locale'] = esc_attr( Functions::get_locale() );
+			$css                = self::_inline_style();
+			$style_file         = apply_filters( VA_SOCIALBUZZ_PREFIX . 'style_file', VA_SOCIALBUZZ_URL . 'assets/css/style' . $file_prefix . '.css' );
+			$script_file        = apply_filters( VA_SOCIALBUZZ_PREFIX . 'script_file', VA_SOCIALBUZZ_URL . 'assets/js/script' . $file_prefix . '.js' );
 			$options            = $this->options;
-			$background_color   = Functions::hex_to_rgb( sanitize_hex_color( $options['like_area_bg'] ), true );
-			$opacity            = preg_replace( '/[^0-9\.]/', '', $options['like_area_opacity'] );
-			$color              = sanitize_hex_color( $options['like_area_color'] );
-
-			if ( 'none' !== $thumbnail ) {
-				$thumbnail = sprintf( 'url(%s)', $thumbnail );
-			}
-
-			$css = str_replace( '{{thumbnail}}', $thumbnail, $css );
-			$css = str_replace( '{{background_color}}', $background_color, $css );
-			$css = str_replace( '{{opacity}}', $opacity, $css );
-			$css = str_replace( '{{color}}', $color, $css );
 
 			if ( ! empty( $options['fb_appid'] ) ) {
 				$localize['appid'] = esc_attr( preg_replace( '/[^0-9]/', '', $options['fb_appid'] ) );
 			}
 
-			wp_enqueue_style( VA_SOCIALBUZZ_BASENAME, VA_SOCIALBUZZ_URL . 'assets/css/style' . $file_prefix . '.css', array(), VA_SOCIALBUZZ_VERSION );
+			wp_enqueue_style( VA_SOCIALBUZZ_BASENAME, esc_url( $style_file ), array(), VA_SOCIALBUZZ_VERSION );
 			wp_add_inline_style( VA_SOCIALBUZZ_BASENAME, $css );
-			wp_enqueue_script( VA_SOCIALBUZZ_BASENAME, VA_SOCIALBUZZ_URL . 'assets/js/script' . $file_prefix . '.js', array( 'jquery' ), VA_SOCIALBUZZ_VERSION, true );
+			wp_enqueue_script( VA_SOCIALBUZZ_BASENAME, esc_url( $script_file ), array( 'jquery' ), VA_SOCIALBUZZ_VERSION, true );
 			wp_localize_script( VA_SOCIALBUZZ_BASENAME, 'vaSocialBuzzSettings', $localize );
 		}
 
@@ -117,6 +106,31 @@ namespace VASOCIALBUZZ\Modules {
 		}
 
 		/**
+		 * Add inline style.
+		 *
+		 * @return string
+		 */
+		protected function _inline_style() {
+			$thumbnail        = Functions::get_thumbnail();
+			$css              = self::_tmp_head_css();
+			$options          = $this->options;
+			$background_color = Functions::hex_to_rgb( sanitize_hex_color( $options['like_area_bg'] ), true );
+			$opacity          = preg_replace( '/[^0-9\.]/', '', $options['like_area_opacity'] );
+			$color            = sanitize_hex_color( $options['like_area_color'] );
+
+			if ( 'none' !== $thumbnail ) {
+				$thumbnail = sprintf( 'url(%s)', $thumbnail );
+			}
+
+			$css = str_replace( '{{thumbnail}}', $thumbnail, $css );
+			$css = str_replace( '{{background_color}}', $background_color, $css );
+			$css = str_replace( '{{opacity}}', $opacity, $css );
+			$css = str_replace( '{{color}}', $color, $css );
+
+			return $css;
+		}
+
+		/**
 		 * Template head css.
 		 *
 		 * @return string
@@ -131,15 +145,18 @@ namespace VASOCIALBUZZ\Modules {
 	color: {{color}};
 }
 .textwidget .va-social-buzz .vasb_fb .vasb_fb_like {
-    background-color: rgba({{background_color}}, {{opacity}}) !important;
+    background-color: rgba({{background_color}}, {{opacity}});
 }
-@media only screen and (min-width : 711px) {
+@media only screen and (min-width: 711px) {
 	.va-social-buzz .vasb_fb .vasb_fb_like {
 		background-color: rgba({{background_color}}, 1);
 	}
 }
 EOI;
-			$css = trim( preg_replace( array( '/(?:\r\n)|[\r\n]/', '/[\\x00-\\x09\\x0b-\\x1f]/', '/\n/' ), '', $css ) );
+			$css = trim( preg_replace( array( '/(?:\r\n)|[\r\n]/', '/[\\x00-\\x09\\x0b-\\x1f]/', '/\n/', '/\s{2,}/' ), '', $css ) );
+			$css = preg_replace( '/:\s/', ':', $css );
+			$css = preg_replace( '/,\s/', ',', $css );
+			$css = preg_replace( '/\s{/', '{', $css );
 
 			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'tmp_head_css', $css );
 		}
