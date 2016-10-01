@@ -75,7 +75,6 @@ namespace VASOCIALBUZZ\Modules {
 			add_image_size( VA_SOCIALBUZZ_PREFIX . 'thumbnail', '980', '9999', false );
 			// Recommend you don't use this short code registering your own post data.
 			add_shortcode( 'socialbuzz', array( &$this, 'add_shortcode' ) );
-			add_filter( 'widget_text', 'do_shortcode' );
 
 			if ( ! is_admin() ) {
 				add_action( 'wp_enqueue_scripts', array( &$this, 'wp_enqueue_scripts' ) );
