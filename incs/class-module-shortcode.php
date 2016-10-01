@@ -49,6 +49,7 @@ namespace VASOCIALBUZZ\Modules {
 			$this->options = Options::get( 'all' );
 
 			add_filter( VA_SOCIALBUZZ_PREFIX . 'add_shortcode', [ &$this, 'add_shortcode' ] );
+			add_filter( 'wp_insert_post_data', [ &$this, 'wp_insert_post_data' ], -10 );
 		}
 
 		/**
@@ -101,6 +102,16 @@ namespace VASOCIALBUZZ\Modules {
 			}
 
 			return $output;
+		}
+
+		public function wp_insert_post_data( $data ) {
+			$raw = $data['post_content'];
+
+			if ( has_shortcode( $data['post_content'], 'socialbuzz' ) ) {
+				$data['post_content'] = preg_replace( '/' . get_shortcode_regex( [ 'socialbuzz' ] ) . '/', '', $data['post_content'] );
+			}
+
+			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'insert_post_data', $data, $raw );
 		}
 
 		/**
