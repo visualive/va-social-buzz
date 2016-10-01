@@ -59,7 +59,7 @@ namespace VASOCIALBUZZ\Modules {
 		 * @return string
 		 */
 		public static function get_thumbnail( $_post = null ) {
-			$thumb = 'none';
+			$thumb = apply_filters( VA_SOCIALBUZZ_PREFIX . 'default_thumbnail', 'none' );
 
 			if ( empty( $_post ) ) {
 				global $post;
@@ -68,9 +68,9 @@ namespace VASOCIALBUZZ\Modules {
 
 			if ( ! empty( $_post ) && has_post_thumbnail( $_post ) && ! post_password_required( $_post ) ) {
 				$thumb = get_the_post_thumbnail_url( $_post, VA_SOCIALBUZZ_PREFIX . 'thumbnail' );
-			} elseif ( has_header_image() ) {
+			} elseif ( 'none' === $thumb && has_header_image() ) {
 				$thumb = get_header_image();
-			} elseif ( has_site_icon() ) {
+			} elseif ( 'none' === $thumb && has_site_icon() ) {
 				$thumb = get_site_icon_url();
 			}
 
