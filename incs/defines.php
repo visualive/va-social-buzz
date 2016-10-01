@@ -44,7 +44,7 @@ $va_socialbuzz_data = get_file_data( $va_socialbuzz_path, array(
 ) );
 
 define( 'VA_SOCIALBUZZ_URL', plugin_dir_url( $va_socialbuzz_path ) );
-define( 'VA_SOCIALBUZZ_PATH', plugin_dir_path( $va_socialbuzz_path ) );
+define( 'VA_SOCIALBUZZ_PATH', untrailingslashit( plugin_dir_path( $va_socialbuzz_path ) ) );
 define( 'VA_SOCIALBUZZ_BASENAME', dirname( plugin_basename( $va_socialbuzz_path ) ) );
 define( 'VA_SOCIALBUZZ_NAME', $va_socialbuzz_data['Name'] );
 define( 'VA_SOCIALBUZZ_PREFIX', $va_socialbuzz_data['Prefix'] );
