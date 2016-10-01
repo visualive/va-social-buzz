@@ -67,7 +67,7 @@ namespace VASOCIALBUZZ\Modules {
 				'_builtin'      => true,
 			];
 			$settings['text_like_0'] = [
-				'label'         => __( 'Like Aria Text 1', 'va-social-buzz' ),
+				'label'         => __( 'Text Of Like Button Area 1', 'va-social-buzz' ),
 				'description'   => __( 'Appear on top of the "like" button. Sentence of the first line.', 'va-social-buzz' ),
 				'default_value' => __( 'If you liked this article,', 'va-social-buzz' ),
 				'render'        => 'render_text_like_0',
@@ -75,7 +75,7 @@ namespace VASOCIALBUZZ\Modules {
 				'_builtin'      => true,
 			];
 			$settings['text_like_1'] = [
-				'label'         => __( 'Like Aria Text 2', 'va-social-buzz' ),
+				'label'         => __( 'Text Of Like Button Area 2', 'va-social-buzz' ),
 				'description'   => __( 'Appear on top of the "like" button. Sentence of the second line.', 'va-social-buzz' ),
 				'default_value' => __( 'please click this "like!".', 'va-social-buzz' ),
 				'render'        => 'render_text_like_1',
@@ -119,7 +119,7 @@ namespace VASOCIALBUZZ\Modules {
 			}
 
 			$settings['like_area_bg']      = [
-				'label'         => __( 'Like Aria Background Color', 'va-social-buzz' ),
+				'label'         => __( 'Background Color Of Like Button Area', 'va-social-buzz' ),
 				'description'   => '',
 				'default_value' => '#2b2b2b',
 				'render'        => 'render_like_area_bg',
@@ -127,7 +127,7 @@ namespace VASOCIALBUZZ\Modules {
 				'_builtin'      => true,
 			];
 			$settings['like_area_opacity'] = [
-				'label'         => __( 'Like Aria Background Opacity', 'va-social-buzz' ),
+				'label'         => __( 'Background Opacity Of Like Button Area', 'va-social-buzz' ),
 				'description'   => '',
 				'default_value' => '0.7',
 				'render'        => 'render_like_area_opacity',
@@ -135,7 +135,7 @@ namespace VASOCIALBUZZ\Modules {
 				'_builtin'      => true,
 			];
 			$settings['like_area_color']   = [
-				'label'         => __( 'Like Aria Text Color', 'va-social-buzz' ),
+				'label'         => __( 'Font Color OF Like Button Area ', 'va-social-buzz' ),
 				'description'   => '',
 				'default_value' => '#ffffff',
 				'render'        => 'render_like_area_color',
