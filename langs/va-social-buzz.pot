@@ -2,14 +2,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: VA Social Buzz\n"
-"POT-Creation-Date: 2016-07-30 04:30+0900\n"
+"POT-Creation-Date: 2016-10-02 01:41+0900\n"
 "PO-Revision-Date: 2015-12-29 07:09+0900\n"
 "Last-Translator: \n"
 "Language-Team: VisuAlive <kuck1u@visualive.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.8.9\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: en_001\n"
@@ -17,110 +17,131 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_x;esc_html__;esc_html_e;_e\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: incs/admin.php:59 incs/admin.php:343
+#: incs/back-compat.php:34
+#, php-format
+msgid "%1$s requires at least WordPress version %2$s and PHP version %3$s. You are running WordPress version %4$s and PHP version %5$s. Please upgrade and try again."
+msgstr ""
+
+#: incs/class-module-admin.php:90 incs/class-module-admin.php:107
 msgid "VA Social Buzz"
 msgstr ""
 
-#: incs/admin.php:65
-msgid "Facebook Page Web Address"
-msgstr ""
-
-#: incs/admin.php:75
-msgid "Facebook App ID"
-msgstr ""
-
-#: incs/admin.php:85
-msgid "Twitter Account"
-msgstr ""
-
-#: incs/admin.php:95
-msgid "Text"
-msgstr ""
-
-#: incs/admin.php:105
-msgid "Like Button Aria"
-msgstr ""
-
-#: incs/admin.php:115
-msgid "Show In"
-msgstr ""
-
-#: incs/admin.php:136
-msgid "Facebook Page Web Address can only contain A-Z, a-z, 0-9, and periods (.)"
-msgstr ""
-
-#: incs/admin.php:152
-msgid "Facebook App ID can only contain 0-9."
-msgstr ""
-
-#: incs/admin.php:168
-msgid "Twitter Account can only contain A-Z, a-z, 0-9, and underscore (_)"
-msgstr ""
-
-#: incs/admin.php:193
-msgid "Appear on top of the like button."
-msgstr ""
-
-#: incs/admin.php:201
-msgid "Share button to Facebook."
-msgstr ""
-
-#: incs/admin.php:209
-msgid "Tweet button to Twitter."
-msgstr ""
-
-#: incs/admin.php:220
-msgid "Follow Push7 button of the text."
-msgstr ""
-
-#: incs/admin.php:229
-msgid "Follow button left of the text."
-msgstr ""
-
-#: incs/admin.php:244
-msgid "Background color:"
-msgstr ""
-
-#: incs/admin.php:249
-msgid "Background color opacity:"
-msgstr ""
-
-#: incs/admin.php:268
-msgid "Font color:"
-msgstr ""
-
-#: incs/admin.php:304
-msgid "Choose the post type to display."
-msgstr ""
-
-#: incs/admin.php:305
-msgid "Please select the one or more."
-msgstr ""
-
-#: incs/admin.php:344
+#: incs/class-module-admin.php:91
 msgid "You can setting VA Social Buzz in <a href=\"options-reading.php\">Reading</a>."
 msgstr ""
 
-#: incs/singleton.php:103
-msgid "Share"
+#: incs/trait-variables.php:46
+msgid "Facebook Page Web Address"
 msgstr ""
 
-#: incs/singleton.php:108
-msgid "Tweet"
+#: incs/trait-variables.php:47
+msgid "Facebook Page Web Address can only contain A-Z, a-z, 0-9, and periods (.)."
 msgstr ""
 
-#: incs/singleton.php:125
+#: incs/trait-variables.php:54
+msgid "Facebook App ID"
+msgstr ""
+
+#: incs/trait-variables.php:55
+msgid "Facebook App ID can only contain 0-9."
+msgstr ""
+
+#: incs/trait-variables.php:62
+msgid "Twitter Account"
+msgstr ""
+
+#: incs/trait-variables.php:63
+msgid "Twitter Account can only contain A-Z, a-z, 0-9, and underscore (_)."
+msgstr ""
+
+#: incs/trait-variables.php:70
+msgid "Text Of Like Button Area 1"
+msgstr ""
+
+#: incs/trait-variables.php:71
+msgid "Appear on top of the \"like\" button. Sentence of the first line."
+msgstr ""
+
+#: incs/trait-variables.php:72
 msgid "If you liked this article,"
 msgstr ""
 
-#: incs/singleton.php:126
+#: incs/trait-variables.php:78
+msgid "Text Of Like Button Area 2"
+msgstr ""
+
+#: incs/trait-variables.php:79
+msgid "Appear on top of the \"like\" button. Sentence of the second line."
+msgstr ""
+
+#: incs/trait-variables.php:80
 msgid "please click this \"like!\"."
 msgstr ""
 
-#: incs/singleton.php:128
+#: incs/trait-variables.php:86
+msgid "Share Button Text"
+msgstr ""
+
+#: incs/trait-variables.php:87
+msgid "Share button to Facebook."
+msgstr ""
+
+#: incs/trait-variables.php:88
+msgid "Share"
+msgstr ""
+
+#: incs/trait-variables.php:94
+msgid "Tweet Button Text"
+msgstr ""
+
+#: incs/trait-variables.php:95
+msgid "Tweet button to Twitter."
+msgstr ""
+
+#: incs/trait-variables.php:96
+msgid "Tweet"
+msgstr ""
+
+#: incs/trait-variables.php:102
+msgid "Twitter Follow Text"
+msgstr ""
+
+#: incs/trait-variables.php:103
+msgid "Follow button left of the text."
+msgstr ""
+
+#: incs/trait-variables.php:104
 msgid "Follow on Twetter !"
 msgstr ""
 
-#: incs/singleton.php:129
+#: incs/trait-variables.php:112
+msgid "Push7 Button Text"
+msgstr ""
+
+#: incs/trait-variables.php:113
+msgid "Follow Push7 button of the text."
+msgstr ""
+
+#: incs/trait-variables.php:114
 msgid "Receive the latest posts with push notifications"
+msgstr ""
+
+#: incs/trait-variables.php:122
+msgid "Background Color Of Like Button Area"
+msgstr ""
+
+#: incs/trait-variables.php:130
+msgid "Background Opacity Of Like Button Area"
+msgstr ""
+
+#: incs/trait-variables.php:138
+msgid "Text Color OF Like Button Area "
+msgstr ""
+
+#: incs/trait-variables.php:146
+msgid "Show in"
+msgstr ""
+
+#: incs/trait-variables.php:147
+msgid "Please select the one or more."
 msgstr ""
