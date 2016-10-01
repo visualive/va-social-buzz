@@ -49,6 +49,8 @@ namespace VASOCIALBUZZ\Modules {
 			$this->options = Options::get( 'all' );
 
 			add_filter( VA_SOCIALBUZZ_PREFIX . 'add_shortcode', [ &$this, 'add_shortcode' ] );
+			add_filter( VA_SOCIALBUZZ_PREFIX . 'raw_the_content', [ &$this, 'the_content' ], -10 );
+			add_filter( 'widget_text', [ &$this, 'widget_text' ], -10 );
 			add_filter( 'wp_insert_post_data', [ &$this, 'wp_insert_post_data' ], -10 );
 		}
 
@@ -104,6 +106,13 @@ namespace VASOCIALBUZZ\Modules {
 			return $output;
 		}
 
+		/**
+		 * Rnsert post data.
+		 *
+		 * @param array $data Post data.
+		 *
+		 * @return array
+		 */
 		public function wp_insert_post_data( $data ) {
 			$raw = $data['post_content'];
 
@@ -111,11 +120,39 @@ namespace VASOCIALBUZZ\Modules {
 				$data['post_content'] = preg_replace( '/' . get_shortcode_regex( [ 'socialbuzz' ] ) . '/', '', $data['post_content'] );
 			}
 
-			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'insert_post_data', $data, $raw );
+			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'xxx_insert_post_data', $data, $raw );
 		}
 
 		/**
-		 * Short code the like block.
+		 * The content.
+		 *
+		 * @param string $content Post content.
+		 *
+		 * @return string
+		 */
+		public function the_content( $content ) {
+			$raw     = $content;
+			$content = self::_strip_short_code( $content );
+
+			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'xxx_the_content', $content, $raw );
+		}
+
+		/**
+		 * The content.
+		 *
+		 * @param string $content Post content.
+		 *
+		 * @return string
+		 */
+		public function widget_text( $text ) {
+			$raw  = $text;
+			$text = self::_strip_short_code( $text );
+
+			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'xxx_widget_text', $text, $raw );
+		}
+
+		/**
+		 * Short code the like block.widget_text
 		 *
 		 * @return string
 		 */
@@ -268,6 +305,21 @@ namespace VASOCIALBUZZ\Modules {
 			$tmp .= '</div><!-- //.vasb_tw -->';
 
 			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'tmp_followblock', $tmp );
+		}
+
+		/**
+		 * Strip short code.
+		 *
+		 * @param string $text Content text.
+		 *
+		 * @return string
+		 */
+		protected function _strip_short_code( $text = '' ) {
+			if ( has_shortcode( $text, 'socialbuzz' ) ) {
+				$text = preg_replace( '/' . get_shortcode_regex( [ 'socialbuzz' ] ) . '/', '', $text );
+			}
+
+			return $text;
 		}
 	}
 }
