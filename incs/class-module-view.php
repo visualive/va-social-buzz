@@ -36,18 +36,9 @@ namespace VASOCIALBUZZ\Modules {
 		use Instance, Options;
 
 		/**
-		 * Option items.
-		 *
-		 * @var array
-		 */
-		private $options = [];
-
-		/**
 		 * This hook is called once any activated plugins have been loaded.
 		 */
-		private function __construct() {
-			$this->options = Options::get( 'all' );
-
+		protected function __construct() {
 			add_action( VA_SOCIALBUZZ_PREFIX . 'enqueue_scripts', [ &$this, 'enqueue_scripts' ] );
 			add_filter( VA_SOCIALBUZZ_PREFIX . 'the_content', [ &$this, 'the_content' ] );
 		}
@@ -64,7 +55,7 @@ namespace VASOCIALBUZZ\Modules {
 			$css                = self::_inline_style();
 			$style_file         = apply_filters( VA_SOCIALBUZZ_PREFIX . 'style_file', VA_SOCIALBUZZ_URL . 'assets/css/style' . $file_prefix . '.css' );
 			$script_file        = apply_filters( VA_SOCIALBUZZ_PREFIX . 'script_file', VA_SOCIALBUZZ_URL . 'assets/js/script' . $file_prefix . '.js' );
-			$options            = $this->options;
+			$options            = Options::get( 'all' );
 
 			if ( ! empty( $options['fb_appid'] ) ) {
 				$localize['appid'] = esc_attr( preg_replace( '/[^0-9]/', '', $options['fb_appid'] ) );
@@ -87,7 +78,7 @@ namespace VASOCIALBUZZ\Modules {
 		 * @return string
 		 */
 		public function the_content( $content = '' ) {
-			$options = $this->options;
+			$options = Options::get( 'all' );
 			$show_in = $options['post_types'];
 
 			if (
@@ -113,7 +104,7 @@ namespace VASOCIALBUZZ\Modules {
 		protected function _inline_style() {
 			$thumbnail        = Functions::get_thumbnail();
 			$css              = self::_tmp_head_css();
-			$options          = $this->options;
+			$options          = Options::get( 'all' );
 			$background_color = Functions::hex_to_rgb( sanitize_hex_color( $options['like_area_bg'] ), true );
 			$opacity          = preg_replace( '/[^0-9\.]/', '', $options['like_area_opacity'] );
 			$color            = sanitize_hex_color( $options['like_area_color'] );
