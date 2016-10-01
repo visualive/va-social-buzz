@@ -62,7 +62,7 @@ namespace VASOCIALBUZZ\Modules {
 		 *
 		 * @return null|string
 		 */
-		public function add_shortcode( $atts ) {
+		public function add_shortcode( $atts = [] ) {
 			$output         = null;
 			$tmp_wrapper    = self::_tmp_wrapper();
 			$show_in_like   = apply_filters( VA_SOCIALBUZZ_PREFIX . 'show_in_like', true );
@@ -113,7 +113,7 @@ namespace VASOCIALBUZZ\Modules {
 		 *
 		 * @return array
 		 */
-		public function wp_insert_post_data( $data ) {
+		public function wp_insert_post_data( $data = [] ) {
 			$raw = $data['post_content'];
 
 			if ( has_shortcode( $data['post_content'], 'socialbuzz' ) ) {
@@ -130,7 +130,7 @@ namespace VASOCIALBUZZ\Modules {
 		 *
 		 * @return string
 		 */
-		public function the_content( $content ) {
+		public function the_content( $content = '' ) {
 			$raw     = $content;
 			$content = self::_strip_short_code( $content );
 
@@ -140,11 +140,11 @@ namespace VASOCIALBUZZ\Modules {
 		/**
 		 * The content.
 		 *
-		 * @param string $content Post content.
+		 * @param string $text Post content.
 		 *
 		 * @return string
 		 */
-		public function widget_text( $text ) {
+		public function widget_text( $text = '' ) {
 			$raw  = $text;
 			$text = self::_strip_short_code( $text );
 
