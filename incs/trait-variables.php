@@ -173,7 +173,7 @@ namespace VASOCIALBUZZ\Modules {
 				$options[ $key ] = $setting['default_value'];
 			}
 
-			return $options;
+			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'admin_default_options', $options );
 		}
 
 		/**
