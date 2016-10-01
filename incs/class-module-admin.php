@@ -27,6 +27,10 @@ namespace VASOCIALBUZZ\Modules {
 		exit;
 	}
 
+	if ( version_compare( $GLOBALS['wp_version'], '4.6', '<' ) && ! function_exists( 'sanitize_hex_color' ) ) {
+		require_once ABSPATH . WPINC . '/class-wp-customize-manager.php';
+	}
+
 	/**
 	 * Class Admin
 	 *
