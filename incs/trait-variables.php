@@ -100,7 +100,7 @@ namespace VASOCIALBUZZ\Modules {
 			];
 			$settings['text_follow'] = [
 				'label'         => __( 'Twitter Follow Text', 'va-social-buzz' ),
-				'description'   => __( 'Follow Push7 button of the text.', 'va-social-buzz' ),
+				'description'   => __( 'Follow button left of the text.', 'va-social-buzz' ),
 				'default_value' => __( 'Follow on Twetter !', 'va-social-buzz' ),
 				'render'        => 'render_text_follow',
 				'sanitize'      => 'sanitize_text_field',
@@ -110,7 +110,7 @@ namespace VASOCIALBUZZ\Modules {
 			if ( Functions::exists_push7() ) {
 				$settings['text_push7'] = [
 					'label'         => __( 'Push7 Button Text', 'va-social-buzz' ),
-					'description'   => __( 'Follow button left of the text.', 'va-social-buzz' ),
+					'description'   => __( 'Follow Push7 button of the text.', 'va-social-buzz' ),
 					'default_value' => __( 'Receive the latest posts with push notifications', 'va-social-buzz' ),
 					'render'        => 'render_text_push7',
 					'sanitize'      => 'sanitize_text_field',
