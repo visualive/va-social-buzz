@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name: VA Social Buzz v1.1.0
+ * Plugin Name: VA Social Buzz
  * Plugin URI: https://github.com/visualive/va-social-buzz
  * Description: It displays buttons at the end of every article for readers to "Like" your recommended Facebook page, to share the article on SNS.
  * Author: KUCKLU
  * Version: 1.1.0
- * WordPress Version: 4.3
+ * WordPress Version: 4.4
  * PHP Version: 5.4
  * DB Version: 1.0.0
  * Author URI: https://www.visualive.jp

@@ -2,10 +2,10 @@
 Contributors: kuck1u, mayukojpn, toro_unit
 Donate link: http://www.amazon.co.jp/registry/wishlist/AN9BLYUQMVZ5/
 Tags: automatic, social, socialmedia, social media, viral, viralmedia, viral media, share, facebook, twitter
-Requires at least: 4.5.2
-Tested up to: 4.5.2
+Requires at least: 4.4
+Tested up to: 4.6
 Stable tag: trunk
-License: GPLv2 or later
+License: GPL-v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 It displays buttons at the end of every article for readers to "Like" your recommended Facebook page, to share the article on social, and to follow you on social.
@@ -21,7 +21,7 @@ If Google Universal Analytics is introduced to the website, it will become possi
 * Japanese: KUCKLU
 
 = Requires =
-* WordPress 4.5 or higher
+* WordPress 4.4 or higher
 * PHP 5.6+
 
 = Note =

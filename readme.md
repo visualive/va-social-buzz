@@ -13,7 +13,7 @@ It displays buttons at the end of every article for readers to "Like" your recom
 If Google Universal Analytics is introduced to the website, it will become possible to track how many clicks etc each particular event gets.
 
 ## Requires
-* WordPress 4.5 or higher
+* WordPress 4.4 or higher
 * PHP 5.6+  
 PHP 7 is not tested.
 
