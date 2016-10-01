@@ -166,8 +166,8 @@ namespace VASOCIALBUZZ\Modules {
 		 * @return array
 		 */
 		public static function default_options() {
-			$settings = self::settings();
-			$options  = [];
+			$settings              = self::settings();
+			$options['db_version'] = VA_SOCIALBUZZ_VERSION_DB;
 
 			foreach ( $settings as $key => $setting ) {
 				$options[ $key ] = $setting['default_value'];
