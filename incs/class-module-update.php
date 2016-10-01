@@ -48,19 +48,19 @@ namespace VASOCIALBUZZ\Modules {
 		 * Run update.
 		 */
 		public function run() {
-			$options = Options::get( 'raw' );
+			$options    = Options::get( 'raw' );
+			$db_version = isset( $options['db_version'] ) ? $options['db_version'] : '0';
 
-			self::version_0( $options );
+			self::version_0( $options, $db_version );
 		}
 
 		/**
 		 * Run update version 0.
 		 *
-		 * @param array $options Options.
+		 * @param array  $options    Options.
+		 * @param string $db_version Option version.
 		 */
-		protected function version_0( $options = [] ) {
-			$db_version = isset( $options['db_version'] ) ? $options['db_version'] : '0';
-
+		protected function version_0( $options = [], $db_version = '0' ) {
 			if ( ! empty( $options ) && version_compare( '0', $db_version, '==' ) ) {
 				$transient_key = 'vasocialbuzz_push7_register_url';
 				$transient     = get_transient( $transient_key );
