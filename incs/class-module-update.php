@@ -48,7 +48,7 @@ namespace VASOCIALBUZZ\Modules {
 		 * Run update.
 		 */
 		public function run() {
-			$options = Options::get( 'all' );
+			$options = Options::get( 'raw' );
 
 			self::version_0( $options );
 		}

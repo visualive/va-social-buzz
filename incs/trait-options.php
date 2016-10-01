@@ -47,12 +47,14 @@ namespace VASOCIALBUZZ\Modules {
 			$options         = get_option( VA_SOCIALBUZZ_NAME_OPTION, [] );
 			$default_options = Variable::default_options();
 
-			if ( '' !== $key && ! in_array( $key, [ 'all', 'default' ] ) ) {
+			if ( '' !== $key && ! in_array( $key, [ 'all', 'default', 'raw' ] ) ) {
 				$result = isset( $options[ $key ] ) ? $options[ $key ] : $default_options[ $key ];
 			} elseif ( 'all' === $key ) {
 				$result = wp_parse_args( $options, $default_options );
 			} elseif ( 'default' === $key ) {
 				$result = $default_options;
+			} elseif ( 'raw' === $key ) {
+				$result = $options;
 			}
 
 			return $result;

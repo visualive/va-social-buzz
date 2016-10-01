@@ -106,6 +106,7 @@ namespace VASOCIALBUZZ\Modules {
 			    && ! has_shortcode( $content, 'socialbuzz' )
 				&& in_the_loop()
 				&& is_singular()
+				&& isset( $show_in )
 			    && in_array( get_post_type(), $show_in )
 			) {
 				// Recommend you don't use this short code registering your own post data.
