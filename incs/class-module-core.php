@@ -50,7 +50,7 @@ namespace VASOCIALBUZZ\Modules {
 		/**
 		 * This hook is called once any activated plugins have been loaded.
 		 */
-		private function __construct() {
+		protected function __construct() {
 			self::init();
 		}
 

@@ -49,7 +49,7 @@ namespace VASOCIALBUZZ\Modules {
 		/**
 		 * This hook is called once any activated plugins have been loaded.
 		 */
-		public function __construct() {
+		protected function __construct() {
 			$this->settings = Variable::settings();
 
 			add_action( 'admin_init', array( &$this, 'admin_init' ) );

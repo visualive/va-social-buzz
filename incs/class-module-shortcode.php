@@ -45,7 +45,7 @@ namespace VASOCIALBUZZ\Modules {
 		/**
 		 * This hook is called once any activated plugins have been loaded.
 		 */
-		private function __construct() {
+		protected function __construct() {
 			$this->options = Options::get( 'all' );
 
 			add_filter( VA_SOCIALBUZZ_PREFIX . 'add_shortcode', [ &$this, 'add_shortcode' ] );
