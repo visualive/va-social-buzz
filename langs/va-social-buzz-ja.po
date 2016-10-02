@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: VA Social Buzz\n"
-"POT-Creation-Date: 2016-10-02 01:47+0900\n"
-"PO-Revision-Date: 2016-10-02 02:42+0900\n"
+"POT-Creation-Date: 2016-10-03 02:53+0900\n"
+"PO-Revision-Date: 2016-10-03 02:54+0900\n"
 "Last-Translator: \n"
 "Language-Team: VisuAlive <kuck1u@visualive.jp>\n"
 "Language: en_001\n"
@@ -157,8 +157,11 @@ msgid "Show in"
 msgstr "自動表示"
 
 #: incs/trait-variables.php:147
-msgid "Please select the one or more."
-msgstr "1 つ以上選択してください。"
+msgid "Please choose post type one or more."
+msgstr "投稿タイプを 1 つ以上選択してください。"
+
+#~ msgid "Please select the one or more."
+#~ msgstr "1 つ以上選択してください。"
 
 #~ msgid "Text Color OF Like Button Area "
 #~ msgstr "いいね! ボタンエリアのフォントカラー"
