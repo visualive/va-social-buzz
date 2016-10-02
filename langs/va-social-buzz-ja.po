@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: VA Social Buzz\n"
-"POT-Creation-Date: 2016-10-03 02:53+0900\n"
-"PO-Revision-Date: 2016-10-03 02:54+0900\n"
+"POT-Creation-Date: 2016-10-03 04:01+0900\n"
+"PO-Revision-Date: 2016-10-03 04:07+0900\n"
 "Last-Translator: \n"
 "Language-Team: VisuAlive <kuck1u@visualive.jp>\n"
 "Language: en_001\n"
@@ -40,128 +40,131 @@ msgstr ""
 "す。"
 
 #: incs/trait-variables.php:46
-msgid "Facebook Page Web Address"
-msgstr "Facebook ページ Web アドレス"
+msgid "Facebook Page Username"
+msgstr "Facebook ページのユーザーネーム"
 
-#: incs/trait-variables.php:47
+#: incs/trait-variables.php:48
 msgid ""
-"Facebook Page Web Address can only contain A-Z, a-z, 0-9, and periods (.)."
+"Usernames can only contain alphanumeric characters (A-Z, 0-9) or a period "
+"(\".\")."
 msgstr ""
-"Facebook ページ Web アドレスには、A-Z、 a-z、0-9とピリオド( . ) が入力できま"
-"す。"
+"ユーザーネームには英数字 (A-Z、0-9) とピリオド (“.”) のみ使用できます。"
 
-#: incs/trait-variables.php:54
+#: incs/trait-variables.php:52
+msgid "How do I change the username for my Page?"
+msgstr "ページのユーザーネームを変更するにはどうすればよいですか。"
+
+#: incs/trait-variables.php:61
 msgid "Facebook App ID"
-msgstr "Facebook App ID"
-
-#: incs/trait-variables.php:55
-msgid "Facebook App ID can only contain 0-9."
-msgstr "Facebook アプリケーション ID には 0-9 のみ入力できます。"
-
-#: incs/trait-variables.php:62
-msgid "Twitter Account"
-msgstr "Twitter アカウント"
+msgstr "Facebook のアプリ ID"
 
 #: incs/trait-variables.php:63
-msgid "Twitter Account can only contain A-Z, a-z, 0-9, and underscore (_)."
-msgstr ""
-"Twitter アカウントには、A-Z,、a-z、0-9とアンダースコア ( _ ) が入力できま"
-"す。"
+msgid "App ID can only contain alphanumeric (0-9)."
+msgstr "アプリ ID には数字 (0-9) のみ使用できます。"
 
-#: incs/trait-variables.php:70
+#: incs/trait-variables.php:67
+msgid "Creating an App ID"
+msgstr "アプリ ID の作成"
+
+#: incs/trait-variables.php:76
+msgid "Twitter Username"
+msgstr "Twitter のユーザーネーム"
+
+#: incs/trait-variables.php:77
+msgid ""
+"Usernames can only contain alphanumeric characters (A-Z, 0-9) or a "
+"underscore (\"_\")."
+msgstr ""
+"ユーザーネームには英数字 (A-Z、0-9) とアンダースコア (“_”) のみ使用できます。"
+
+#: incs/trait-variables.php:84
 msgid "Text Of Like Button Area 1"
 msgstr "いいね! ボタンエリアのテキスト 1"
 
-#: incs/trait-variables.php:71
+#: incs/trait-variables.php:85
 msgid "Appear on top of the \"like\" button. Sentence of the first line."
 msgstr "いいね! ボタンの上に表示される 1 行目のテキスト。"
 
-#: incs/trait-variables.php:72
+#: incs/trait-variables.php:86
 msgid "If you liked this article,"
 msgstr "この記事が気に入ったら"
 
-#: incs/trait-variables.php:78
+#: incs/trait-variables.php:92
 msgid "Text Of Like Button Area 2"
 msgstr "いいね! ボタンエリアのテキスト 2"
 
-#: incs/trait-variables.php:79
+#: incs/trait-variables.php:93
 msgid "Appear on top of the \"like\" button. Sentence of the second line."
 msgstr "いいね! ボタンの上に表示される 2 行目のテキスト。"
 
-#: incs/trait-variables.php:80
+#: incs/trait-variables.php:94
 msgid "please click this \"like!\"."
 msgstr "いいね！しよう"
 
-#: incs/trait-variables.php:86
+#: incs/trait-variables.php:100
 msgid "Share Button Text"
 msgstr "シェアボタンのテキスト"
 
-#: incs/trait-variables.php:87
+#: incs/trait-variables.php:101
 msgid "Share button to Facebook."
 msgstr "Facebook へのシェアボタンのテキスト。"
 
-#: incs/trait-variables.php:88
+#: incs/trait-variables.php:102
 msgid "Share"
 msgstr "シェアする"
 
-#: incs/trait-variables.php:94
+#: incs/trait-variables.php:108
 msgid "Tweet Button Text"
 msgstr "ツイートボタンのテキスト"
 
-#: incs/trait-variables.php:95
+#: incs/trait-variables.php:109
 msgid "Tweet button to Twitter."
 msgstr "Twitter へのツイートボタンのテキスト。"
 
-#: incs/trait-variables.php:96
+#: incs/trait-variables.php:110
 msgid "Tweet"
 msgstr "ツイートする"
 
-#: incs/trait-variables.php:102
+#: incs/trait-variables.php:116
 msgid "Twitter Follow Text"
 msgstr "Twitter のフォローテキスト"
 
-#: incs/trait-variables.php:103
+#: incs/trait-variables.php:117
 msgid "Follow button left of the text."
 msgstr "フォローボタンの左横のテキスト。"
 
-#: incs/trait-variables.php:104
+#: incs/trait-variables.php:118
 msgid "Follow on Twetter !"
 msgstr "Twitter で"
 
-#: incs/trait-variables.php:112
+#: incs/trait-variables.php:126
 msgid "Push7 Button Text"
 msgstr "Push7 のボタンのテキスト"
 
-#: incs/trait-variables.php:113
+#: incs/trait-variables.php:127
 msgid "Follow Push7 button of the text."
 msgstr "Push7 の登録ボタンのテキスト。"
 
-#: incs/trait-variables.php:114
+#: incs/trait-variables.php:128
 msgid "Receive the latest posts with push notifications"
 msgstr "更新情報を Push 通知で受けとる"
 
-#: incs/trait-variables.php:122
+#: incs/trait-variables.php:136
 msgid "Background Color Of Like Button Area"
 msgstr "いいね! ボタンエリアの背景色"
 
-#: incs/trait-variables.php:130
+#: incs/trait-variables.php:144
 msgid "Background Opacity Of Like Button Area"
 msgstr "いいね! ボタンエリアの背景の透明度"
 
-#: incs/trait-variables.php:138
+#: incs/trait-variables.php:152
 msgid "Font Color OF Like Button Area "
 msgstr "いいね! ボタンエリアのフォントカラー"
 
-#: incs/trait-variables.php:146
+#: incs/trait-variables.php:160
 msgid "Show in"
 msgstr "自動表示"
 
-#: incs/trait-variables.php:147
+#: incs/trait-variables.php:161
 msgid "Please choose post type one or more."
 msgstr "投稿タイプを 1 つ以上選択してください。"
-
-#~ msgid "Please select the one or more."
-#~ msgstr "1 つ以上選択してください。"
-
-#~ msgid "Text Color OF Like Button Area "
-#~ msgstr "いいね! ボタンエリアのフォントカラー"
