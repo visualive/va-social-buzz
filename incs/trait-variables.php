@@ -51,6 +51,11 @@ namespace VASOCIALBUZZ\Modules {
 						esc_url( 'https://www.facebook.com/help/203523569682738' ),
 						__( 'How do I change the username for my Page?', 'va-social-buzz' )
 					),
+					sprintf(
+						'<a href="%s" target="_blank">%s</a>',
+						esc_url( 'https://www.facebook.com/help/105399436216001' ),
+						__( 'What are the guidelines around creating a custom username for my Page or profile?', 'va-social-buzz' )
+					),
 				],
 				'default_value' => '',
 				'render'        => 'render_fb_page',
