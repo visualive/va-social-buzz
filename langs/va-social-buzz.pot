@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: VA Social Buzz\n"
-"POT-Creation-Date: 2016-10-03 04:01+0900\n"
+"POT-Creation-Date: 2016-10-03 04:12+0900\n"
 "PO-Revision-Date: 2015-12-29 07:09+0900\n"
 "Last-Translator: \n"
 "Language-Team: VisuAlive <kuck1u@visualive.jp>\n"
@@ -42,114 +42,118 @@ msgstr ""
 msgid "How do I change the username for my Page?"
 msgstr ""
 
-#: incs/trait-variables.php:61
+#: incs/trait-variables.php:57
+msgid "What are the guidelines around creating a custom username for my Page or profile?"
+msgstr ""
+
+#: incs/trait-variables.php:66
 msgid "Facebook App ID"
 msgstr ""
 
-#: incs/trait-variables.php:63
+#: incs/trait-variables.php:68
 msgid "App ID can only contain alphanumeric (0-9)."
 msgstr ""
 
-#: incs/trait-variables.php:67
+#: incs/trait-variables.php:72
 msgid "Creating an App ID"
 msgstr ""
 
-#: incs/trait-variables.php:76
+#: incs/trait-variables.php:81
 msgid "Twitter Username"
 msgstr ""
 
-#: incs/trait-variables.php:77
+#: incs/trait-variables.php:82
 msgid "Usernames can only contain alphanumeric characters (A-Z, 0-9) or a underscore (\"_\")."
 msgstr ""
 
-#: incs/trait-variables.php:84
+#: incs/trait-variables.php:89
 msgid "Text Of Like Button Area 1"
 msgstr ""
 
-#: incs/trait-variables.php:85
+#: incs/trait-variables.php:90
 msgid "Appear on top of the \"like\" button. Sentence of the first line."
 msgstr ""
 
-#: incs/trait-variables.php:86
+#: incs/trait-variables.php:91
 msgid "If you liked this article,"
 msgstr ""
 
-#: incs/trait-variables.php:92
+#: incs/trait-variables.php:97
 msgid "Text Of Like Button Area 2"
 msgstr ""
 
-#: incs/trait-variables.php:93
+#: incs/trait-variables.php:98
 msgid "Appear on top of the \"like\" button. Sentence of the second line."
 msgstr ""
 
-#: incs/trait-variables.php:94
+#: incs/trait-variables.php:99
 msgid "please click this \"like!\"."
 msgstr ""
 
-#: incs/trait-variables.php:100
+#: incs/trait-variables.php:105
 msgid "Share Button Text"
 msgstr ""
 
-#: incs/trait-variables.php:101
+#: incs/trait-variables.php:106
 msgid "Share button to Facebook."
 msgstr ""
 
-#: incs/trait-variables.php:102
+#: incs/trait-variables.php:107
 msgid "Share"
 msgstr ""
 
-#: incs/trait-variables.php:108
+#: incs/trait-variables.php:113
 msgid "Tweet Button Text"
 msgstr ""
 
-#: incs/trait-variables.php:109
+#: incs/trait-variables.php:114
 msgid "Tweet button to Twitter."
 msgstr ""
 
-#: incs/trait-variables.php:110
+#: incs/trait-variables.php:115
 msgid "Tweet"
 msgstr ""
 
-#: incs/trait-variables.php:116
+#: incs/trait-variables.php:121
 msgid "Twitter Follow Text"
 msgstr ""
 
-#: incs/trait-variables.php:117
+#: incs/trait-variables.php:122
 msgid "Follow button left of the text."
 msgstr ""
 
-#: incs/trait-variables.php:118
+#: incs/trait-variables.php:123
 msgid "Follow on Twetter !"
 msgstr ""
 
-#: incs/trait-variables.php:126
+#: incs/trait-variables.php:131
 msgid "Push7 Button Text"
 msgstr ""
 
-#: incs/trait-variables.php:127
+#: incs/trait-variables.php:132
 msgid "Follow Push7 button of the text."
 msgstr ""
 
-#: incs/trait-variables.php:128
+#: incs/trait-variables.php:133
 msgid "Receive the latest posts with push notifications"
 msgstr ""
 
-#: incs/trait-variables.php:136
+#: incs/trait-variables.php:141
 msgid "Background Color Of Like Button Area"
 msgstr ""
 
-#: incs/trait-variables.php:144
+#: incs/trait-variables.php:149
 msgid "Background Opacity Of Like Button Area"
 msgstr ""
 
-#: incs/trait-variables.php:152
+#: incs/trait-variables.php:157
 msgid "Font Color OF Like Button Area "
 msgstr ""
 
-#: incs/trait-variables.php:160
+#: incs/trait-variables.php:165
 msgid "Show in"
 msgstr ""
 
-#: incs/trait-variables.php:161
+#: incs/trait-variables.php:166
 msgid "Please choose post type one or more."
 msgstr ""
