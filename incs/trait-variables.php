@@ -44,7 +44,14 @@ namespace VASOCIALBUZZ\Modules {
 		public static function settings() {
 			$settings['fb_page']     = [
 				'label'         => __( 'Facebook Page Web Address', 'va-social-buzz' ),
-				'description'   => __( 'Facebook Page Web Address can only contain A-Z, a-z, 0-9, and periods (.).', 'va-social-buzz' ),
+				'description'   => [
+					__( 'Facebook Page Web Address can only contain A-Z, a-z, 0-9, and periods (.).', 'va-social-buzz' ),
+					sprintf(
+						'<a href="%s" target="_blank">%s</a>',
+						esc_url( 'https://www.facebook.com/help/203523569682738' ),
+						__( 'How do I change the username for my Page?', 'va-social-buzz' )
+					),
+				],
 				'default_value' => '',
 				'render'        => 'render_fb_page',
 				'sanitize'      => '_sanitize_fb_page',
