@@ -43,9 +43,9 @@ namespace VASOCIALBUZZ\Modules {
 		 */
 		public static function settings() {
 			$settings['fb_page']     = [
-				'label'         => __( 'Facebook Page Web Address', 'va-social-buzz' ),
+				'label'         => __( 'Facebook Page Username', 'va-social-buzz' ),
 				'description'   => [
-					__( 'Facebook Page Web Address can only contain A-Z, a-z, 0-9, and periods (.).', 'va-social-buzz' ),
+					__( 'Usernames can only contain alphanumeric characters (A-Z, 0-9) or a period (".").', 'va-social-buzz' ),
 					sprintf(
 						'<a href="%s" target="_blank">%s</a>',
 						esc_url( 'https://www.facebook.com/help/203523569682738' ),
@@ -59,15 +59,22 @@ namespace VASOCIALBUZZ\Modules {
 			];
 			$settings['fb_appid']    = [
 				'label'         => __( 'Facebook App ID', 'va-social-buzz' ),
-				'description'   => __( 'Facebook App ID can only contain 0-9.', 'va-social-buzz' ),
+				'description'   => [
+					__( 'App ID can only contain alphanumeric (0-9).', 'va-social-buzz' ),
+					sprintf(
+						'<a href="%s" target="_blank">%s</a>',
+						esc_url( 'https://developers.facebook.com/docs/apps/register' ),
+						__( 'Creating an App ID', 'va-social-buzz' )
+					),
+				],
 				'default_value' => '',
 				'render'        => 'render_fb_appid',
 				'sanitize'      => '_sanitize_intval',
 				'_builtin'      => true,
 			];
 			$settings['twttr_name']  = [
-				'label'         => __( 'Twitter Account', 'va-social-buzz' ),
-				'description'   => __( 'Twitter Account can only contain A-Z, a-z, 0-9, and underscore (_).', 'va-social-buzz' ),
+				'label'         => __( 'Twitter Username', 'va-social-buzz' ),
+				'description'   => __( 'Usernames can only contain alphanumeric characters (A-Z, 0-9) or a underscore ("_").', 'va-social-buzz' ),
 				'default_value' => '',
 				'render'        => 'render_twttr_name',
 				'sanitize'      => '_sanitize_twttr_name',
