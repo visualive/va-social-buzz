@@ -3,7 +3,7 @@
  * WordPress plugin admin class.
  *
  * @package    WordPress
- * @subpackage VA Extra Settings
+ * @subpackage VA Social Buzz
  * @since      1.1.0
  * @author     KUCKLU <kuck1u@visualive.jp>
  *             Copyright (C) 2015 KUCKLU and VisuAlive.
@@ -109,7 +109,7 @@ namespace VASOCIALBUZZ\Modules {
 			foreach ( $settings as $key => $setting ) {
 				$render = $setting['render'];
 
-				if ( true === $setting['_builtin'] ) {
+				if ( isset( $setting['_builtin'] ) && true === $setting['_builtin'] ) {
 					$render = [ &$this, $render ];
 				}
 
@@ -298,7 +298,7 @@ namespace VASOCIALBUZZ\Modules {
 			foreach ( $options as $key => $option ) {
 				$sanitize = $settings[ $key ]['sanitize'];
 
-				if ( true === $settings[ $key ]['_builtin'] && 1 === preg_match( '/\A_(.*?)+\z/', $settings[ $key ]['sanitize'] ) ) {
+				if ( isset( $settings[ $key ]['_builtin'] ) && true === $settings[ $key ]['_builtin'] && 1 === preg_match( '/\A_(.*?)+\z/', $settings[ $key ]['sanitize'] ) ) {
 					$sanitize = [ &$this, $sanitize ];
 				}
 
