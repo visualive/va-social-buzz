@@ -218,9 +218,7 @@ namespace VASOCIALBUZZ\Modules {
 				$loop     = $loop - 1;
 			} while ( $loop );
 
-			if ( isset( $settings['description'] ) && '' !== $settings['description'] ) {
-				$output[] = sprintf( '<p class="description">%s</p>', esc_html( $settings['description'] ) );
-			}
+			$output[] = self::_render_description( $settings );
 
 			echo sprintf( $dom_select, esc_attr( VA_SOCIALBUZZ_NAME_OPTION ), esc_attr( $key ), implode( PHP_EOL, $output ) );
 		}
@@ -251,9 +249,7 @@ namespace VASOCIALBUZZ\Modules {
 				);
 			}
 
-			if ( isset( $settings['description'] ) && '' !== $settings['description'] ) {
-				$output[] = sprintf( '<p class="description">%s</p>', esc_html( $settings['description'] ) );
-			}
+			$output[] = self::_render_description( $settings );
 
 			echo sprintf( '<ul>%s</ul>', implode( PHP_EOL, $output ) );
 		}
@@ -273,12 +269,32 @@ namespace VASOCIALBUZZ\Modules {
 				esc_attr( $key ),
 				esc_attr( $value )
 			);
-
-			if ( isset( $settings['description'] ) && '' !== $settings['description'] ) {
-				$output[] = sprintf( '<p class="description">%s</p>', esc_html( $settings['description'] ) );
-			}
+			$output[] = self::_render_description( $settings );
 
 			echo implode( PHP_EOL, $output );
+		}
+
+		/**
+		 * Render description.
+		 *
+		 * @param array $settings Option key.
+		 *
+		 * @return string
+		 */
+		protected function _render_description( $settings = [] ) {
+			$output      = [];
+			$tmp         = '<p class="description">%s</p>';
+			$description = isset( $settings['description'] ) ? $settings['description'] : '';
+
+			if ( ! empty( $description ) && is_array( $description )  ) {
+				foreach ( $description as $value ) {
+					$output[] = sprintf( $tmp, wp_kses_data( $value ) );
+				}
+			} elseif ( ! empty( $description ) ) {
+				$output[] = sprintf( $tmp, wp_kses_data( $description ) );
+			}
+
+			return implode( PHP_EOL, $output );
 		}
 
 		/**
