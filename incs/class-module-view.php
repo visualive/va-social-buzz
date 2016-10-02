@@ -91,7 +91,7 @@ namespace VASOCIALBUZZ\Modules {
 			    && in_array( get_post_type(), $show_in )
 			) {
 				// Recommend you don't use this short code registering your own post data.
-				$content .= do_shortcode( '[socialbuzz]' );
+				$content .= do_shortcode( '[socialbuzz box="select"]' );
 			};
 
 			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'create_the_content', $content );

@@ -82,12 +82,7 @@ namespace VASOCIALBUZZ\Modules {
 				case 'follow':
 					$output = self::_shortcode_followblock();
 					break;
-				case 'all':
-						$output[] = self::_shortcode_likeblock();
-						$output[] = self::_shortcode_shareblock();
-						$output[] = self::_shortcode_followblock();
-					break;
-				default:
+				case 'select':
 					if ( true === $show_in_like ) {
 						$output[] = self::_shortcode_likeblock();
 					}
@@ -97,6 +92,11 @@ namespace VASOCIALBUZZ\Modules {
 					if ( true === $show_in_follow ) {
 						$output[] = self::_shortcode_followblock();
 					}
+					break;
+				default:
+					$output[] = self::_shortcode_likeblock();
+					$output[] = self::_shortcode_shareblock();
+					$output[] = self::_shortcode_followblock();
 					break;
 			}
 
