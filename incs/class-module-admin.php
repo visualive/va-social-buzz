@@ -204,7 +204,7 @@ namespace VASOCIALBUZZ\Modules {
 		 * Render form parts.
 		 */
 		public function render_like_area_opacity() {
-			$output     = null;
+			$output     = [];
 			$value      = 0;
 			$loop       = 11;
 			$key        = 'like_area_opacity';
@@ -229,7 +229,7 @@ namespace VASOCIALBUZZ\Modules {
 		 * Render form parts.
 		 */
 		public function render_post_types() {
-			$output     = null;
+			$output     = [];
 			$key        = 'post_types';
 			$show_ins   = Options::get( $key );
 			$settings   = $this->settings[ $key ];
