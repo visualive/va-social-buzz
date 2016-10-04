@@ -43,7 +43,7 @@ namespace VASOCIALBUZZ\Modules {
 		 */
 		public static function settings() {
 			$settings['fb_page']     = [
-				'label'         => __( 'Facebook Page Username', 'va-social-buzz' ),
+				'label'         => __( 'Facebook Page username', 'va-social-buzz' ),
 				'description'   => [
 					__( 'Usernames can only contain alphanumeric characters (A-Z, 0-9) or a period (".").', 'va-social-buzz' ),
 					sprintf(
@@ -78,7 +78,7 @@ namespace VASOCIALBUZZ\Modules {
 				'_builtin'      => true,
 			];
 			$settings['twttr_name']  = [
-				'label'         => __( 'Twitter Username', 'va-social-buzz' ),
+				'label'         => __( 'Twitter username', 'va-social-buzz' ),
 				'description'   => __( 'Usernames can only contain alphanumeric characters (A-Z, 0-9) or a underscore ("_").', 'va-social-buzz' ),
 				'default_value' => '',
 				'render'        => 'render_twttr_name',
@@ -86,40 +86,40 @@ namespace VASOCIALBUZZ\Modules {
 				'_builtin'      => true,
 			];
 			$settings['text_like_0'] = [
-				'label'         => __( 'Text Of Like Button Area 1', 'va-social-buzz' ),
-				'description'   => __( 'Appear on top of the "like" button. Sentence of the first line.', 'va-social-buzz' ),
+				'label'         => __( 'Text of the "like!" button area 1', 'va-social-buzz' ),
+				'description'   => __( 'Appear on top of the "like!" button. Sentence of the first line.', 'va-social-buzz' ),
 				'default_value' => __( 'If you liked this article,', 'va-social-buzz' ),
 				'render'        => 'render_text_like_0',
 				'sanitize'      => 'sanitize_text_field',
 				'_builtin'      => true,
 			];
 			$settings['text_like_1'] = [
-				'label'         => __( 'Text Of Like Button Area 2', 'va-social-buzz' ),
-				'description'   => __( 'Appear on top of the "like" button. Sentence of the second line.', 'va-social-buzz' ),
+				'label'         => __( 'Text of the "like!" button area 2', 'va-social-buzz' ),
+				'description'   => __( 'Appear on top of the "like!" button. Sentence of the second line.', 'va-social-buzz' ),
 				'default_value' => __( 'please click this "like!".', 'va-social-buzz' ),
 				'render'        => 'render_text_like_1',
 				'sanitize'      => 'sanitize_text_field',
 				'_builtin'      => true,
 			];
 			$settings['text_share']  = [
-				'label'         => __( 'Share Button Text', 'va-social-buzz' ),
-				'description'   => __( 'Share button to Facebook.', 'va-social-buzz' ),
+				'label'         => __( 'Share button', 'va-social-buzz' ),
+				'description'   => __( 'Text of the share button to Facebook.', 'va-social-buzz' ),
 				'default_value' => __( 'Share', 'va-social-buzz' ),
 				'render'        => 'render_text_share',
 				'sanitize'      => 'sanitize_text_field',
 				'_builtin'      => true,
 			];
 			$settings['text_tweet']  = [
-				'label'         => __( 'Tweet Button Text', 'va-social-buzz' ),
-				'description'   => __( 'Tweet button to Twitter.', 'va-social-buzz' ),
+				'label'         => __( 'Tweet button', 'va-social-buzz' ),
+				'description'   => __( 'Text of the tweet button to Twitter.', 'va-social-buzz' ),
 				'default_value' => __( 'Tweet', 'va-social-buzz' ),
 				'render'        => 'render_text_tweet',
 				'sanitize'      => 'sanitize_text_field',
 				'_builtin'      => true,
 			];
 			$settings['text_follow'] = [
-				'label'         => __( 'Twitter Follow Text', 'va-social-buzz' ),
-				'description'   => __( 'Follow button left of the text.', 'va-social-buzz' ),
+				'label'         => __( 'Follow button', 'va-social-buzz' ),
+				'description'   => __( 'Follow button horizontal text.', 'va-social-buzz' ),
 				'default_value' => __( 'Follow on Twetter !', 'va-social-buzz' ),
 				'render'        => 'render_text_follow',
 				'sanitize'      => 'sanitize_text_field',
@@ -128,8 +128,8 @@ namespace VASOCIALBUZZ\Modules {
 
 			if ( Functions::exists_push7() ) {
 				$settings['text_push7'] = [
-					'label'         => __( 'Push7 Button Text', 'va-social-buzz' ),
-					'description'   => __( 'Follow Push7 button of the text.', 'va-social-buzz' ),
+					'label'         => __( 'Push7 button', 'va-social-buzz' ),
+					'description'   => __( 'Text of the subscription button to Push7.', 'va-social-buzz' ),
 					'default_value' => __( 'Receive the latest posts with push notifications', 'va-social-buzz' ),
 					'render'        => 'render_text_push7',
 					'sanitize'      => 'sanitize_text_field',
@@ -138,7 +138,7 @@ namespace VASOCIALBUZZ\Modules {
 			}
 
 			$settings['like_area_bg']      = [
-				'label'         => __( 'Background Color Of Like Button Area', 'va-social-buzz' ),
+				'label'         => __( 'Background color of the "like!" button area', 'va-social-buzz' ),
 				'description'   => '',
 				'default_value' => '#2b2b2b',
 				'render'        => 'render_like_area_bg',
@@ -146,7 +146,7 @@ namespace VASOCIALBUZZ\Modules {
 				'_builtin'      => true,
 			];
 			$settings['like_area_opacity'] = [
-				'label'         => __( 'Background Opacity Of Like Button Area', 'va-social-buzz' ),
+				'label'         => __( 'Background opacity of the "like!" button area', 'va-social-buzz' ),
 				'description'   => '',
 				'default_value' => '0.7',
 				'render'        => 'render_like_area_opacity',
@@ -154,7 +154,7 @@ namespace VASOCIALBUZZ\Modules {
 				'_builtin'      => true,
 			];
 			$settings['like_area_color']   = [
-				'label'         => __( 'Font Color OF Like Button Area ', 'va-social-buzz' ),
+				'label'         => __( 'Text color of the "like!" button area ', 'va-social-buzz' ),
 				'description'   => '',
 				'default_value' => '#ffffff',
 				'render'        => 'render_like_area_color',

@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: VA Social Buzz\n"
-"POT-Creation-Date: 2016-10-03 04:12+0900\n"
+"POT-Creation-Date: 2016-10-05 06:49+0900\n"
 "PO-Revision-Date: 2015-12-29 07:09+0900\n"
 "Last-Translator: \n"
 "Language-Team: VisuAlive <kuck1u@visualive.jp>\n"
@@ -31,7 +31,7 @@ msgid "You can setting VA Social Buzz in <a href=\"options-reading.php\">Reading
 msgstr ""
 
 #: incs/trait-variables.php:46
-msgid "Facebook Page Username"
+msgid "Facebook Page username"
 msgstr ""
 
 #: incs/trait-variables.php:48
@@ -59,7 +59,7 @@ msgid "Creating an App ID"
 msgstr ""
 
 #: incs/trait-variables.php:81
-msgid "Twitter Username"
+msgid "Twitter username"
 msgstr ""
 
 #: incs/trait-variables.php:82
@@ -67,11 +67,11 @@ msgid "Usernames can only contain alphanumeric characters (A-Z, 0-9) or a unders
 msgstr ""
 
 #: incs/trait-variables.php:89
-msgid "Text Of Like Button Area 1"
+msgid "Text of the \"like!\" button area 1"
 msgstr ""
 
 #: incs/trait-variables.php:90
-msgid "Appear on top of the \"like\" button. Sentence of the first line."
+msgid "Appear on top of the \"like!\" button. Sentence of the first line."
 msgstr ""
 
 #: incs/trait-variables.php:91
@@ -79,11 +79,11 @@ msgid "If you liked this article,"
 msgstr ""
 
 #: incs/trait-variables.php:97
-msgid "Text Of Like Button Area 2"
+msgid "Text of the \"like!\" button area 2"
 msgstr ""
 
 #: incs/trait-variables.php:98
-msgid "Appear on top of the \"like\" button. Sentence of the second line."
+msgid "Appear on top of the \"like!\" button. Sentence of the second line."
 msgstr ""
 
 #: incs/trait-variables.php:99
@@ -91,11 +91,11 @@ msgid "please click this \"like!\"."
 msgstr ""
 
 #: incs/trait-variables.php:105
-msgid "Share Button Text"
+msgid "Share button"
 msgstr ""
 
 #: incs/trait-variables.php:106
-msgid "Share button to Facebook."
+msgid "Text of the share button to Facebook."
 msgstr ""
 
 #: incs/trait-variables.php:107
@@ -103,11 +103,11 @@ msgid "Share"
 msgstr ""
 
 #: incs/trait-variables.php:113
-msgid "Tweet Button Text"
+msgid "Tweet button"
 msgstr ""
 
 #: incs/trait-variables.php:114
-msgid "Tweet button to Twitter."
+msgid "Text of the tweet button to Twitter."
 msgstr ""
 
 #: incs/trait-variables.php:115
@@ -115,11 +115,11 @@ msgid "Tweet"
 msgstr ""
 
 #: incs/trait-variables.php:121
-msgid "Twitter Follow Text"
+msgid "Follow button"
 msgstr ""
 
 #: incs/trait-variables.php:122
-msgid "Follow button left of the text."
+msgid "Follow button horizontal text."
 msgstr ""
 
 #: incs/trait-variables.php:123
@@ -127,11 +127,11 @@ msgid "Follow on Twetter !"
 msgstr ""
 
 #: incs/trait-variables.php:131
-msgid "Push7 Button Text"
+msgid "Push7 button"
 msgstr ""
 
 #: incs/trait-variables.php:132
-msgid "Follow Push7 button of the text."
+msgid "Text of the subscription button to Push7."
 msgstr ""
 
 #: incs/trait-variables.php:133
@@ -139,15 +139,15 @@ msgid "Receive the latest posts with push notifications"
 msgstr ""
 
 #: incs/trait-variables.php:141
-msgid "Background Color Of Like Button Area"
+msgid "Background color of the \"like!\" button area"
 msgstr ""
 
 #: incs/trait-variables.php:149
-msgid "Background Opacity Of Like Button Area"
+msgid "Background opacity of the \"like!\" button area"
 msgstr ""
 
 #: incs/trait-variables.php:157
-msgid "Font Color OF Like Button Area "
+msgid "Text color of the \"like!\" button area "
 msgstr ""
 
 #: incs/trait-variables.php:165
