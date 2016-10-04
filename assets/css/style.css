@@ -192,11 +192,13 @@
     vertical-align: middle !important;
 }
 
-.textwidget .va-social-buzz .vasb_fb .vasb_fb_thumbnail {
+.textwidget .va-social-buzz .vasb_fb .vasb_fb_thumbnail,
+.widget_va_social_buzz .va-social-buzz .vasb_fb .vasb_fb_thumbnail{
     display: block !important;
     width: 100% !important;
 }
-.textwidget .va-social-buzz .vasb_fb .vasb_fb_like {
+.textwidget .va-social-buzz .vasb_fb .vasb_fb_like,
+.widget_va_social_buzz .va-social-buzz .vasb_fb .vasb_fb_like {
     display: block !important;
     height: initial !important;
     width: initial !important;

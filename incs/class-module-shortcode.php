@@ -69,12 +69,15 @@ namespace VASOCIALBUZZ\Modules {
 			$show_in_share  = apply_filters( VA_SOCIALBUZZ_PREFIX . 'show_in_share', true );
 			$show_in_follow = apply_filters( VA_SOCIALBUZZ_PREFIX . 'show_in_follow', true );
 			$atts           = shortcode_atts( array(
-				'box' => '',
+				'box'           => '',
+				'mode'          => '',
+				'likebox_text1' => '',
+				'likebox_text2' => '',
 			), $atts, 'socialbuzz' );
 
 			switch ( $atts['box'] ) {
 				case 'like':
-					$output = self::_shortcode_likeblock();
+					$output = self::_shortcode_likeblock( $atts['likebox_text1'], $atts['likebox_text2'] );
 					break;
 				case 'share':
 					$output = self::_shortcode_shareblock();
@@ -84,7 +87,7 @@ namespace VASOCIALBUZZ\Modules {
 					break;
 				case 'select':
 					if ( true === $show_in_like ) {
-						$output[] = self::_shortcode_likeblock();
+						$output[] = self::_shortcode_likeblock( $atts['likebox_text1'], $atts['likebox_text2'] );
 					}
 					if ( true === $show_in_share ) {
 						$output[] = self::_shortcode_shareblock();
@@ -94,7 +97,7 @@ namespace VASOCIALBUZZ\Modules {
 					}
 					break;
 				default:
-					$output[] = self::_shortcode_likeblock();
+					$output[] = self::_shortcode_likeblock( $atts['likebox_text1'], $atts['likebox_text2'] );
 					$output[] = self::_shortcode_shareblock();
 					$output[] = self::_shortcode_followblock();
 					break;
@@ -104,7 +107,7 @@ namespace VASOCIALBUZZ\Modules {
 				$output = implode( '', $output );
 			}
 
-			if ( ! empty( $output ) ) {
+			if ( ! empty( $output ) && 'widget' !== $atts['mode'] ) {
 				$output = str_replace( '{{content}}', $output, $tmp_wrapper );
 			}
 
@@ -158,7 +161,7 @@ namespace VASOCIALBUZZ\Modules {
 		 *
 		 * @return string
 		 */
-		protected function _shortcode_likeblock() {
+		protected function _shortcode_likeblock( $text1 = '', $text2 = '' ) {
 			$output  = null;
 			$tmp     = self::_tmp_likeblock();
 			$options = $this->options;
@@ -167,11 +170,15 @@ namespace VASOCIALBUZZ\Modules {
 				$text   = [];
 				$output = $tmp;
 
-				if ( ! empty( $options['text_like_0'] ) ) {
+				if ( ! empty( $text1 ) ) {
+					$text[] = esc_html( $text1 );
+				} elseif ( ! empty( $options['text_like_0'] ) ) {
 					$text[] = esc_html( $options['text_like_0'] );
 				}
 
-				if ( ! empty( $options['text_like_1'] ) ) {
+				if ( ! empty( $text2 ) ) {
+					$text[] = esc_html( $text2 );
+				} elseif ( ! empty( $options['text_like_1'] ) ) {
 					$text[] = esc_html( $options['text_like_1'] );
 				}
 
