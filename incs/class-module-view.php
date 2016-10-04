@@ -83,11 +83,12 @@ namespace VASOCIALBUZZ\Modules {
 			$content = apply_filters( VA_SOCIALBUZZ_PREFIX . 'raw_the_content', $content );
 
 			if (
-				! is_embed()
+			    ! is_embed()
+			    && ! is_feed()
 			    && ! has_shortcode( $content, 'socialbuzz' )
-				&& in_the_loop()
-				&& is_singular()
-				&& isset( $show_in )
+			    && in_the_loop()
+			    && is_singular()
+			    && isset( $show_in )
 			    && in_array( get_post_type(), $show_in )
 			) {
 				// Recommend you don't use this short code registering your own post data.
