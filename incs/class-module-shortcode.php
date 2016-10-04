@@ -161,7 +161,7 @@ namespace VASOCIALBUZZ\Modules {
 		 *
 		 * @return string
 		 */
-		protected function _shortcode_likeblock( $text1 = '', $text2 = '' ) {
+		protected function _shortcode_likeblock( $text1 = '', $text2 = '', $mode = '' ) {
 			$output  = null;
 			$tmp     = self::_tmp_likeblock();
 			$options = $this->options;
@@ -170,15 +170,15 @@ namespace VASOCIALBUZZ\Modules {
 				$text   = [];
 				$output = $tmp;
 
-				if ( ! empty( $text1 ) ) {
+				if ( ! empty( $text1 ) && 'widget' === $mode ) {
 					$text[] = esc_html( $text1 );
-				} elseif ( ! empty( $options['text_like_0'] ) ) {
+				} elseif ( ! empty( $options['text_like_0'] ) && 'widget' !== $mode ) {
 					$text[] = esc_html( $options['text_like_0'] );
 				}
 
-				if ( ! empty( $text2 ) ) {
+				if ( ! empty( $text2 ) && 'widget' === $mode ) {
 					$text[] = esc_html( $text2 );
-				} elseif ( ! empty( $options['text_like_1'] ) ) {
+				} elseif ( ! empty( $options['text_like_1'] ) && 'widget' !== $mode ) {
 					$text[] = esc_html( $options['text_like_1'] );
 				}
 
@@ -235,10 +235,7 @@ namespace VASOCIALBUZZ\Modules {
 			if ( ! empty( $options['twttr_name'] ) ) {
 				$output = $tmp;
 				$output = str_replace( '{{twttr_name}}', esc_attr( $options['twttr_name'] ), $output );
-
-				if ( ! empty( $options['text_follow'] ) ) {
-					$output = str_replace( '{{text}}', esc_html( $options['text_follow'] ) . ' ', $output );
-				}
+				$output = str_replace( '{{text}}', esc_html( $options['text_follow'] ) . ' ', $output );
 			}
 
 			return $output;
