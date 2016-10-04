@@ -119,11 +119,8 @@ namespace VASOCIALBUZZ\Modules {
 		 * @return array
 		 */
 		public function wp_insert_post_data( $data = [] ) {
-			$raw = $data['post_content'];
-
-			if ( has_shortcode( $data['post_content'], 'socialbuzz' ) ) {
-				$data['post_content'] = preg_replace( '/' . get_shortcode_regex( [ 'socialbuzz' ] ) . '/', '', $data['post_content'] );
-			}
+			$raw                  = $data['post_content'];
+			$data['post_content'] = self::_strip_short_code( $data['post_content'] );
 
 			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'xxx_insert_post_data', $data, $raw );
 		}
