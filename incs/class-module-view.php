@@ -53,7 +53,7 @@ namespace VASOCIALBUZZ\Modules {
 			$file_prefix        = ( defined( 'WP_DEBUG' ) && true === WP_DEBUG ) ? '' : '.min';
 			$localize['locale'] = esc_attr( Functions::get_locale() );
 			$css                = self::_inline_style();
-			$style_file         = apply_filters( VA_SOCIALBUZZ_PREFIX . 'style_file', VA_SOCIALBUZZ_URL . 'assets/css/style' . $file_prefix . '.css' );
+			$style_file         = self::_style_file();
 			$script_file        = apply_filters( VA_SOCIALBUZZ_PREFIX . 'script_file', VA_SOCIALBUZZ_URL . 'assets/js/script' . $file_prefix . '.js' );
 			$options            = Options::get( 'all' );
 
@@ -95,6 +95,23 @@ namespace VASOCIALBUZZ\Modules {
 			};
 
 			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'create_the_content', $content );
+		}
+
+		/**
+		 * Create stylesheet file url.
+		 *
+		 * @return string
+		 */
+		protected function _style_file() {
+			$file_prefix = ( defined( 'WP_DEBUG' ) && true === WP_DEBUG ) ? '' : '.min';
+
+			if ( file_exists( get_stylesheet_directory() . '/style-vasocialbuzz.css' ) ) {
+				$file = get_stylesheet_directory_uri() . '/style-vasocialbuzz.css';
+			} else {
+				$file = VA_SOCIALBUZZ_URL . 'assets/css/style' . $file_prefix . '.css';
+			}
+
+			return esc_url( $file );
 		}
 
 		/**
