@@ -5,10 +5,10 @@ Tags: automatic, social, socialmedia, social media, viral, viralmedia, viral med
 Requires at least: 4.4
 Tested up to: 4.6
 Stable tag: trunk
-License: GPL-v2 or later
+License: GPL-v2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-It displays buttons at the end of every article for readers to "Like" your recommended Facebook page, to share the article on social, and to follow you on social.
+It displays buttons at the end of every article for readers to "Like" your recommended Facebook page, to share the article on SNS.
 
 == Description ==
 
@@ -23,11 +23,8 @@ If Google Universal Analytics is introduced to the website, it will become possi
 * Japanese: KUCKLU
 
 = Requires =
-* WordPress 4.4 or higher
+* WordPress 4.4+
 * PHP 5.6+
-
-= Note =
-PHP 7 is not tested.
 
 = Contribute! =
 You can fork the plugin from [GitHub](https://github.com/visualive/va-social-buzz)
@@ -37,8 +34,8 @@ You can fork the plugin from [GitHub](https://github.com/visualive/va-social-buz
 To install "VA Social Buzz":
 
 1. Upload the "va-social-buzz" directory and all its contents to your `/wp-content/plugins/` directory.
-2. Activate the plugin through the 'Plugins' menu in WordPress.
-3. Optimize your setting through the `Option`>`Reading` menu in WordPress.
+2. Activate the plugin through the "Plugins" menu in WordPress.
+3. Optimize your setting through the "Settings > Reading" menu in WordPress.
 
 == Screenshots ==
 
@@ -48,6 +45,10 @@ To install "VA Social Buzz":
 4. Google Analytics - Social Plugin.
 
 == Changelog ==
+
+= 1.1.0 =
+* Source code full renewal.
+* Add new feature is not.
 
 = 1.0.20 =
 * Support PHP 5.4

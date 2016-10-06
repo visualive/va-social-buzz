@@ -4,7 +4,7 @@ VA Social Buzz
 [![Latest Stable Version](https://poser.pugx.org/visualive/va-social-buzz/v/stable)](https://packagist.org/packages/visualive/va-social-buzz)
 [![License](https://poser.pugx.org/visualive/va-social-buzz/license)](https://packagist.org/packages/visualive/va-social-buzz)
 
-It displays buttons at the end of every article for readers to "Like" your recommended Facebook page, to share the article on social, and to follow you on social.
+It displays buttons at the end of every article for readers to "Like" your recommended Facebook page, to share the article on SNS.
 
 ## Description
 
@@ -15,17 +15,16 @@ It displays buttons at the end of every article for readers to "Like" your recom
 If Google Universal Analytics is introduced to the website, it will become possible to track how many clicks etc each particular event gets.
 
 ## Requires
-* WordPress 4.4 or higher
+* WordPress 4.4+
 * PHP 5.6+  
-PHP 7 is not tested.
 
 ## Installation
 
-To install VA Social Buzz:
+To install "VA Social Buzz":
 
 1. Upload the "va-social-buzz" directory and all its contents to your `/wp-content/plugins/` directory.
-2. Activate the plugin through the 'Plugins' menu in WordPress.
-3. Optimize your setting through the `Option`>`Reading` menu in WordPress.
+2. Activate the plugin through the "Plugins" menu in WordPress.
+3. Optimize your setting through the "Settings > Reading" menu in WordPress.
 
 ## Screenshots
 
@@ -42,6 +41,10 @@ To install VA Social Buzz:
 **4. Google Analytics - Social Plugin.**
 
 ## Changelog
+
+### 1.1.0
+* Source code full renewal.
+* Add new feature is not.
 
 ### 1.0.20
 * Support PHP 5.4
