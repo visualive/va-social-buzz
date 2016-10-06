@@ -8,13 +8,13 @@ Stable tag: trunk
 License: GPL-v2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-It displays buttons at the end of every article for readers to "Like" your recommended Facebook page, to share the article on SNS.
+It displays buttons at the end of every article for readers to "Like!" your recommended Facebook page, to share the article on SNS.
 
 == Description ==
 
 https://vimeo.com/185254343
 
-It displays buttons at the end of every article for readers to "Like" your recommended Facebook page, to share the article on Facebook, to tweet about it on Twitter, and to follow you on Twitter. japanese viral media often uses this kind of display.
+It displays buttons at the end of every article for readers to "Like!" your recommended Facebook page, to share the article on Facebook, to tweet about it on Twitter, and to follow you on Twitter. japanese viral media often uses this kind of display.
 
 If Google Universal Analytics is introduced to the website, it will become possible to track how many clicks etc each particular event gets.
 

@@ -4,13 +4,13 @@ VA Social Buzz
 [![Latest Stable Version](https://poser.pugx.org/visualive/va-social-buzz/v/stable)](https://packagist.org/packages/visualive/va-social-buzz)
 [![License](https://poser.pugx.org/visualive/va-social-buzz/license)](https://packagist.org/packages/visualive/va-social-buzz)
 
-It displays buttons at the end of every article for readers to "Like" your recommended Facebook page, to share the article on SNS.
+It displays buttons at the end of every article for readers to "Like!" your recommended Facebook page, to share the article on SNS.
 
 ## Description
 
 [Movie - How to use VA Social Buzz](https://vimeo.com/185254343)
 
-It displays buttons at the end of every article for readers to "Like" your recommended Facebook page, to share the article on Facebook, to tweet about it on Twitter, and to follow you on Twitter. japanese viral media often uses this kind of display.
+It displays buttons at the end of every article for readers to "Like!" your recommended Facebook page, to share the article on Facebook, to tweet about it on Twitter, and to follow you on Twitter. japanese viral media often uses this kind of display.
 
 If Google Universal Analytics is introduced to the website, it will become possible to track how many clicks etc each particular event gets.
 
