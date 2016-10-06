@@ -2,11 +2,11 @@
  * VA Social Buzz.
  *
  * @package   VisuAlive.
- * @version   1.0.12
+ * @version   1.1.0
  * @author    KUCKLU.
  * @copyright Copyright (c) KUCKLU and VisuAlive.
- * @link      http://visualive.jp/
- * @license   GNU General Public License version 2.0 later.
+ * @link      http://visualive.jps
+ * @license   GPL-2.0+
  */
 
 (function ($, window, document, undefined) {
@@ -138,7 +138,7 @@
 
             $.getScript('//connect.facebook.net/' + self._deletionOtherAlphanumeric(self.cache.wordpress.locale) + '/sdk.js', function () {
                 fb_init = {
-                    version: 'v2.5',
+                    version: 'v2.8',
                     status : true,
                     cookie : true,
                     xfbml  : true
