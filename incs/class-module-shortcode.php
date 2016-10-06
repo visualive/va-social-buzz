@@ -77,7 +77,7 @@ namespace VASOCIALBUZZ\Modules {
 
 			switch ( $atts['box'] ) {
 				case 'like':
-					$output = self::_shortcode_likeblock( $atts['likebox_text1'], $atts['likebox_text2'] );
+					$output = self::_shortcode_likeblock( $atts['likebox_text1'], $atts['likebox_text2'], $atts['mode'] );
 					break;
 				case 'share':
 					$output = self::_shortcode_shareblock();
@@ -87,7 +87,7 @@ namespace VASOCIALBUZZ\Modules {
 					break;
 				case 'select':
 					if ( true === $show_in_like ) {
-						$output[] = self::_shortcode_likeblock( $atts['likebox_text1'], $atts['likebox_text2'] );
+						$output[] = self::_shortcode_likeblock( $atts['likebox_text1'], $atts['likebox_text2'], $atts['mode'] );
 					}
 					if ( true === $show_in_share ) {
 						$output[] = self::_shortcode_shareblock();
@@ -97,7 +97,7 @@ namespace VASOCIALBUZZ\Modules {
 					}
 					break;
 				default:
-					$output[] = self::_shortcode_likeblock( $atts['likebox_text1'], $atts['likebox_text2'] );
+					$output[] = self::_shortcode_likeblock( $atts['likebox_text1'], $atts['likebox_text2'], $atts['mode'] );
 					$output[] = self::_shortcode_shareblock();
 					$output[] = self::_shortcode_followblock();
 					break;

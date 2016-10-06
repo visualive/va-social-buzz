@@ -193,11 +193,11 @@
 }
 
 .textwidget .va-social-buzz .vasb_fb .vasb_fb_thumbnail,
-.widget_va_social_buzz .va-social-buzz .vasb_fb .vasb_fb_thumbnail{
+.widget_va_social_buzz .va-social-buzz .vasb_fb .vasb_fb_thumbnail {
     display: block !important;
     width: 100% !important;
 }
-.textwidget .va-social-buzz .vasb_fb .vasb_fb_like,
+.widget-area .va-social-buzz .vasb_fb .vasb_fb_like,
 .widget_va_social_buzz .va-social-buzz .vasb_fb .vasb_fb_like {
     display: block !important;
     height: initial !important;

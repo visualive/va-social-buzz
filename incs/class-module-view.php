@@ -80,12 +80,11 @@ namespace VASOCIALBUZZ\Modules {
 		public function the_content( $content = '' ) {
 			$options = Options::get( 'all' );
 			$show_in = $options['post_types'];
-			$content = apply_filters( VA_SOCIALBUZZ_PREFIX . 'raw_the_content', $content );
+			$raw     = apply_filters( VA_SOCIALBUZZ_PREFIX . 'raw_the_content', $content );
 
 			if (
 			    ! is_embed()
 			    && ! is_feed()
-			    && ! has_shortcode( $content, 'socialbuzz' )
 			    && in_the_loop()
 			    && is_singular()
 			    && isset( $show_in )
@@ -95,7 +94,7 @@ namespace VASOCIALBUZZ\Modules {
 				$content .= do_shortcode( '[socialbuzz box="select"]' );
 			};
 
-			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'create_the_content', $content );
+			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'create_the_content', $content, $raw );
 		}
 
 		/**
@@ -154,8 +153,9 @@ namespace VASOCIALBUZZ\Modules {
 	background-color: rgba({{background_color}}, {{opacity}});
 	color: {{color}};
 }
-.textwidget .va-social-buzz .vasb_fb .vasb_fb_like {
-    background-color: rgba({{background_color}}, {{opacity}});
+.textwidget .va-social-buzz .vasb_fb .vasb_fb_like,
+.widget_va_social_buzz .va-social-buzz .vasb_fb .vasb_fb_like {
+    background-color: rgba({{background_color}}, {{opacity}}) !important;
 }
 @media only screen and (min-width: 711px) {
 	.va-social-buzz .vasb_fb .vasb_fb_like {
