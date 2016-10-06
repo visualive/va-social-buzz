@@ -355,7 +355,7 @@ namespace VASOCIALBUZZ\Modules {
 		/**
 		 * Sanitize number float.
 		 *
-		 * @param string $value
+		 * @param string $value Number.
 		 *
 		 * @return string
 		 */
