@@ -12,7 +12,7 @@
  * Domain Path: /langs
  * Text Domain: va-social-buzz
  * Prefix: va_social_buzz_
- * License: GNU General Public License v2 or later
+ * License: GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  *
  * @package    WordPress
