@@ -81,10 +81,14 @@ namespace VASOCIALBUZZ\Modules {
 			$options = Options::get( 'all' );
 			$show_in = $options['post_types'];
 			$raw     = apply_filters( VA_SOCIALBUZZ_PREFIX . 'raw_the_content', $content );
+			$content = apply_filters( VA_SOCIALBUZZ_PREFIX . 'create_the_content', $content, $raw );
 
 			if (
 			    ! is_embed()
 			    && ! is_feed()
+			    && ! has_shortcode( $content, 'socialbuzz' )
+			    && ! is_front_page()
+			    && ! is_home()
 			    && in_the_loop()
 			    && is_singular()
 			    && isset( $show_in )
@@ -94,7 +98,7 @@ namespace VASOCIALBUZZ\Modules {
 				$content .= do_shortcode( '[socialbuzz box="select"]' );
 			};
 
-			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'create_the_content', $content, $raw );
+			return $content;
 		}
 
 		/**

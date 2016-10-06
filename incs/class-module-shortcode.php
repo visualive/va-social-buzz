@@ -49,7 +49,7 @@ namespace VASOCIALBUZZ\Modules {
 			$this->options = Options::get( 'all' );
 
 			add_filter( VA_SOCIALBUZZ_PREFIX . 'add_shortcode', [ &$this, 'add_shortcode' ] );
-			add_filter( VA_SOCIALBUZZ_PREFIX . 'raw_the_content', [ &$this, 'the_content' ], -10 );
+			add_filter( VA_SOCIALBUZZ_PREFIX . 'create_the_content', [ &$this, 'the_content' ], -10 );
 			add_filter( 'widget_text', [ &$this, 'widget_text' ], -10 );
 			add_filter( 'wp_insert_post_data', [ &$this, 'wp_insert_post_data' ], -10 );
 		}
