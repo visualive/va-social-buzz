@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: VA Social Buzz\n"
-"POT-Creation-Date: 2016-10-05 06:46+0900\n"
-"PO-Revision-Date: 2016-10-05 06:51+0900\n"
+"POT-Creation-Date: 2016-10-07 04:58+0900\n"
+"PO-Revision-Date: 2016-10-07 04:59+0900\n"
 "Last-Translator: \n"
 "Language-Team: VisuAlive <kuck1u@visualive.jp>\n"
 "Language: en_001\n"
@@ -87,28 +87,28 @@ msgstr ""
 "す。"
 
 #: incs/trait-variables.php:89
-msgid "Text of the \"like!\" button area 1"
+msgid "Text of the \"Like!\" button area 1"
 msgstr "いいね ! ボタンエリアのテキスト 1"
 
 #: incs/trait-variables.php:90
-msgid "Appear on top of the \"like!\" button. Sentence of the first line."
+msgid "Appear on top of the \"Like!\" button. Sentence of the first line."
 msgstr "いいね ! ボタンの上に表示される 1 行目のテキスト。"
 
 #: incs/trait-variables.php:91
-msgid "If you liked this article,"
+msgid "If you liked this article"
 msgstr "この記事が気に入ったら"
 
 #: incs/trait-variables.php:97
-msgid "Text of the \"like!\" button area 2"
+msgid "Text of the \"Like!\" button area 2"
 msgstr "いいね ! ボタンエリアのテキスト 2"
 
 #: incs/trait-variables.php:98
-msgid "Appear on top of the \"like!\" button. Sentence of the second line."
+msgid "Appear on top of the \"Like!\" button. Sentence of the second line."
 msgstr "いいね ! ボタンの上に表示される 2 行目のテキスト。"
 
 #: incs/trait-variables.php:99
-msgid "please click this \"like!\"."
-msgstr "いいね！しよう"
+msgid "please click on the \"Like!\"."
+msgstr "いいね ! しよう"
 
 #: incs/trait-variables.php:105
 msgid "Share button"
@@ -177,60 +177,3 @@ msgstr "自動表示"
 #: incs/trait-variables.php:166
 msgid "Please choose post type one or more."
 msgstr "投稿タイプを 1 つ以上選択してください。"
-
-#~ msgid "Share button text"
-#~ msgstr "シェアボタンのテキスト"
-
-#~ msgid "Tweet button text"
-#~ msgstr "ツイートボタンのテキスト"
-
-#~ msgid "Facebook Page Username"
-#~ msgstr "Facebook ページのユーザーネーム"
-
-#~ msgid "Twitter Username"
-#~ msgstr "Twitter のユーザーネーム"
-
-#~ msgid "Text Of Like Button Area 1"
-#~ msgstr "いいね! ボタンエリアのテキスト 1"
-
-#~ msgid "Appear on top of the \"like\" button. Sentence of the first line."
-#~ msgstr "いいね! ボタンの上に表示される 1 行目のテキスト。"
-
-#~ msgid "Text Of Like Button Area 2"
-#~ msgstr "いいね! ボタンエリアのテキスト 2"
-
-#~ msgid "Appear on top of the \"like\" button. Sentence of the second line."
-#~ msgstr "いいね! ボタンの上に表示される 2 行目のテキスト。"
-
-#~ msgid "Share Button Text"
-#~ msgstr "シェアボタンのテキスト"
-
-#~ msgid "Share button to Facebook."
-#~ msgstr "Facebook へのシェアボタンのテキスト。"
-
-#~ msgid "Tweet Button Text"
-#~ msgstr "ツイートボタンのテキスト"
-
-#~ msgid "Tweet button to Twitter."
-#~ msgstr "Twitter へのツイートボタンのテキスト。"
-
-#~ msgid "Twitter Follow Text"
-#~ msgstr "Twitter のフォローテキスト"
-
-#~ msgid "Follow button left of the text."
-#~ msgstr "フォローボタンの左横のテキスト。"
-
-#~ msgid "Push7 Button Text"
-#~ msgstr "Push7 のボタンのテキスト"
-
-#~ msgid "Follow Push7 button of the text."
-#~ msgstr "Push7 の登録ボタンのテキスト。"
-
-#~ msgid "Background Color Of Like Button Area"
-#~ msgstr "いいね! ボタンエリアの背景色"
-
-#~ msgid "Background Opacity Of Like Button Area"
-#~ msgstr "いいね! ボタンエリアの背景の透明度"
-
-#~ msgid "Font Color OF Like Button Area "
-#~ msgstr "いいね! ボタンエリアのフォントカラー"

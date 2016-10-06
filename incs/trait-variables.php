@@ -86,17 +86,17 @@ namespace VASOCIALBUZZ\Modules {
 				'_builtin'      => true,
 			];
 			$settings['text_like_0'] = [
-				'label'         => __( 'Text of the "like!" button area 1', 'va-social-buzz' ),
-				'description'   => __( 'Appear on top of the "like!" button. Sentence of the first line.', 'va-social-buzz' ),
-				'default_value' => __( 'If you liked this article,', 'va-social-buzz' ),
+				'label'         => __( 'Text of the "Like!" button area 1', 'va-social-buzz' ),
+				'description'   => __( 'Appear on top of the "Like!" button. Sentence of the first line.', 'va-social-buzz' ),
+				'default_value' => __( 'If you liked this article', 'va-social-buzz' ),
 				'render'        => 'render_text_like_0',
 				'sanitize'      => 'sanitize_text_field',
 				'_builtin'      => true,
 			];
 			$settings['text_like_1'] = [
-				'label'         => __( 'Text of the "like!" button area 2', 'va-social-buzz' ),
-				'description'   => __( 'Appear on top of the "like!" button. Sentence of the second line.', 'va-social-buzz' ),
-				'default_value' => __( 'please click this "like!".', 'va-social-buzz' ),
+				'label'         => __( 'Text of the "Like!" button area 2', 'va-social-buzz' ),
+				'description'   => __( 'Appear on top of the "Like!" button. Sentence of the second line.', 'va-social-buzz' ),
+				'default_value' => __( 'please click on the "Like!".', 'va-social-buzz' ),
 				'render'        => 'render_text_like_1',
 				'sanitize'      => 'sanitize_text_field',
 				'_builtin'      => true,
