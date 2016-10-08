@@ -50,11 +50,10 @@ namespace VASOCIALBUZZ\Modules {
 		 * @since 1.1.0 Refactoring.
 		 */
 		public function enqueue_scripts() {
-			$file_prefix        = ( defined( 'WP_DEBUG' ) && true === WP_DEBUG ) ? '' : '.min';
 			$localize['locale'] = esc_attr( Functions::get_locale() );
 			$css                = self::_inline_style();
 			$style_file         = self::_style_file();
-			$script_file        = apply_filters( VA_SOCIALBUZZ_PREFIX . 'script_file', VA_SOCIALBUZZ_URL . 'assets/js/script' . $file_prefix . '.js' );
+			$script_file        = self::_script_file();
 			$options            = Options::get( 'all' );
 
 			if ( ! empty( $options['fb_appid'] ) ) {
@@ -78,27 +77,36 @@ namespace VASOCIALBUZZ\Modules {
 		 * @return string
 		 */
 		public function the_content( $content = '' ) {
-			$options = Options::get( 'all' );
-			$show_in = $options['post_types'];
-			$raw     = apply_filters( VA_SOCIALBUZZ_PREFIX . 'raw_the_content', $content );
-			$content = apply_filters( VA_SOCIALBUZZ_PREFIX . 'create_the_content', $content, $raw );
+			$options    = Options::get( 'all' );
+			$show_in    = $options['post_types'];
+			$raw        = apply_filters( VA_SOCIALBUZZ_PREFIX . 'raw_the_content', $content );
+			$content    = apply_filters( VA_SOCIALBUZZ_PREFIX . 'create_the_content', $content, $raw );
+			$conditions = ! is_embed() && ! is_feed() && is_single() && in_the_loop() && isset( $show_in ) && in_array( get_post_type(), $show_in );
+			$conditions = apply_filters( VA_SOCIALBUZZ_PREFIX . 'show_in_conditions', $conditions );
 
-			if (
-			    ! is_embed()
-			    && ! is_feed()
-			    && ! has_shortcode( $content, 'socialbuzz' )
-			    && ! is_front_page()
-			    && ! is_home()
-			    && in_the_loop()
-			    && is_singular()
-			    && isset( $show_in )
-			    && in_array( get_post_type(), $show_in )
-			) {
+			if ( $conditions ) {
 				// Recommend you don't use this short code registering your own post data.
 				$content .= do_shortcode( '[socialbuzz box="select"]' );
 			};
 
 			return $content;
+		}
+
+		/**
+		 * Create javascript file url.
+		 *
+		 * @return string
+		 */
+		protected function _script_file() {
+			$file_prefix = ( defined( 'WP_DEBUG' ) && true === WP_DEBUG ) ? '' : '.min';
+
+			if ( file_exists( get_stylesheet_directory() . '/vasocialbuzz.js' ) ) {
+				$file = get_stylesheet_directory_uri() . '/vasocialbuzz.js';
+			} else {
+				$file = VA_SOCIALBUZZ_URL . 'assets/js/script' . $file_prefix . '.js';
+			}
+
+			return esc_url( $file );
 		}
 
 		/**
@@ -109,8 +117,8 @@ namespace VASOCIALBUZZ\Modules {
 		protected function _style_file() {
 			$file_prefix = ( defined( 'WP_DEBUG' ) && true === WP_DEBUG ) ? '' : '.min';
 
-			if ( file_exists( get_stylesheet_directory() . '/style-vasocialbuzz.css' ) ) {
-				$file = get_stylesheet_directory_uri() . '/style-vasocialbuzz.css';
+			if ( file_exists( get_stylesheet_directory() . '/vasocialbuzz.css' ) ) {
+				$file = get_stylesheet_directory_uri() . '/vasocialbuzz.css';
 			} else {
 				$file = VA_SOCIALBUZZ_URL . 'assets/css/style' . $file_prefix . '.css';
 			}
