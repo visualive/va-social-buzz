@@ -16,7 +16,7 @@ If Google Universal Analytics is introduced to the website, it will become possi
 
 ## Requires
 * WordPress 4.4+
-* PHP 5.6+  
+* PHP 5.4+  
 
 ## Installation
 
