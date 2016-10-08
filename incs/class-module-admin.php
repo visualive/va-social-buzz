@@ -312,9 +312,10 @@ namespace VASOCIALBUZZ\Modules {
 			unset( $options['db_version'] );
 
 			foreach ( $options as $key => $option ) {
-				$sanitize = $settings[ $key ]['sanitize'];
+				$sanitize   = $settings[ $key ]['sanitize'];
+				$conditions = ( isset( $settings[ $key ]['_builtin'] ) && true === $settings[ $key ]['_builtin'] && 1 === preg_match( '/\A_(.*?)+\z/', $settings[ $key ]['sanitize'] ) );
 
-				if ( isset( $settings[ $key ]['_builtin'] ) && true === $settings[ $key ]['_builtin'] && 1 === preg_match( '/\A_(.*?)+\z/', $settings[ $key ]['sanitize'] ) ) {
+				if ( $conditions ) {
 					$sanitize = [ &$this, $sanitize ];
 				}
 
