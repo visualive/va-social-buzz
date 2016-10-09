@@ -42,6 +42,9 @@ To install "VA Social Buzz":
 
 ## Changelog
 
+### 1.1.1
+* Remove css class.
+
 ### 1.1.0
 * Source code full renewal.
 * Add new feature is not.
