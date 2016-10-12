@@ -41,6 +41,7 @@ namespace VASOCIALBUZZ\Modules {
 		protected function __construct() {
 			add_action( VA_SOCIALBUZZ_PREFIX . 'enqueue_scripts', [ &$this, 'enqueue_scripts' ] );
 			add_filter( VA_SOCIALBUZZ_PREFIX . 'the_content', [ &$this, 'the_content' ] );
+			add_filter( VA_SOCIALBUZZ_PREFIX . 'doing_show_in', [ &$this, 'doing_show_in' ], 10, 2 );
 		}
 
 		/**
@@ -67,7 +68,7 @@ namespace VASOCIALBUZZ\Modules {
 		}
 
 		/**
-		 * Create content.
+		 * Doing show in'.
 		 *
 		 * @since 0.0.1 (Alpha)
 		 * @since 1.1.0 Refactoring.
@@ -79,6 +80,18 @@ namespace VASOCIALBUZZ\Modules {
 		public function the_content( $content = '' ) {
 			global $post;
 
+			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'doing_show_in', $content, $post );
+		}
+
+		/**
+		 * Create content.
+		 *
+		 * @param string $content Post content.
+		 * @param string $post    \WP_Query.
+		 *
+		 * @return string
+		 */
+		public function doing_show_in( $content = '', $post = null ) {
 			$options    = Options::get( 'all' );
 			$show_in    = $options['post_types'];
 			$raw        = apply_filters( VA_SOCIALBUZZ_PREFIX . 'raw_the_content', $content );
