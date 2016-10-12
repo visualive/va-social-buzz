@@ -42,6 +42,10 @@ To install "VA Social Buzz":
 
 ## Changelog
 
+### 1.1.5
+
+* Add new filters & actions.
+
 ### 1.1.4
 
 * Bugfix.
