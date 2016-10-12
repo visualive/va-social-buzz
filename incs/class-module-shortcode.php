@@ -68,12 +68,17 @@ namespace VASOCIALBUZZ\Modules {
 			$show_in_like   = apply_filters( VA_SOCIALBUZZ_PREFIX . 'show_in_like', true );
 			$show_in_share  = apply_filters( VA_SOCIALBUZZ_PREFIX . 'show_in_share', true );
 			$show_in_follow = apply_filters( VA_SOCIALBUZZ_PREFIX . 'show_in_follow', true );
+			$doing          = apply_filters( VA_SOCIALBUZZ_PREFIX . 'show_in_doing', doing_action( 'the_content' ) );
 			$atts           = shortcode_atts( array(
 				'box'           => '',
 				'mode'          => '',
 				'likebox_text1' => '',
 				'likebox_text2' => '',
 			), $atts, 'socialbuzz' );
+
+			if ( ! $doing ) {
+				return $output;
+			}
 
 			switch ( $atts['box'] ) {
 				case 'like':

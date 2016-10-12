@@ -42,6 +42,10 @@ To install "VA Social Buzz":
 
 ## Changelog
 
+### 1.1.3
+
+* bugfix.
+
 ### 1.1.2
 * Fixed a problem that does not appear in a pages.
 
