@@ -39,7 +39,7 @@ namespace VASOCIALBUZZ\Modules {
 		 * This hook is called once any activated plugins have been loaded.
 		 */
 		protected function __construct() {
-			add_action( VA_SOCIALBUZZ_PREFIX . 'enqueue_scripts', [ &$this, 'enqueue_scripts' ] );
+			add_action( VA_SOCIALBUZZ_PREFIX . 'wp_enqueue_scripts', [ &$this, 'enqueue_scripts' ] );
 			add_filter( VA_SOCIALBUZZ_PREFIX . 'the_content', [ &$this, 'the_content' ] );
 			add_filter( VA_SOCIALBUZZ_PREFIX . 'doing_show_in', [ &$this, 'doing_show_in' ], 10, 2 );
 		}
@@ -55,16 +55,51 @@ namespace VASOCIALBUZZ\Modules {
 			$css                = self::_inline_style();
 			$style_file         = self::_style_file();
 			$script_file        = self::_script_file();
+			$include_style      = apply_filters( VA_SOCIALBUZZ_PREFIX . 'include_style', true );
+			$include_script     = apply_filters( VA_SOCIALBUZZ_PREFIX . 'include_script', true );
 			$options            = Options::get( 'all' );
 
 			if ( ! empty( $options['fb_appid'] ) ) {
 				$localize['appid'] = esc_attr( preg_replace( '/[^0-9]/', '', $options['fb_appid'] ) );
 			}
 
-			wp_enqueue_style( VA_SOCIALBUZZ_BASENAME, esc_url( $style_file ), array(), VA_SOCIALBUZZ_VERSION );
-			wp_add_inline_style( VA_SOCIALBUZZ_BASENAME, $css );
-			wp_enqueue_script( VA_SOCIALBUZZ_BASENAME, esc_url( $script_file ), array( 'jquery' ), VA_SOCIALBUZZ_VERSION, true );
-			wp_localize_script( VA_SOCIALBUZZ_BASENAME, 'vaSocialBuzzSettings', $localize );
+			/**
+			 * Add extra CSS styles to a registered stylesheet.
+			 *
+			 * @param string $data   String containing the CSS styles to be added.
+			 * @param string $handle Name of the stylesheet to add the extra styles to.
+			 */
+			$css = apply_filters( VA_SOCIALBUZZ_PREFIX . 'inline_style', trim( $css ), VA_SOCIALBUZZ_BASENAME );
+
+			/**
+			 * Localize script.
+			 *
+			 * @param array $l10n         The data itself. The data can be either a single or multi-dimensional array.
+			 * @param string $object_name Name for the JavaScript object. Passed directly, so it should be qualified JS variable.
+			 *                            Example: '/[a-zA-Z0-9_]+/'.
+			 * @param string $handle      Script handle the data will be attached to.
+			 */
+			$localize = apply_filters( VA_SOCIALBUZZ_PREFIX . 'localize_script', $localize, 'vaSocialBuzzSettings', VA_SOCIALBUZZ_BASENAME );
+
+			if ( true === $include_style ) {
+				wp_enqueue_style( VA_SOCIALBUZZ_BASENAME, esc_url( $style_file ), array(), VA_SOCIALBUZZ_VERSION );
+				wp_add_inline_style( VA_SOCIALBUZZ_BASENAME, $css );
+			}
+
+			if ( true === $include_script ) {
+				wp_enqueue_script( VA_SOCIALBUZZ_BASENAME, esc_url( $script_file ), array( 'jquery' ), VA_SOCIALBUZZ_VERSION, true );
+				wp_localize_script( VA_SOCIALBUZZ_BASENAME, 'vaSocialBuzzSettings', $localize );
+			}
+
+			/**
+			 * Enqueue scripts.
+			 *
+			 * @param string $css         String containing the CSS styles to be added.
+			 * @param array $l10n         The data itself. The data can be either a single or multi-dimensional array.
+			 * @param string $object_name Name for the JavaScript object. Passed directly, so it should be qualified JS variable.
+			 *                            Example: '/[a-zA-Z0-9_]+/'.
+			 */
+			do_action( VA_SOCIALBUZZ_PREFIX . 'enqueue_scripts', $css, $localize, VA_SOCIALBUZZ_BASENAME );
 		}
 
 		/**
@@ -114,9 +149,11 @@ namespace VASOCIALBUZZ\Modules {
 		 */
 		protected function _script_file() {
 			$file_prefix = ( defined( 'WP_DEBUG' ) && true === WP_DEBUG ) ? '' : '.min';
+			$filename    = apply_filters( VA_SOCIALBUZZ_PREFIX . 'script_filename', 'vasocialbuzz.js' );
+			$filename    = trim( $filename, '/' );
 
-			if ( file_exists( get_stylesheet_directory() . '/vasocialbuzz.js' ) ) {
-				$file = get_stylesheet_directory_uri() . '/vasocialbuzz.js';
+			if ( file_exists( trailingslashit( get_stylesheet_directory() ) . $filename ) ) {
+				$file = trailingslashit( get_stylesheet_directory_uri() )  . $filename;
 			} else {
 				$file = VA_SOCIALBUZZ_URL . 'assets/js/script' . $file_prefix . '.js';
 			}
@@ -131,9 +168,11 @@ namespace VASOCIALBUZZ\Modules {
 		 */
 		protected function _style_file() {
 			$file_prefix = ( defined( 'WP_DEBUG' ) && true === WP_DEBUG ) ? '' : '.min';
+			$filename    = apply_filters( VA_SOCIALBUZZ_PREFIX . 'style_filename', 'vasocialbuzz.css' );
+			$filename    = trim( $filename, '/' );
 
-			if ( file_exists( get_stylesheet_directory() . '/vasocialbuzz.css' ) ) {
-				$file = get_stylesheet_directory_uri() . '/vasocialbuzz.css';
+			if ( file_exists( trailingslashit( get_stylesheet_directory() ) . $filename ) ) {
+				$file = trailingslashit( get_stylesheet_directory_uri() )  . $filename;
 			} else {
 				$file = VA_SOCIALBUZZ_URL . 'assets/css/style' . $file_prefix . '.css';
 			}

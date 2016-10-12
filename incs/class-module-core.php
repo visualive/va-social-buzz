@@ -77,7 +77,7 @@ namespace VASOCIALBUZZ\Modules {
 			add_shortcode( 'socialbuzz', array( &$this, 'add_shortcode' ) );
 
 			if ( ! is_admin() ) {
-				add_action( 'wp_enqueue_scripts', array( &$this, 'wp_enqueue_scripts' ) );
+				add_action( 'wp_enqueue_scripts', array( &$this, 'wp_enqueue_scripts' ), 15 );
 				add_filter( 'the_content', array( &$this, 'the_content' ) );
 			}
 		}
@@ -86,7 +86,7 @@ namespace VASOCIALBUZZ\Modules {
 		 * Echo scripts.
 		 */
 		public function wp_enqueue_scripts() {
-			do_action( VA_SOCIALBUZZ_PREFIX . 'enqueue_scripts' );
+			do_action( VA_SOCIALBUZZ_PREFIX . 'wp_enqueue_scripts' );
 		}
 
 		/**
