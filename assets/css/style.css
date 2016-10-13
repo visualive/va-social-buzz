@@ -29,8 +29,6 @@
 /**
  * Clearfix.
  */
-.va-social-buzz .vasb_fb:before,
-.va-social-buzz .vasb_fb:after,
 .va-social-buzz .vasb_share:before,
 .va-social-buzz .vasb_share:after,
 .va-social-buzz .vasb_notification:before,
@@ -38,7 +36,6 @@
     content: ' ';
     display: table;
 }
-.va-social-buzz .vasb_fb:after,
 .va-social-buzz .vasb_share:after,
 .va-social-buzz .vasb_notification:after {
     clear: both;
@@ -107,7 +104,7 @@
 }
 
 /**
- * Like! block.
+ * Like! box.
  */
 .va-social-buzz .vasb_fb {
     background-position: center;
@@ -152,7 +149,7 @@
 }
 
 /**
- * Share block.
+ * Share box.
  */
 .va-social-buzz .vasb_share .vasb_share_button {
     width: 50%;
@@ -187,7 +184,7 @@
 }
 
 /**
- * Notification block.
+ * Notification box.
  */
 .va-social-buzz .vasb_notification .vasb_notification_button-push7 {
     padding: 0;
@@ -204,7 +201,7 @@
 }
 
 /**
- * Follow block.
+ * Follow box.
  */
 .va-social-buzz .vasb_follow {
     background-color: #eeeeee;
