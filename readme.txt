@@ -46,6 +46,9 @@ To install "VA Social Buzz":
 
 == Changelog ==
 
+= 1.1.6 =
+* Push7 button was moved from Share block to notification block.
+
 = 1.1.5 =
 * Add new filters & actions.
 

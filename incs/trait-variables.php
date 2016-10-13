@@ -216,6 +216,21 @@ namespace VASOCIALBUZZ\Modules {
 				],
 			];
 
+			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'sns_list', $links );
+		}
+
+		/**
+		 * Notification list.
+		 *
+		 * @since 1.1.6
+		 *
+		 * @return array
+		 */
+		public static function notification_list() {
+			$options         = get_option( VA_SOCIALBUZZ_NAME_OPTION, [] );
+			$default_options = self::default_options();
+			$links           = [];
+
 			if ( Functions::exists_push7() ) {
 				$endpoint_push7 = Functions::get_push7_register_url();
 				$text_push7     = isset( $options['text_push7'] ) ? $options['text_push7'] : $default_options['text_push7'];
@@ -225,7 +240,7 @@ namespace VASOCIALBUZZ\Modules {
 				];
 			}
 
-			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'sns_list', $links );
+			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'notification_list', $links );
 		}
 	}
 }

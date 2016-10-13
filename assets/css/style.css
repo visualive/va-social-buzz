@@ -26,20 +26,94 @@
     box-sizing: inherit;
 }
 
-.va-social-buzz .vasb_fb .vasb_fb_like .vasb_fb_like_text,
-.va-social-buzz .vasb_share .vasb_share_button,
+/**
+ * Clearfix.
+ */
+.va-social-buzz .vasb_fb:before,
+.va-social-buzz .vasb_fb:after,
+.va-social-buzz .vasb_share:before,
+.va-social-buzz .vasb_share:after,
+.va-social-buzz .vasb_notification:before,
+.va-social-buzz .vasb_notification:after {
+    content: ' ';
+    display: table;
+}
+.va-social-buzz .vasb_fb:after,
+.va-social-buzz .vasb_share:after,
+.va-social-buzz .vasb_notification:after {
+    clear: both;
+}
+
+/**
+ * Font size.
+ */
+.va-social-buzz .vasb_fb_like_text,
+.va-social-buzz .vasb_share_button,
+.va-social-buzz .vasb_notification_button,
 .va-social-buzz .vasb_follow {
     font-size: 16px;
 }
 
+/**
+ * Icon.
+ */
+.va-social-buzz .vasb_icon {
+    font-family: 'vasocialbuzz';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1;
+    text-transform: none;
+}
+.va-social-buzz .vasb_icon:before {
+    margin-right: 8px;
+}
+
+/**
+ * Button design.
+ */
+.va-social-buzz .vasb_share_button,
+.va-social-buzz .vasb_notification_button {
+    float: left;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+.va-social-buzz .vasb_share_button a,
+.va-social-buzz .vasb_notification_button a {
+    border-bottom: none;
+    border-radius: 5px;
+    color: #ffffff;
+    display: block;
+    padding: .75em 0;
+    text-decoration: none;
+}
+.va-social-buzz .vasb_share_button a:focus,
+.va-social-buzz .vasb_notification_button a:focus {
+    outline: none;
+}
+
+/**
+ * Box layout.
+ */
+.va-social-buzz .vasb_fb,
+.va-social-buzz .vasb_share,
+.va-social-buzz .vasb_notification {
+    margin-bottom: .75em;
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+/**
+ * Like! block.
+ */
 .va-social-buzz .vasb_fb {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     display: table;
-    margin-bottom: .75em;
-    position: relative;
-    width: 100%;
 }
 .va-social-buzz .vasb_fb .vasb_fb_thumbnail {
     background-position: center;
@@ -77,56 +151,19 @@
     max-width: initial;
 }
 
-.va-social-buzz .vasb_share {
-    margin-bottom: .75em;
-    text-align: center;
-    width: 100%;
-}
-.va-social-buzz .vasb_share:before,
-.va-social-buzz .vasb_share:after {
-    content: ' ';
-    display: table;
-}
-.va-social-buzz .vasb_share:after {
-    clear: both;
-}
-.va-social-buzz .vasb_share .vasb_icon {
-    font-family: 'vasocialbuzz';
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1;
-    text-transform: none;
-}
+/**
+ * Share block.
+ */
 .va-social-buzz .vasb_share .vasb_share_button {
-    float: left;
-    padding-left: 7px;
-    padding-right: 7px;
     width: 50%;
 }
-.va-social-buzz .vasb_share .vasb_share_button:first-child {
-
-}
-.va-social-buzz .vasb_share .vasb_share_button a {
-    border-bottom: none;
-    border-radius: 5px;
-    color: #ffffff;
-    display: block;
-    padding: .75em 0;
-    text-decoration: none;
-}
-.va-social-buzz .vasb_share .vasb_share_button a:focus {
-    outline: none;
-}
+/* Share */
 .va-social-buzz .vasb_share .vasb_share_button-fb {
     padding-left: 0;
     padding-right: 7px;
 }
 .va-social-buzz .vasb_share .vasb_share_button-fb .vasb_icon:before {
     content: "\e800";
-    margin-right: 8px;
 }
 .va-social-buzz .vasb_share .vasb_share_button-fb a {
     background-color: #3b55a0;
@@ -134,14 +171,13 @@
 .va-social-buzz .vasb_share .vasb_share_button-fb a:hover {
     background-color: #384182;
 }
-
+/* Tweet */
 .va-social-buzz .vasb_share .vasb_share_button-twttr {
     padding-left: 7px;
     padding-right: 0;
 }
 .va-social-buzz .vasb_share .vasb_share_button-twttr .vasb_icon:before {
     content: "\e801";
-    margin-right: 8px;
 }
 .va-social-buzz .vasb_share .vasb_share_button-twttr a {
     background-color: #1b95e0;
@@ -150,35 +186,26 @@
     background-color: #0c7abf;
 }
 
-.va-social-buzz .vasb_share .vasb_share_button-push7:before,
-.va-social-buzz .vasb_share .vasb_share_button-push7:after {
-    content: ' ';
-    display: table;
-}
-.va-social-buzz .vasb_share .vasb_share_button-push7:after {
-    clear: both;
-}
-.va-social-buzz .vasb_share .vasb_share_button-push7 {
-    clear: both;
-    display: block;
-    float: none;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: .75em;
+/**
+ * Notification block.
+ */
+.va-social-buzz .vasb_notification .vasb_notification_button-push7 {
+    padding: 0;
     width: 100%;
 }
-.va-social-buzz .vasb_share .vasb_share_button-push7 .vasb_icon:before {
+.va-social-buzz .vasb_notification .vasb_notification_button-push7 .vasb_icon:before {
     content: "\e804";
-    margin-right: 8px;
 }
-.va-social-buzz .vasb_share .vasb_share_button-push7 a {
+.va-social-buzz .vasb_notification .vasb_notification_button-push7 a {
     background-color: #e5a717;
-    text-align: center;
 }
-.va-social-buzz .vasb_share .vasb_share_button-push7 a:hover {
+.va-social-buzz .vasb_notification .vasb_notification_button-push7 a:hover {
     background-color: #bf9214;
 }
 
+/**
+ * Follow block.
+ */
 .va-social-buzz .vasb_follow {
     background-color: #eeeeee;
     color: #707070;

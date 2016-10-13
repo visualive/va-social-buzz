@@ -63,13 +63,14 @@ namespace VASOCIALBUZZ\Modules {
 		 * @return null|string
 		 */
 		public function add_shortcode( $atts = [] ) {
-			$output         = null;
-			$tmp_wrapper    = self::_tmp_wrapper();
-			$show_in_like   = apply_filters( VA_SOCIALBUZZ_PREFIX . 'show_in_like', true );
-			$show_in_share  = apply_filters( VA_SOCIALBUZZ_PREFIX . 'show_in_share', true );
-			$show_in_follow = apply_filters( VA_SOCIALBUZZ_PREFIX . 'show_in_follow', true );
-			$doing          = apply_filters( VA_SOCIALBUZZ_PREFIX . 'show_in_doing', doing_filter( VA_SOCIALBUZZ_PREFIX . 'doing_show_in' ) );
-			$atts           = shortcode_atts( array(
+			$output               = null;
+			$tmp_wrapper          = self::_tmp_wrapper();
+			$show_in_like         = apply_filters( VA_SOCIALBUZZ_PREFIX . 'show_in_like', true );
+			$show_in_share        = apply_filters( VA_SOCIALBUZZ_PREFIX . 'show_in_share', true );
+			$show_in_notification = apply_filters( VA_SOCIALBUZZ_PREFIX . 'show_in_notification', true );
+			$show_in_follow       = apply_filters( VA_SOCIALBUZZ_PREFIX . 'show_in_follow', true );
+			$doing                = apply_filters( VA_SOCIALBUZZ_PREFIX . 'show_in_doing', doing_filter( VA_SOCIALBUZZ_PREFIX . 'doing_show_in' ) );
+			$atts                 = shortcode_atts( array(
 				'box'           => '',
 				'mode'          => '',
 				'likebox_text1' => '',
@@ -87,6 +88,9 @@ namespace VASOCIALBUZZ\Modules {
 				case 'share':
 					$output = self::_shortcode_shareblock();
 					break;
+				case 'notification':
+					$output = self::_shortcode_notificationblock();
+					break;
 				case 'follow':
 					$output = self::_shortcode_followblock();
 					break;
@@ -97,6 +101,9 @@ namespace VASOCIALBUZZ\Modules {
 					if ( true === $show_in_share ) {
 						$output[] = self::_shortcode_shareblock();
 					}
+					if ( true === $show_in_notification ) {
+						$output[] = self::_shortcode_notificationblock();
+					}
 					if ( true === $show_in_follow ) {
 						$output[] = self::_shortcode_followblock();
 					}
@@ -104,6 +111,7 @@ namespace VASOCIALBUZZ\Modules {
 				default:
 					$output[] = self::_shortcode_likeblock( $atts['likebox_text1'], $atts['likebox_text2'], $atts['mode'] );
 					$output[] = self::_shortcode_shareblock();
+					$output[] = self::_shortcode_notificationblock();
 					$output[] = self::_shortcode_followblock();
 					break;
 			}
@@ -228,6 +236,31 @@ namespace VASOCIALBUZZ\Modules {
 		}
 
 		/**
+		 * Short code the notification block.
+		 *
+		 * @return string
+		 */
+		protected function _shortcode_notificationblock() {
+			$output      = null;
+			$tmp         = self::_tmp_notificationblock();
+			$tmp_wrapper = self::_tmp_wrapper_notificationblock();
+			$sns         = Variable::notification_list();
+
+			foreach ( $sns as $key => $value ) {
+				$output[ $key ] = $tmp;
+				$output[ $key ] = str_replace( '{{prefix}}', sanitize_html_class( $key ), $output[ $key ] );
+				$output[ $key ] = str_replace( '{{endpoint}}', $value['endpoint'], $output[ $key ] );
+				$output[ $key ] = str_replace( '{{anchor_text}}', $value['anchor_text'], $output[ $key ] );
+			}
+
+			if ( is_array( $output ) && ! empty( $output ) ) {
+				$output = str_replace( '{{content}}', implode( '', $output ), $tmp_wrapper );
+			}
+
+			return $output;
+		}
+
+		/**
 		 * Short code the follow block.
 		 *
 		 * @return string
@@ -303,6 +336,35 @@ namespace VASOCIALBUZZ\Modules {
 			$tmp .= '</div><!-- //.vasb_share_button-{{prefix}} -->';
 
 			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'tmp_shareblock', $tmp );
+		}
+
+		/**
+		 * Wrapper Template.
+		 *
+		 * @return string
+		 */
+		protected function _tmp_wrapper_notificationblock() {
+			$tmp = '<div class="vasb_notification">';
+			$tmp .= '{{content}}';
+			$tmp .= '</div><!-- //.vasb_notification -->';
+
+			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'tmp_wrapper_notificationblock', $tmp );
+		}
+
+		/**
+		 * Notification block Template.
+		 *
+		 * @return string
+		 */
+		protected function _tmp_notificationblock() {
+			$tmp = '<div class="vasb_notification_button vasb_notification_button-{{prefix}}">';
+			$tmp .= '<a href="{{endpoint}}">';
+			$tmp .= '<i class="vasb_icon"></i>';
+			$tmp .= '<span class="vasb_share_button_text">{{anchor_text}}</span>';
+			$tmp .= '</a>';
+			$tmp .= '</div><!-- //.vasb_notification_button-{{prefix}} -->';
+
+			return apply_filters( VA_SOCIALBUZZ_PREFIX . 'tmp_notificationblock', $tmp );
 		}
 
 		/**
