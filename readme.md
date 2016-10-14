@@ -42,6 +42,10 @@ To install "VA Social Buzz":
 
 ## Changelog
 
+### 1.1.7
+* [Developer's][Fix] Arguments to pass to the do_action was wrong.
+* As for these corrections, normal use does not have any problem.
+
 ### 1.1.6
 
 * Push7 button was moved from Share box to notification box.

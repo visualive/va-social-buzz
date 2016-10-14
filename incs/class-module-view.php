@@ -57,6 +57,7 @@ namespace VASOCIALBUZZ\Modules {
 			$script_file        = self::_script_file();
 			$include_style      = apply_filters( VA_SOCIALBUZZ_PREFIX . 'include_style', true );
 			$include_script     = apply_filters( VA_SOCIALBUZZ_PREFIX . 'include_script', true );
+			$object_name        = 'vaSocialBuzzSettings';
 			$options            = Options::get( 'all' );
 
 			if ( ! empty( $options['fb_appid'] ) ) {
@@ -79,7 +80,7 @@ namespace VASOCIALBUZZ\Modules {
 			 *                            Example: '/[a-zA-Z0-9_]+/'.
 			 * @param string $handle      Script handle the data will be attached to.
 			 */
-			$localize = apply_filters( VA_SOCIALBUZZ_PREFIX . 'localize_script', $localize, 'vaSocialBuzzSettings', VA_SOCIALBUZZ_BASENAME );
+			$localize = apply_filters( VA_SOCIALBUZZ_PREFIX . 'localize_script', $localize, $object_name, VA_SOCIALBUZZ_BASENAME );
 
 			if ( true === $include_style ) {
 				wp_enqueue_style( VA_SOCIALBUZZ_BASENAME, esc_url( $style_file ), array(), VA_SOCIALBUZZ_VERSION );
@@ -99,7 +100,7 @@ namespace VASOCIALBUZZ\Modules {
 			 * @param string $object_name Name for the JavaScript object. Passed directly, so it should be qualified JS variable.
 			 *                            Example: '/[a-zA-Z0-9_]+/'.
 			 */
-			do_action( VA_SOCIALBUZZ_PREFIX . 'enqueue_scripts', $css, $localize, VA_SOCIALBUZZ_BASENAME );
+			do_action( VA_SOCIALBUZZ_PREFIX . 'enqueue_scripts', $css, $localize, $object_name );
 		}
 
 		/**
