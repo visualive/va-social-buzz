@@ -3,7 +3,7 @@ Contributors: kuck1u, mayukojpn, toro_unit
 Donate link: http://www.amazon.co.jp/registry/wishlist/AN9BLYUQMVZ5/
 Tags: automatic, social, socialmedia, social media, viral, viralmedia, viral media, share, facebook, twitter
 Requires at least: 4.4
-Tested up to: 4.6
+Tested up to: 4.7-RC1
 Stable tag: trunk
 License: GPL-v2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -45,6 +45,9 @@ To install "VA Social Buzz":
 4. Google Analytics - Social Plugin.
 
 == Changelog ==
+
+= 1.1.8 =
+* Tested up to WordPress 4.7-RC1
 
 = 1.1.7 =
 * [Developer's][Fixed] Arguments to pass to the do_action was wrong.

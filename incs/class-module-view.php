@@ -89,7 +89,7 @@ namespace VASOCIALBUZZ\Modules {
 
 			if ( true === $include_script ) {
 				wp_enqueue_script( VA_SOCIALBUZZ_BASENAME, esc_url( $script_file ), array( 'jquery' ), VA_SOCIALBUZZ_VERSION, true );
-				wp_localize_script( VA_SOCIALBUZZ_BASENAME, 'vaSocialBuzzSettings', $localize );
+				wp_localize_script( VA_SOCIALBUZZ_BASENAME, $object_name, $localize );
 			}
 
 			/**
