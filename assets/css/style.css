@@ -81,10 +81,15 @@
 .va-social-buzz .vasb_notification_button a {
     border-bottom: none;
     border-radius: 5px;
+    box-shadow: none;
     color: #ffffff;
     display: block;
     padding: .75em 0;
     text-decoration: none;
+}
+.va-social-buzz .vasb_share_button a:hover,
+.va-social-buzz .vasb_notification_button a:hover {
+    box-shadow: none;
 }
 .va-social-buzz .vasb_share_button a:focus,
 .va-social-buzz .vasb_notification_button a:focus {

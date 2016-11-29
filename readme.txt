@@ -48,6 +48,7 @@ To install "VA Social Buzz":
 
 = 1.1.8 =
 * Tested up to WordPress 4.7-RC1
+* Tested to Twenty Seventeen.
 
 = 1.1.7 =
 * [Developer's][Fixed] Arguments to pass to the do_action was wrong.
