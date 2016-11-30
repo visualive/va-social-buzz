@@ -3,7 +3,7 @@ Contributors: kuck1u, mayukojpn, toro_unit
 Donate link: http://www.amazon.co.jp/registry/wishlist/AN9BLYUQMVZ5/
 Tags: automatic, social, socialmedia, social media, viral, viralmedia, viral media, share, facebook, twitter
 Requires at least: 4.4
-Tested up to: 4.7-RC1
+Tested up to: 4.7
 Stable tag: trunk
 License: GPL-v2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
