@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: VA Social Buzz\n"
-"POT-Creation-Date: 2016-11-30 10:44+0900\n"
-"PO-Revision-Date: 2016-11-30 10:46+0900\n"
+"POT-Creation-Date: 2016-12-01 00:49+0900\n"
+"PO-Revision-Date: 2016-12-01 00:52+0900\n"
 "Last-Translator: \n"
 "Language-Team: VisuAlive <kuck1u@visualive.jp>\n"
 "Language: en_001\n"
@@ -27,35 +27,39 @@ msgstr ""
 "す。現在のWordPressのバージョンは %4$s、  PHP のバージョンは %5$s です。アッ"
 "プグレード後、再度お試しください。"
 
-#: incs/class-module-admin.php:92 incs/class-module-admin.php:109
+#: incs/class-module-admin-notices.php:82
+msgid ""
+"Premium add-on that makes VA Social Buzz more flexible, more convenient!"
+msgstr ""
+"VA Social Buzz を、もっと柔軟に、もっと便利にするプレミアムアドオン発売中！"
+
+#: incs/class-module-admin-notices.php:83
+msgid "https://gumroad.com/l/va-social-buzz-plus-sw"
+msgstr "https://bit.ly/VA-Social-Buzz-Plus-SW"
+
+#: incs/class-module-admin-notices.php:84
+msgid "Click here to details."
+msgstr "詳しくはこちら"
+
+#: incs/class-module-admin-notices.php:85
+msgid "Dismiss this notice."
+msgstr "通知を閉じる。"
+
+#: incs/class-module-admin-notices.php:108
+msgid "Dismissible has not been set."
+msgstr ""
+
+#: incs/class-module-admin.php:91 incs/class-module-admin.php:121
 msgid "VA Social Buzz"
 msgstr "VA Social Buzz"
 
-#: incs/class-module-admin.php:93
+#: incs/class-module-admin.php:92
 msgid ""
 "You can setting VA Social Buzz in <a href=\"options-reading.php\">Reading</"
 "a>."
 msgstr ""
 "VA Social Buzz の設定は<a href=\"options-reading.php\">表示設定</a>で行えま"
 "す。"
-
-#: incs/class-module-admin.php:138
-msgid ""
-"Premium add-on that makes VA Social Buzz more flexible, more convenient!"
-msgstr ""
-"VA Social Buzz を、もっと柔軟に、もっと便利にするプレミアムアドオン発売中！"
-
-#: incs/class-module-admin.php:139
-msgid "https://gumroad.com/l/va-social-buzz-plus-sw"
-msgstr "https://www.visualive.jp/portfolio/archives/va-social-buzz/"
-
-#: incs/class-module-admin.php:140
-msgid "Click here to details."
-msgstr "詳しくはこちら"
-
-#: incs/class-module-admin.php:141
-msgid "Dismiss this notice."
-msgstr "通知を閉じる。"
 
 #: incs/trait-variables.php:46
 msgid "Facebook Page username"
