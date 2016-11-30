@@ -67,19 +67,20 @@ namespace VASOCIALBUZZ\Modules {
 		 * @param string       $key   Option key.
 		 */
 		public static function update( $value = '', $key = '' ) {
-			$options = get_option( VA_SOCIALBUZZ_NAME_OPTION, [] );
+			$options = self::get( 'all' );
+			$key     = sanitize_key( $key );
 
 			if ( '' === $value ) {
 				return;
 			}
 
-			if ( ! is_array( $value ) && '' !== $key ) {
-				$options[ $key ] = $value;
-			} elseif ( is_array( $value ) ) {
+			if ( is_array( $value ) && '' === $key ) {
 				$options = $value;
+			} elseif ( '' !== $value && '' !== $key ) {
+				$options[ $key ] = $value;
 			}
 
-			update_option( VA_SOCIALBUZZ_NAME_OPTION, $options );
+			return update_option( VA_SOCIALBUZZ_NAME_OPTION, $options );
 		}
 
 		/**
@@ -92,7 +93,7 @@ namespace VASOCIALBUZZ\Modules {
 				delete_option( VA_SOCIALBUZZ_NAME_OPTION );
 			}
 
-			$options = get_option( VA_SOCIALBUZZ_NAME_OPTION, [] );
+			$options = self::get( 'all' );
 
 			if ( isset( $options[ $key ] ) ) {
 				unset( $options[ $key ] );

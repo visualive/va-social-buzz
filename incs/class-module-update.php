@@ -60,13 +60,14 @@ namespace VASOCIALBUZZ\Modules {
 		 * @param array  $options    Options.
 		 * @param string $db_version Option version.
 		 */
-		protected function version_0( $options = [], $db_version = '0' ) {
-			if ( ! empty( $options ) && version_compare( '0', $db_version, '==' ) ) {
+		protected function version_0( $options = false, $db_version = '0' ) {
+			if ( false !== $options && ! empty( $options ) && version_compare( '0', $db_version, '==' ) ) {
 				$transient_key = 'vasocialbuzz_push7_register_url';
 				$transient     = get_transient( $transient_key );
 				$old_options   = $options;
 				$new_options   = [
 					'db_version'      => VA_SOCIALBUZZ_VERSION_DB,
+					'notices'         => [],
 					'fb_page'         => $old_options['fb_page'],
 					'fb_appid'        => $old_options['fb_appid'],
 					'twttr_name'      => $old_options['tw_account'],

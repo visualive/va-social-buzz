@@ -53,6 +53,7 @@ namespace VASOCIALBUZZ\Modules {
 			$this->settings = Variable::settings();
 
 			add_action( 'admin_init', array( &$this, 'admin_init' ) );
+			add_action( 'admin_init', array( &$this, 'admin_notices' ) );
 			add_action( 'admin_enqueue_scripts', array( &$this, 'admin_enqueue_scripts' ) );
 			add_action( 'admin_enqueue_scripts', array( &$this, 'add_pointer_script' ) );
 		}
@@ -95,6 +96,19 @@ namespace VASOCIALBUZZ\Modules {
 				'pointerName'    => VA_SOCIALBUZZ_NAME_OPTION,
 				'pointerEnable'  => $pointer_enable,
 			) );
+		}
+
+		/**
+		 * Admin notices.
+		 *
+		 * @since  1.1.8
+		 */
+		public function admin_notices() {
+			require_once dirname( __FILE__ ) . '/class-module-admin-notices.php';
+
+			$notices  = apply_filters( VA_SOCIALBUZZ_PREFIX . 'module_admin_notices', AdminNotices::get_called_class() );
+
+			$notices::get_instance();
 		}
 
 		/**
@@ -286,7 +300,7 @@ namespace VASOCIALBUZZ\Modules {
 			$tmp         = '<p class="description">%s</p>';
 			$description = isset( $settings['description'] ) ? $settings['description'] : '';
 
-			if ( ! empty( $description ) && is_array( $description )  ) {
+			if ( ! empty( $description ) && is_array( $description ) ) {
 				foreach ( $description as $value ) {
 					$output[] = sprintf( $tmp, wp_kses_data( $value ) );
 				}
@@ -305,11 +319,13 @@ namespace VASOCIALBUZZ\Modules {
 		 * @return array
 		 */
 		public function sanitize_option( $options ) {
-			$settings = $this->settings;
-			$default  = Options::get( 'default' );
-			$options  = wp_parse_args( $options, $default );
+			$settings   = $this->settings;
+			$options    = wp_parse_args( $options, Options::get( 'all' ) );
+			$db_version = ( isset( $options['db_version'] ) ) ? $options['db_version'] : VA_SOCIALBUZZ_VERSION_DB;
+			$notices    = ( isset( $options['notices'] ) && ! empty( $options['notices'] ) ) ? $options['notices'] : [];
 
 			unset( $options['db_version'] );
+			unset( $options['notices'] );
 
 			foreach ( $options as $key => $option ) {
 				$sanitize   = $settings[ $key ]['sanitize'];
@@ -322,7 +338,8 @@ namespace VASOCIALBUZZ\Modules {
 				$options[ $key ] = call_user_func( $sanitize, $option );
 			}
 
-			$options['db_version'] = VA_SOCIALBUZZ_VERSION_DB;
+			$options['db_version'] = $db_version;
+			$options['notices']    = $notices;
 
 			return $options;
 		}
