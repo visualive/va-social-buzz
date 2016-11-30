@@ -42,6 +42,11 @@ namespace VASOCIALBUZZ\Modules {
 		 */
 		private $settings = [];
 
+		/**
+		 * Ajax action.
+		 *
+		 * @var string
+		 */
 		private $ajax_action = 'vasb_dismiss_admin_notice';
 
 		/**
