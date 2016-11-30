@@ -80,7 +80,7 @@ namespace VASOCIALBUZZ\Modules {
 			}
 
 			$message = __( 'Premium add-on that makes VA Social Buzz more flexible, more convenient!', 'va-social-buzz' );
-			$href    = __( 'https://gumroad.com/l/va-social-buzz-plus-sw', 'va-social-buzz' );
+			$href    = __( 'https://gumroad.com/l/va-social-buzz-plus-sw/?utm_source=VASB-WP-Dashboard&utm_medium=social&utm_campaign=VASB-WP-Dashboard', 'va-social-buzz' );
 			$anchor  = sprintf( '<a href="%s">%s</a>', esc_url( $href ), __( 'Click here to details.', 'va-social-buzz' ) );
 			$dismiss = __( 'Dismiss this notice.', 'va-social-buzz' );
 			$notices = <<<EOM
