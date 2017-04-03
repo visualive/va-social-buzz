@@ -42,12 +42,16 @@ To install "VA Social Buzz":
 
 ## Changelog
 
+### 1.1.9
+* [Fixed] Bug that current url can not be acquired correctly.
+* [Fixed] Bug that the title garbled when sharing to Twitter.
+
 ### 1.1.8
 * Tested up to WordPress 4.7-RC1.
 * Tested to Twenty Seventeen.
 
 ### 1.1.7
-* [Developer's][Fix] Arguments to pass to the do_action was wrong.
+* [Developer's][Fixed] Arguments to pass to the do_action was wrong.
 * As for these corrections, normal use does not have any problem.
 
 ### 1.1.6

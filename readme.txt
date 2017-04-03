@@ -46,6 +46,10 @@ To install "VA Social Buzz":
 
 == Changelog ==
 
+= 1.1.9 =
+* [Fixed] Bug that current url can not be acquired correctly.
+* [Fixed] Bug that the title garbled when sharing to Twitter.
+
 = 1.1.8 =
 * Tested up to WordPress 4.7-RC1
 * Tested to Twenty Seventeen.
