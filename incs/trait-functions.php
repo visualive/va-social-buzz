@@ -125,6 +125,26 @@ namespace VASOCIALBUZZ\Modules {
 		}
 
 		/**
+		 * Get current url.
+		 *
+		 * @return string
+		 */
+		public static function get_current_url() {
+			global $wp;
+			$wpbitly = get_option( 'wpbitly-options', array() );
+
+			if ( ! $wp->did_permalink ) {
+				$current_url = add_query_arg( $wp->query_string, '', home_url( '/' ) );
+			} elseif ( isset( $wpbitly ) && ! empty( $wpbitly ) && is_singular() && is_array( $wpbitly ) && in_array( get_post_type(), $wpbitly['post_types'] ) ) {
+				$current_url = wp_get_shortlink( 0, 'query' );
+			} else {
+				$current_url = home_url( add_query_arg( array(), $wp->request ) );
+			}
+
+			return $current_url;
+		}
+
+		/**
 		 * Output the locale, doing some conversions to make sure the proper Facebook locale is outputted.
 		 * Yoast SEO Plugin Thanks ! https://yoast.com/wordpress/plugins/seo/
 		 *

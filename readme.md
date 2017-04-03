@@ -42,6 +42,9 @@ To install "VA Social Buzz":
 
 ## Changelog
 
+### 1.1.10
+* [Fixed] Bug that current url can not be acquired correctly.
+
 ### 1.1.9
 * [Fixed] Bug that current url can not be acquired correctly.
 * [Fixed] Bug that the title garbled when sharing to Twitter.

@@ -208,24 +208,12 @@ namespace VASOCIALBUZZ\Modules {
 		 * @return string
 		 */
 		protected function _shortcode_shareblock() {
-			global $wp;
-
 			$output        = null;
 			$tmp           = self::_tmp_shareblock();
 			$tmp_wrapper   = self::_tmp_wrapper_shareblock();
 			$sns           = Variable::sns_list();
+			$current_url   = Functions::get_current_url();
 			$current_title = wp_get_document_title();
-			$wpbitly       = get_option( 'wpbitly-options', array() );
-
-			if ( ! $wp->did_permalink ) {
-				$current_url = home_url( add_query_arg( array(), $wp->query_string ) );
-			} else {
-				$current_url = home_url( add_query_arg( array(), $wp->request ) );
-			}
-
-			if ( isset( $wpbitly ) && ! empty( $wpbitly ) && is_singular() && is_array( $wpbitly ) && in_array( get_post_type(), $wpbitly['post_types'] ) ) {
-				$current_url = wp_get_shortlink( 0, 'query' );
-			}
 
 			if ( ! empty( $current_url ) && ! empty( $current_title ) ) {
 				foreach ( $sns as $key => $value ) {
@@ -233,7 +221,7 @@ namespace VASOCIALBUZZ\Modules {
 					$output[ $key ] = str_replace( '{{prefix}}', sanitize_html_class( $key ), $output[ $key ] );
 					$output[ $key ] = str_replace( '{{endpoint}}', $value['endpoint'], $output[ $key ] );
 					$output[ $key ] = str_replace( '{{anchor_text}}', $value['anchor_text'], $output[ $key ] );
-					$output[ $key ] = str_replace( '{{permalink}}', rawurlencode( esc_url_raw( $current_url ) ), $output[ $key ] );
+					$output[ $key ] = str_replace( '{{permalink}}', rawurlencode( esc_url( $current_url ) ), $output[ $key ] );
 					$output[ $key ] = str_replace( '{{post_title}}', rawurlencode( html_entity_decode( $current_title, ENT_COMPAT, get_bloginfo( 'charset' ) ) ), $output[ $key ] );
 				}
 
