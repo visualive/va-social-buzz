@@ -78,14 +78,14 @@ namespace VASOCIALBUZZ\Modules {
 		 */
 		public function admin_notices() {
 			$notices = Options::get( 'notices' );
-			$key     = 'vasb-20161130';
+			$key     = 'vasb-2017-04-04';
 
 			if ( ! current_user_can( 'manage_options' ) || defined( 'VA_SOCIALBUZZ_PLUS_SW_VERSION' ) || ! self::_is_admin_notice_active( $key ) || in_array( $key, $notices ) ) {
 				return;
 			}
 
 			$message = __( 'Premium add-on that makes VA Social Buzz more flexible, more convenient!', 'va-social-buzz' );
-			$href    = __( 'https://gumroad.com/l/va-social-buzz-plus-sw/?utm_source=VASB-WP-Dashboard&utm_medium=social&utm_campaign=VASB-WP-Dashboard', 'va-social-buzz' );
+			$href    = __( 'https://gumroad.com/l/va-social-buzz-plus-sw/', 'va-social-buzz' );
 			$anchor  = sprintf( '<a href="%s">%s</a>', esc_url( $href ), __( 'Click here to details.', 'va-social-buzz' ) );
 			$dismiss = __( 'Dismiss this notice.', 'va-social-buzz' );
 			$notices = <<<EOM
