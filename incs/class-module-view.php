@@ -214,7 +214,7 @@ namespace VASOCIALBUZZ\Modules {
 		protected function _tmp_head_css() {
 			$css_before            = apply_filters( VA_SOCIALBUZZ_PREFIX . 'tmp_head_css_before', '' );
 			$css_after             = apply_filters( VA_SOCIALBUZZ_PREFIX . 'tmp_head_css_after', '' );
-			$css_end               = apply_filters( VA_SOCIALBUZZ_PREFIX . 'tmp_head_css_end', '' );
+			$css_center            = apply_filters( VA_SOCIALBUZZ_PREFIX . 'tmp_head_css_center', '' );
 			$css_mediaquery_before = apply_filters( VA_SOCIALBUZZ_PREFIX . 'tmp_head_css_mediaquery_before', '' );
 			$css_mediaquery_after  = apply_filters( VA_SOCIALBUZZ_PREFIX . 'tmp_head_css_mediaquery_after', '' );
 			$css                   = <<<EOI
@@ -222,11 +222,16 @@ namespace VASOCIALBUZZ\Modules {
 .va-social-buzz .vasb_fb .vasb_fb_thumbnail {
 	background-image: {{thumbnail}};
 }
+#secondary #widget-area .va-social-buzz .vasb_fb .vasb_fb_like,
+#secondary .widget-area .va-social-buzz .vasb_fb .vasb_fb_like,
+#secondary.widget-area .va-social-buzz .vasb_fb .vasb_fb_like,
+.secondary .widget-area .va-social-buzz .vasb_fb .vasb_fb_like,
+.sidebar-container .va-social-buzz .vasb_fb .vasb_fb_like,
 .va-social-buzz .vasb_fb .vasb_fb_like {
 	background-color: rgba({{background_color}}, {{opacity}});
 	color: {{color}};
 }
-{$css_after}
+{$css_center}
 @media only screen and (min-width: 711px) {
 	{$css_mediaquery_before}
 	.va-social-buzz .vasb_fb .vasb_fb_like {
@@ -234,7 +239,7 @@ namespace VASOCIALBUZZ\Modules {
 	}
 	{$css_mediaquery_after}
 }
-{$css_end}
+{$css_after}
 EOI;
 			$css = apply_filters( VA_SOCIALBUZZ_PREFIX . 'tmp_head_css', $css );
 			$css = trim( preg_replace( array( '/(?:\r\n)|[\r\n]/', '/[\\x00-\\x09\\x0b-\\x1f]/', '/\n/', '/\s{2,}/' ), '', $css ) );

@@ -128,12 +128,29 @@
     width: 100%;
     z-index: 0;
 }
+#secondary #widget-area .va-social-buzz .vasb_fb .vasb_fb_thumbnail,
+#secondary .widget-area .va-social-buzz .vasb_fb .vasb_fb_thumbnail,
+#secondary.widget-area .va-social-buzz .vasb_fb .vasb_fb_thumbnail,
+.secondary .widget-area .va-social-buzz .vasb_fb .vasb_fb_thumbnail,
+.sidebar-container .va-social-buzz .vasb_fb .vasb_fb_thumbnail {
+    display: block !important;
+    width: 100% !important;
+}
 .va-social-buzz .vasb_fb .vasb_fb_like {
     padding: 16.5px 0;
     position: relative;
     text-align: center;
     vertical-align: middle;
     z-index: 1;
+}
+#secondary #widget-area .va-social-buzz .vasb_fb .vasb_fb_like,
+#secondary .widget-area .va-social-buzz .vasb_fb .vasb_fb_like,
+#secondary.widget-area .va-social-buzz .vasb_fb .vasb_fb_like,
+.secondary .widget-area .va-social-buzz .vasb_fb .vasb_fb_like,
+.sidebar-container .va-social-buzz .vasb_fb .vasb_fb_like {
+    display: block !important;
+    height: initial !important;
+    width: initial !important;
 }
 .va-social-buzz .vasb_fb .vasb_fb_like .vasb_fb_like_text {
     line-height: 1.5;

@@ -59,10 +59,20 @@ namespace VASOCIALBUZZ\Modules {
 		 * @return string
 		 */
 		public static function get_thumbnail( $_post = null ) {
-			$thumb = apply_filters( VA_SOCIALBUZZ_PREFIX . 'default_thumbnail', 'none' );
+			global $post;
 
-			if ( empty( $_post ) ) {
-				global $post;
+			$thumb          = apply_filters( VA_SOCIALBUZZ_PREFIX . 'default_thumbnail', 'none' );
+			$show_on_front  = get_option( 'show_on_front' );
+			$page_on_front  = get_option( 'page_on_front' );
+			$page_for_posts = get_option( 'page_for_posts' );
+
+			if ( empty( $_post ) && 'page' === $show_on_front && is_front_page() ) {
+				$_post = get_post( $page_on_front );
+			} elseif ( empty( $_post ) && 'page' === $show_on_front && is_home() ) {
+				$_post = get_post( $page_for_posts );
+			}
+
+			if ( empty( $_post ) && is_singular() ) {
 				$_post = $post;
 			}
 
