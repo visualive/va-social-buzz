@@ -42,6 +42,9 @@ To install "VA Social Buzz":
 
 ## Changelog
 
+### 1.1.11
+* Fine-tuned the CSS.
+
 ### 1.1.10
 * [Fixed] Bug that current url can not be acquired correctly.
 
