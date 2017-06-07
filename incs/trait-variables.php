@@ -154,7 +154,7 @@ namespace VASOCIALBUZZ\Modules {
 				'_builtin'      => true,
 			];
 			$settings['like_area_color']   = [
-				'label'         => __( 'Text color of the "like!" button area ', 'va-social-buzz' ),
+				'label'         => __( 'Text color of the "like!" button area', 'va-social-buzz' ),
 				'description'   => '',
 				'default_value' => '#ffffff',
 				'render'        => 'render_like_area_color',

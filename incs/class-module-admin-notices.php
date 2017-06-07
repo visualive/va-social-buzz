@@ -78,7 +78,7 @@ namespace VASOCIALBUZZ\Modules {
 		 */
 		public function admin_notices() {
 			$notices = Options::get( 'notices' );
-			$key     = 'vasb-2017-04-04';
+			$key     = 'vasb-2017-06-07';
 
 			if ( ! current_user_can( 'manage_options' ) || defined( 'VA_SOCIALBUZZ_PLUS_SW_VERSION' ) || ! self::_is_admin_notice_active( $key ) || in_array( $key, $notices ) ) {
 				return;

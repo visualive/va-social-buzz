@@ -1,12 +1,12 @@
 /*!
- * VA Social Buzz.
- *
- * @package   VisuAlive.
- * @version   1.1.0
- * @author    KUCKLU.
- * @copyright Copyright (c) KUCKLU and VisuAlive.
- * @link      http://visualive.jps
- * @license   GPL-2.0+
+ VA Social Buzz.
+
+ @package   VisuAlive.
+ @version   1.1.0
+ @author    KUCKLU.
+ @copyright Copyright (c) KUCKLU and VisuAlive.
+ @link      http://visualive.jps
+ @license   GPL-2.0+
  */
 
 (function ($, window, document, undefined) {
@@ -146,14 +146,11 @@
 
                 if (typeof self.cache.wordpress.appid != 'undefined') {
                     fb_init.appId = self._deletionOtherNumeric(self.cache.wordpress.appid);
-                    window.fbAsyncInit = function() {
-                        FB.init(fb_init);
-                    };
-                } else {
-                    window.fbAsyncInit = function() {
-                        FB.init(fb_init);
-                    };
                 }
+
+                window.fbAsyncInit = function() {
+                    FB.init(fb_init);
+                };
             });
 
             $.getScript('//platform.twitter.com/widgets.js', function () {

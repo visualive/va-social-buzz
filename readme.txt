@@ -46,6 +46,11 @@ To install "VA Social Buzz":
 
 == Changelog ==
 
+= 1.1.13 =
+* Tested up to WordPress 4.8
+* [Fixed] A mistake in translation file.
+* [Fixed] Other small bugs.
+
 = 1.1.12 =
 * Fine-tuned the CSS.
 

@@ -170,7 +170,11 @@ namespace VASOCIALBUZZ\Modules {
 		}
 
 		/**
-		 * Short code the like block.widget_text
+		 * Short code the like block.
+		 *
+		 * @param string $text1
+		 * @param string $text2
+		 * @param string $mode
 		 *
 		 * @return string
 		 */
@@ -222,7 +226,7 @@ namespace VASOCIALBUZZ\Modules {
 					$output[ $key ] = str_replace( '{{endpoint}}', $value['endpoint'], $output[ $key ] );
 					$output[ $key ] = str_replace( '{{anchor_text}}', $value['anchor_text'], $output[ $key ] );
 					$output[ $key ] = str_replace( '{{permalink}}', rawurlencode( esc_url( $current_url ) ), $output[ $key ] );
-					$output[ $key ] = str_replace( '{{post_title}}', rawurlencode( html_entity_decode( $current_title, ENT_COMPAT, get_bloginfo( 'charset' ) ) ), $output[ $key ] );
+					$output[ $key ] = str_replace( '{{post_title}}', rawurlencode( html_entity_decode( $current_title, ENT_NOQUOTES | ENT_HTML5, get_bloginfo( 'charset' ) ) ), $output[ $key ] );
 				}
 
 				$output = implode( '', $output );

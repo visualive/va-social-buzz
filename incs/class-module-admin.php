@@ -319,6 +319,7 @@ namespace VASOCIALBUZZ\Modules {
 		 * @return array
 		 */
 		public function sanitize_option( $options ) {
+			$sanitize   = array();
 			$settings   = $this->settings;
 			$options    = wp_parse_args( $options, Options::get( 'all' ) );
 			$db_version = ( isset( $options['db_version'] ) ) ? $options['db_version'] : VA_SOCIALBUZZ_VERSION_DB;
@@ -328,7 +329,10 @@ namespace VASOCIALBUZZ\Modules {
 			unset( $options['notices'] );
 
 			foreach ( $options as $key => $option ) {
-				$sanitize   = $settings[ $key ]['sanitize'];
+				if ( isset( $settings[ $key ] ) ) {
+					$sanitize = $settings[ $key ]['sanitize'];
+				}
+
 				$conditions = ( isset( $settings[ $key ]['_builtin'] ) && true === $settings[ $key ]['_builtin'] && 1 === preg_match( '/\A_(.*?)+\z/', $settings[ $key ]['sanitize'] ) );
 
 				if ( $conditions ) {
