@@ -42,6 +42,9 @@ To install "VA Social Buzz":
 
 ## Changelog
 
+### 1.1.14
+* [Fixed] A bug where optional items are not saved with the correct values.
+
 ### 1.1.13
 * Tested up to WordPress 4.8
 * [Fixed] A mistake in translation file.

@@ -5,7 +5,7 @@
  * @package    WordPress
  * @subpackage VA Social Buzz
  * @since      1.1.0
- * @author     KUCKLU <kuck1u@visualive.jp>
+ * @author     KUCKLU <oss@visualive.jp>
  *             Copyright (C) 2016 KUCKLU and VisuAlive.
  *             This program is free software; you can redistribute it and/or modify
  *             it under the terms of the GNU General Public License as published by

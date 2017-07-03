@@ -4,7 +4,7 @@
  * Plugin URI: https://github.com/visualive/va-social-buzz
  * Description: It displays buttons at the end of every article for readers to "Like!" your recommended Facebook page, to share the article on SNS.
  * Author: KUCKLU
- * Version: 1.1.13
+ * Version: 1.1.14
  * WordPress Version: 4.4
  * PHP Version: 5.4
  * DB Version: 1.0.0
@@ -18,7 +18,7 @@
  * @package    WordPress
  * @subpackage VA Social Buzz
  * @since      0.0.1 (Alpha)
- * @author     KUCKLU <kuck1u@visualive.jp>
+ * @author     KUCKLU <oss@visualive.jp>
  *             Copyright (C) 2016 KUCKLU & VisuAlive.
  *             This program is free software; you can redistribute it and/or modify
  *             it under the terms of the GNU General Public License as published by

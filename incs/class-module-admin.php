@@ -5,7 +5,7 @@
  * @package    WordPress
  * @subpackage VA Social Buzz
  * @since      1.1.0
- * @author     KUCKLU <kuck1u@visualive.jp>
+ * @author     KUCKLU <oss@visualive.jp>
  *             Copyright (C) 2015 KUCKLU and VisuAlive.
  *             This program is free software; you can redistribute it and/or modify
  *             it under the terms of the GNU General Public License as published by
@@ -321,7 +321,7 @@ namespace VASOCIALBUZZ\Modules {
 		public function sanitize_option( $options ) {
 			$sanitize   = array();
 			$settings   = $this->settings;
-			$options    = wp_parse_args( $options, Options::get( 'all' ) );
+			$options    = wp_parse_args( $options, Options::get( 'default' ) );
 			$db_version = ( isset( $options['db_version'] ) ) ? $options['db_version'] : VA_SOCIALBUZZ_VERSION_DB;
 			$notices    = ( isset( $options['notices'] ) && ! empty( $options['notices'] ) ) ? $options['notices'] : [];
 
